@@ -1,0 +1,7 @@
+<% if message.head == true %>
+  <%= link_to '# ', chatroom_post_path(@chatroom.id, message.post.id)%>
+<% else %>
+  <%= link_to '- ', chatroom_post_path(@chatroom.id, message.post.id)%>
+<% end %>
+<%= message.user.username%>:
+<%= message.body %><br>

@@ -7,7 +7,8 @@ class MessagesController < ApplicationController
     message.chatroom_id = @chatroom.id
     @post.messages << message
     message.save
-    redirect_to chatroom_post_path(@chatroom.id, @post.id)
+    MessageRelayJob.perform_later(message)
+    # redirect_to chatroom_post_path(@chatroom.id, @post.id)
   end
 
   def destroy
