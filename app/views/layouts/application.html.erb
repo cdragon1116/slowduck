@@ -4,9 +4,9 @@
     <title>Flowdock</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
@@ -24,7 +24,25 @@
         <% end%>
       </div>
   </nav>
-    <%= yield %>
-
+    <div class="fluid-container content">
+    <div class="row">
+      <div class="col-sm-2 pl-4" id="sidebar">
+        <% if user_signed_in? %>
+          <h5>Chatrooms</h5>
+          <ul>
+            <% current_user.chatrooms.each do |room|%>
+              <li>
+                <%= link_to room.name, room, class:'sideber-link', data: {behavior: "chatroom-link", chatroom_id: room.id} %>
+              </li>
+            <% end %>
+            <li><%= link_to 'New Chatroom', new_chatroom_path %></li>
+          </ul>
+        <% end %>
+      </div>
+      <div class="col-sm-10 offset-sm-2" id="content">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
   </body>
 </html>

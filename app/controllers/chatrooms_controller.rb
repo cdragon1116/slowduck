@@ -15,7 +15,7 @@ class ChatroomsController < ApplicationController
   # GET /chatrooms/1
   # GET /chatrooms/1.json
   def show
-    @posts = @chatroom.posts.limit(30)
+    @messages = @chatroom.messages.order(created_at: :desc).limit(50).reverse
   end
 
   # GET /chatrooms/new
@@ -30,7 +30,6 @@ class ChatroomsController < ApplicationController
   # POST /chatrooms
   # POST /chatrooms.json
   def create
-    
     @chatroom = Chatroom.new(chatroom_params)
     
     respond_to do |format|

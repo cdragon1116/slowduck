@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   resources :chatrooms do 
-    resources :posts do 
-      collection do 
+    resources :posts do
         resources :messages, only: [:create ,:destroy]
-      end
     end
   end 
   devise_for :users
