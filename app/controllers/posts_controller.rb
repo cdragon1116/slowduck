@@ -12,7 +12,6 @@ class PostsController < ApplicationController
     message.head = true
     message.chatroom_id = @chatroom.id
     message.save
-    # redirect_to @chatroom
     MessageRelayJob.perform_later(message)
   end
 

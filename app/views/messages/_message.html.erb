@@ -1,8 +1,17 @@
-<% if message.head == true %>
-<%= link_to '# ', chatroom_post_path(message.chatroom_id, message.post.id)%>
-<% else %>
-<%= link_to '- ', chatroom_post_path(message.chatroom_id, message.post.id)%>
-<% end %>
+<div class="">
+  <div class="icon d-flex align-items-center">
+    <% if message.head == true %>
+      <%= link_to '<i class="fa fa-comment-o fa-lg text-primary" aria-hidden="true"></i>'.html_safe, chatroom_post_path(message.chatroom_id, message.post.id)%>
+    <% else %>
+      <%= link_to '<i class="fa fa-share fa-lg text-secondary" aria-hidden="true"></i>
+'.html_safe , chatroom_post_path(message.chatroom_id, message.post.id)%>
+    <% end %>
+    <span style="font-weight: 700;">
+      <%= message.user.username%>
+    </span>
+  </div>
 
-<%= message.user.username%>:
-<%= message.body %><br>
+  <div class="ml-5 pl-2">
+    <%= message.body %>
+  </div>
+</div>

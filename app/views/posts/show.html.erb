@@ -1,12 +1,9 @@
 <p id="notice"><%= notice %></p>
-<p>
-  <strong>Name:</strong>
-  <%= @chatroom.name %>
-</p>
-<%= link_to 'Edit', edit_chatroom_path(@chatroom) %> |
-<%= link_to 'Back', chatroom_path(@chatroom) %>
 <div id="chatroom">
-  <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>'>
+  <h3><%= @chatroom.name %></h3>
+  <%= link_to 'Edit', edit_chatroom_path(@chatroom) %> |
+  <%= link_to 'Back', chatroom_path(@chatroom) %>
+  <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='messagebox'>
     <% @messages.each do |message| %>
       <%= render message %>
     <% end %>

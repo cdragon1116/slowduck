@@ -12,4 +12,14 @@ $(document).on "turbolinks:load", ->
         if e && e.keyCode == 13
             e.preventDefault()
             $(this).submit()
-         
+
+
+    scrolled = false
+    if !scrolled
+        element = $('[data-behavior=\'messages\']')
+        element.animate { scrollTop: element.prop('scrollHeight') }, 200
+
+    $('[data-behavior=\'messages\']').on 'scroll', ->
+      scrolled = true
+
+
