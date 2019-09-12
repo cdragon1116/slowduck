@@ -6,6 +6,7 @@ class PostsController < ApplicationController
     @messages = @post.messages.order(created_at: :desc).limit(50).reverse
   end
   def create
+
     @post = Post.create(user_id: current_user.id, chatroom_id: @chatroom.id)
     message = @post.messages.new(post_params)
     message.user = current_user

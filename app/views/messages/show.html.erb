@@ -1,0 +1,20 @@
+<div id="chatroom">
+  <div class="chatroom_top">
+    <h3><%= @message.user.username%>: <%=  @message.body %></h3>
+    <%= link_to 'Edit', edit_chatroom_path(@chatroom) %> |
+    <%= link_to 'Back', chatroom_path(@chatroom) %>
+    <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='messagebox'>
+      <% @messages.each do |message| %>
+        <%= render message %>
+      <% end %>
+    </div>
+  </div>
+  <%= form_for [@chatroom, Message.new],remote: true, authenticity_token: true do |form| %>
+    <div class="form-group">
+      <%= form.text_area :body, rows: 2, :class => 'input form-control',:placeholder => "有話快說！！！", autofocus: true %>
+      <%= form.hidden_field :user_id, :value => current_user.id %>
+      <%= form.hidden_field :chatroom_id, :value => @chatroom.id %>
+      <%= form.hidden_field :parent_id, :value => @message.id %>
+    </div>
+  <% end %>
+</div>

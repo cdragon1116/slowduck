@@ -1,12 +1,24 @@
 class MessagesController < ApplicationController
   before_action :set_chatroom
-  before_action :find_post
+  def index
+    render html:params
+  end
+  def show
+    find_message
+    @messages = @message.messages
+  end
   def create
     message = Message.new(message_params)
-    message.user = current_user
-    message.chatroom_id = @chatroom.id
-    @post.messages << message
-    MessageRelayJob.perform_later(message)
+
+    if message_params.has_key?("parent_id")
+      message.save
+      MessageRelayJob.perform_later(message)
+    else
+      message.save
+      message.parent = message
+      message.save
+      MessageRelayJob.perform_later(message)
+    end
   end
 
   def destroy
@@ -15,10 +27,10 @@ class MessagesController < ApplicationController
     def set_chatroom
       @chatroom = Chatroom.find(params[:chatroom_id])
     end
-    def find_post
-      @post = Post.find(params[:post_id])
-    end
     def message_params
-      params.require(:message).permit(:body)
+      params.require(:message).permit(:body, :parent_id, :user_id, :chatroom_id)
+    end
+    def find_message
+      @message = Message.find(params[:id])
     end
 end

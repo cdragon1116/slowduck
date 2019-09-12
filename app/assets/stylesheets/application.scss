@@ -16,60 +16,70 @@
 
 @import "bootstrap";
 @import "font-awesome";
-
-.nopadding {
-   padding: 0 !important;
-   margin: 0 !important;
+/*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+body {
+  overflow-x: hidden;
+}
+nav a:hover, 
+#sidebar-wrapper a:hover {
+  background-color: transparent;
+  color:#fff;
+  text-decoration: none;
+}
+a:hover{
+  background-color: transparent;
+}
+.navbar-brand{
+  color: #fff;
+}
+.btn:hover{
+  background-color: #eee;
+  color: #222;
 }
 
-form{
-}
-a:hover {
-    background-color: transparent;
-}
 
 
-nav.navbar {
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
     width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #222;
-    z-index: 1;
-}
+  }
 
-.fluid-container {
-    margin-top: 70px;
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
 }
-
-#sidebar {
-    position: fixed;
-    top: 70;
-    left: 0;
-    height: 100%;
-    color: #eee;
-    background-color: #333;
-    h5{
-        margin-top: 30px;
-        padding: 10px 20px;
-    }
-    li{
-        line-height: 40px;
-    }
-    a{  
-        display: block;
-        width: 100%;
-        font-size: 18px;
-        padding: 10px 20px;
-    }
-    a:hover{
-        color: #eee;
-        background-color: #999;
-        text-decoration: none;
-    }
-}
-
-#content{
-    margin-left: 18%;
-}
-

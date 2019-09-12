@@ -4,44 +4,41 @@
 
 
 #chatroom {
+    display: flex;
+    flex-flow: column nowrap;
     padding: 0px 50px 20px;
+    height: 90vh;
     line-height: 40px;
     font-size: 20px;
-    border-radius: 5px;
+    margin-top: 10px;
     span{
         line-height: 50px;
         margin-left: 20px;
     }
 }
 
+.chatroom_top{
+    border-radius:5px;
+    padding: 20px;
+    height: 80vh;
+    background: #fff;
+}
 [data-behavior='messages']{
     width: 100%;
-    height: 780px;
+    height: 60vh;
     overflow-y: auto; 
-}
-
-.input {
-    margin-left: 20px;
-    line-height: 30px;
-    font-size: 20px;
-    border: none;
-    margin-top: 8px;
-    width: 100%;
 }
 
 .fa{
     padding: 5px;
 }
 .form{
-    position: fixed;
-    bottom: 0;
-    left: 16.6666666%;
-    width: 100%;
-    background-color: #222;
-    height: 100px;
-
+    margin: 5px;
 }
-form{
-    width: 95%;
 
+textarea{
+    width: 10%;
+}
+textarea:focus{
+    outline: none;
 }

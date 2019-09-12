@@ -60,10 +60,14 @@ class ChatroomsController < ApplicationController
   # DELETE /chatrooms/1
   # DELETE /chatrooms/1.json
   def destroy
-    @chatroom.destroy
-    respond_to do |format|
-      format.html { redirect_to chatrooms_url, notice: 'Chatroom was successfully destroyed.' }
-      format.json { head :no_content }
+    if current_user == @chatroom.chatroom_users.find_by(admin:true).user
+      @chatroom.destroy
+      respond_to do |format|
+        format.html { redirect_to chatrooms_url, notice: 'Chatroom was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else 
+      redirect_to chatroom_path(@chatroom), notice: 'You are not Chatroom admin!'
     end
   end
 

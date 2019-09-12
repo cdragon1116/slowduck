@@ -6,44 +6,66 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
   </head>
-
   <body>
-   <nav class="navbar">
-      <div class="navbar">
-        <%= link_to 'Chatty', root_path, class:'navbar-brand'%>
-      </div>
-      <div class="navbar-nav flex-row">
-        <% if user_signed_in?%>
-          <%= link_to 'Profile', edit_user_registration_path, class:'mx-2 nav-link'%>
-          <%= link_to 'Sign Out', destroy_user_session_path, method:'delete', class:'mx-2 nav-link' %>
-        <% else%>
-          <%= link_to 'Sign In', new_user_session_path, class:'mx-2 nav-link'%>
-          <%= link_to 'Sign Up', new_user_registration_path, class:'mx-2 nav-link'%>
-        <% end%>
-      </div>
-  </nav>
-    <div class="fluid-container content">
-    <div class="row">
-      <div class="col-sm-2 nopadding" id="sidebar">
-        <% if user_signed_in? %>
-          <h5>Chatrooms</h5>
-          <ul>
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar -->
+      <div class="bg-dark" id="sidebar-wrapper">
+        <div class="sidebar-heading nav-item"><%= link_to 'Chatty', root_path, class:'navbar-brand'%></div>
+        <div class="list-group list-group-flush">
+          <% if user_signed_in? %>
             <% current_user.chatrooms.each do |room|%>
-              <li>
-                <%= link_to room.name, room, class:'sideber-link', data: {behavior: "chatroom-link", chatroom_id: room.id} %>
-              </li>
+              <%= link_to room.name, room, class:'list-group-item bg-dark', data: {behavior: "chatroom-link", chatroom_id: room.id} %>
             <% end %>
-            <li><%= link_to 'New Chatroom', new_chatroom_path %></li>
-          </ul>
-        <% end %>
+            <%= link_to 'New Chatroom', new_chatroom_path, class:'list-group-item bg-dark' %>
+          <% end %>
+        </div>
       </div>
-      <div class="col-sm-10 mt-5" id="content">
-        <p id="notice"><%= notice %></p>
-        <%= yield %>
+      <!-- /#sidebar-wrapper -->
+      <!-- Page Content -->
+      <div id="page-content-wrapper" class="d-flex flex-column">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 my-0"  >
+          <button class="btn btn-dark" id="menu-toggle">Toggle Menu</button>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+              <% if user_signed_in?%>
+                <li class="nav-item">
+                  <%= link_to 'Profile', edit_user_registration_path, class:'mx-2 nav-link'%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'Sign Out', destroy_user_session_path, method:'delete', class:'mx-2 nav-link' %>
+                </li>
+              <% else%>
+                <li class="nav-item">
+                  <%= link_to 'Sign In', new_user_session_path, class:'mx-2 nav-link'%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'Sign Up', new_user_registration_path, class:'mx-2 nav-link'%>
+                </li>
+              <% end%>
+            </ul>
+          </div>
+        </nav>
+        <div class="container-fluid my-0 bg-faded">
+          <p id="notice"><%= notice %></p>
+          <%= yield %>
+        </div>
       </div>
+      <!-- /#page-content-wrapper -->
     </div>
-  </div>
+    <!-- /#wrapper -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Menu Toggle Script -->
+    <script>
+      $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    </script>
   </body>
 </html>
