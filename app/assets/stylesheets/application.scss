@@ -17,9 +17,13 @@
 @import "bootstrap";
 @import "font-awesome";
 
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
 
-
-
+form{
+}
 a:hover {
     background-color: transparent;
 }
@@ -30,7 +34,7 @@ nav.navbar {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #333;
+    background-color: #222;
     z-index: 1;
 }
 
@@ -39,23 +43,33 @@ nav.navbar {
 }
 
 #sidebar {
-    padding: 50px 30px;
     position: fixed;
     top: 70;
     left: 0;
     height: 100%;
     color: #eee;
-    background-color: #222;
+    background-color: #333;
+    h5{
+        margin-top: 30px;
+        padding: 10px 20px;
+    }
     li{
         line-height: 40px;
     }
     a{  
+        display: block;
+        width: 100%;
         font-size: 18px;
-        padding: 20px 5px;
+        padding: 10px 20px;
     }
     a:hover{
         color: #eee;
+        background-color: #999;
         text-decoration: none;
     }
+}
+
+#content{
+    margin-left: 18%;
 }
 
