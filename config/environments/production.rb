@@ -93,5 +93,10 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   # Devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  #actioncable
+  config.web_socket_server_url = "wss://cchattyme.herokuapp.com/cable" 
+  config.action_cable.allowed_request_origins = ['https://cchattyme.herokuapp.com', 'http://cchattyme.herokuapp.com']
+
 end
 
