@@ -22,7 +22,9 @@
     <% @chatroom_users.each do |user| %>
   <li class="list-group-item d-flex justify-content-between align-items-center">
     <strong><%= user.username%></strong>
-    <%= link_to 'destroy', chatroom_chatroom_user_path(@chatroom.id, user.id), method:'delete', data:{confirm: "你確定嗎？"} , class: 'btn' %>
+    <% unless user == current_user %>
+      <%= link_to 'destroy', chatroom_chatroom_user_path(@chatroom.id, user.id), method:'delete', data:{confirm: "你確定嗎？"} %>
+    <% end %>
   </li>
   <% end%>
 </ul>

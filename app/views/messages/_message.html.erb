@@ -4,7 +4,7 @@
       <%= link_to '<i class="fa fa-comment-o fa-lg text-primary" aria-hidden="true"></i>'.html_safe, chatroom_message_path(message.chatroom_id, message.id)%>
     <% else %>
       <%= link_to '<i class="fa fa-share fa-lg text-secondary" aria-hidden="true"></i>
-'.html_safe , chatroom_message_path(message.chatroom_id, message.id)%>
+'.html_safe , chatroom_message_path(message.chatroom_id, message.parent.id)%>
     <% end %>
     <span style="font-weight: 700;">
       <%= message.user.username%>

@@ -19,9 +19,13 @@ class ChatroomUsersController < ApplicationController
   end
 
   def destroy
-    @chatroom_user = ChatroomUser.find_by(chatroom_id: @chatroom.id ,user_id: params[:id])
-    @chatroom_user.destroy
-    redirect_to new_chatroom_chatroom_user_path(@chatroom.id)
+    if find_admin != current_user
+      redirect_to new_chatroom_chatroom_user_path(@chatroom.id) , notice:"You're not admin"
+    else
+      @chatroom_user = ChatroomUser.find_by(chatroom_id: @chatroom.id ,user_id: params[:id])
+      @chatroom_user.destroy
+      redirect_to new_chatroom_chatroom_user_path(@chatroom.id)  
+    end
   end
   private
     def set_chatroom
@@ -29,6 +33,9 @@ class ChatroomUsersController < ApplicationController
     end
     def chatroom_user_params
       params.require(:chatroom_user).permit( user: [:email])
+    end
+    def find_admin
+      ChatroomUser.find_by(chatroom_id: @chatroom.id ,admin: true).user
     end
 
 end

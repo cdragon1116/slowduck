@@ -16,7 +16,11 @@ class ChatroomsController < ApplicationController
   # GET /chatrooms/1
   # GET /chatrooms/1.json
   def show
-    @messages = @chatroom.messages.order(created_at: :desc).limit(50).reverse
+    if @chatroom.users.exists?(id:current_user.id)
+      @messages = @chatroom.messages.order(created_at: :desc).limit(50).reverse
+    else
+      redirect_to chatrooms_url, notice: "You don't have accessbility"
+    end
   end
 
   # GET /chatrooms/new
@@ -61,7 +65,7 @@ class ChatroomsController < ApplicationController
   # DELETE /chatrooms/1
   # DELETE /chatrooms/1.json
   def destroy
-    if current_user == @chatroom.chatroom_users.find_by(admin:true).user
+    if ChatroomUser.exists?(admin:true, chatroom_id:@chatroom.id, user_id:current_user.id)
       @chatroom.destroy
       respond_to do |format|
         format.html { redirect_to chatrooms_url, notice: 'Chatroom was successfully destroyed.' }
