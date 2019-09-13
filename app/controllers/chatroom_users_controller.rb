@@ -15,6 +15,15 @@ class ChatroomUsersController < ApplicationController
     end
   end
 
+  def join 
+    if user_signed_in?
+      ChatroomUser.where(user_id:current_user.id, chatroom_id: @chatroom.id).first_or_create
+      redirect_to chatroom_path(@chatroom)
+    else 
+      redirect_to chatrooms_path, notice: "請登入會員"
+    end
+  end
+
   def show
   end
 

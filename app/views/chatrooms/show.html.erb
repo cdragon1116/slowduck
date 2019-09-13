@@ -1,9 +1,13 @@
 <div id="chatroom">
   <div class="chatroom_top">
     <h3><%= @chatroom.name %></h3>
-    <%= link_to 'Edit', edit_chatroom_path(@chatroom) %> |
+    <% if find_admin == current_user %>
+      <%= link_to 'Edit', edit_chatroom_path(@chatroom) %> |
+    <% end %>
     <%= link_to 'Back', chatrooms_path %> |
-    <%= link_to 'Add member', new_chatroom_chatroom_user_path(@chatroom) %>
+    <% if @chatroom.public == false %>
+      <%= link_to 'Add member', new_chatroom_chatroom_user_path(@chatroom) %>
+    <% end %>
     <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='message-box'>
       <% @messages.each do |message| %>
         <%= render message %>

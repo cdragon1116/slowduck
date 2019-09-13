@@ -1,11 +1,12 @@
 class ChatroomsController < ApplicationController
   before_action :set_chatroom, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  helper_method :find_admin
 
   # GET /chatrooms
   # GET /chatrooms.json
 
   def index
+    @public_chatrooms = Chatroom.where(public:true).limit(10)
     if user_signed_in?
       @chatrooms = current_user.chatrooms
     else
@@ -16,7 +17,7 @@ class ChatroomsController < ApplicationController
   # GET /chatrooms/1
   # GET /chatrooms/1.json
   def show
-    if @chatroom.users.exists?(id:current_user.id)
+    if @chatroom.users.exists?(id:current_user.id) or @chatroom.public == true
       @messages = @chatroom.messages.order(created_at: :desc).limit(50).reverse
     else
       redirect_to chatrooms_url, notice: "You don't have accessbility"
@@ -65,7 +66,7 @@ class ChatroomsController < ApplicationController
   # DELETE /chatrooms/1
   # DELETE /chatrooms/1.json
   def destroy
-    if ChatroomUser.exists?(admin:true, chatroom_id:@chatroom.id, user_id:current_user.id)
+    if find_admin == current_user
       @chatroom.destroy
       respond_to do |format|
         format.html { redirect_to chatrooms_url, notice: 'Chatroom was successfully destroyed.' }
@@ -84,6 +85,10 @@ class ChatroomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chatroom_params
-      params.require(:chatroom).permit(:name)
+      params.require(:chatroom).permit(:name, :public)
+    end
+
+    def find_admin
+      ChatroomUser.find_by(chatroom_id: @chatroom.id ,admin: true).user
     end
 end
