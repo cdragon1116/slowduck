@@ -1,5 +1,6 @@
 class ChatroomsController < ApplicationController
   before_action :set_chatroom, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /chatrooms
   # GET /chatrooms.json

@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_chatroom
+  before_action :authenticate_user!
   def index
     render html:params
   end

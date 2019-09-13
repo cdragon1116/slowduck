@@ -1,8 +1,7 @@
-<h1>Editing Chatroom</h1>
-
-<%= render 'form', chatroom: @chatroom %>
-
-
-<%= link_to 'Show', @chatroom %> |
-<%= link_to 'Back', chatrooms_path %> |
-<%= link_to 'Destroy', chatroom_path(@chatroom), method:'delete', data:{confirm:'你確定嗎'} %> 
+<div class="container">
+  <h1>Editing Chatroom</h1>
+  <%= render 'form', chatroom: @chatroom %>
+  <%= link_to 'Show', @chatroom %> |
+  <%= link_to 'Back', chatrooms_path %> |
+  <%= link_to 'Destroy', chatroom_path(@chatroom), method:'delete', data:{confirm:'你確定嗎'} %>
+</div>

@@ -19,3 +19,4 @@ $(document).on "turbolinks:load", ->
       scrolled = true
 
 
+

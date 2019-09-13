@@ -36,6 +36,9 @@ a:hover{
 .navbar-brand{
   color: #fff;
 }
+.btn{
+  margin-right: 3px;
+}
 .btn:hover{
   background-color: #eee;
   color: #222;
@@ -82,4 +85,7 @@ a:hover{
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -15rem;
   }
+}
+.active{
+  background-color: #fff;
 }
