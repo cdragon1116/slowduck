@@ -1,6 +1,8 @@
 class MessagesController < ApplicationController
   before_action :set_chatroom
   before_action :authenticate_user!
+  include MessagesHelper
+
   def index
     render html:params
   end
@@ -10,7 +12,6 @@ class MessagesController < ApplicationController
   end
   def create
     message = Message.new(message_params)
-
     if message_params.has_key?("parent_id")
       message.save
       MessageRelayJob.perform_later(message)

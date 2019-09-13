@@ -5,6 +5,9 @@ ruby '2.6.3'
 gem 'bootstrap', '~> 4.3.1'
 gem 'devise-bootstrap-views', '~> 1.0'
 
+gem 'redcarpet', '~> 3.3', '>= 3.3.4'
+gem 'rouge', '~> 1.10', '>= 1.10.1'
+
 gem 'devise'
 gem 'jquery-rails'
 gem 'font-awesome-rails', '~> 4.6', '>= 4.6.3.1'

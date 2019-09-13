@@ -6,8 +6,9 @@
 $(document).on "turbolinks:load", ->
     $('#new_message').on "keypress", (e) ->
         if e && e.keyCode == 13
-            e.preventDefault()
-            $(this).submit()
+            if (!e.shiftKey)
+                e.preventDefault()
+                $(this).submit()
 
 
     scrolled = false
@@ -18,5 +19,14 @@ $(document).on "turbolinks:load", ->
     $('[data-behavior=\'messages\']').on 'scroll', ->
       scrolled = true
 
-
+    $('textarea').on 'keydown', ->
+      if event.keyCode == 9
+        v = $(this).val()
+        s = $(this).selectionStart
+        e = $(this).selectionEnd
+        console.log($(this).val())
+        $(this).val(v.substring(0, s) + '\u0009' + v.substring(e))
+        $(this).selectionStart = $(this).selectionEnd = s + 1
+        return false
+      return
 

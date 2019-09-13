@@ -6,12 +6,12 @@
       <%= link_to '<i class="fa fa-share fa-lg text-secondary" aria-hidden="true"></i>
 '.html_safe , chatroom_message_path(message.chatroom_id, message.parent.id)%>
     <% end %>
-    <span style="font-weight: 700;">
+    <strong style="font-weight: 700;">
       <%= message.user.username%>
-    </span>
+    </strong>
   </div>
 
   <div class="ml-5 pl-2">
-    <%= message.body %>
+    <%= raw(markdown(message.body)) %>
   </div>
 </div>
