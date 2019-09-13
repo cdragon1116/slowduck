@@ -9,6 +9,9 @@
     <strong style="font-weight: 700;">
       <%= message.user.username%>
     </strong>
+    <p class="ml-auto pr-5 mb-0 timestamp">
+    <%=  message.created_at.strftime("%Y-%m-%d-%H:%M")%>
+    </p>
   </div>
 
   <div class="ml-5 pl-2">

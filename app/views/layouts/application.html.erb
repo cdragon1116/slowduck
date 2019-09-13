@@ -15,7 +15,7 @@
         <div class="list-group list-group-flush">
           <% if user_signed_in? %>
             <% current_user.chatrooms.each do |room|%>
-              <%= link_to room.name, room, class:'list-group-item bg-dark', data: {behavior: "chatroom-link", chatroom_id: room.id} %>
+              <%= link_to "#{room.name}<i class='fa fa-exclamation d-none' aria-hidden='true'></i>".html_safe, room, class:'list-group-item bg-dark', data: {behavior: "chatroom-link", chatroom_id: room.id} %>
             <% end %>
             <%= link_to 'New Chatroom', new_chatroom_path, class:'list-group-item bg-dark' %>
           <% end %>
