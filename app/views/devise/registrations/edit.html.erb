@@ -1,5 +1,5 @@
 <div class="profile-user-image">
-  <%= user_image(current_user)  %>
+<%= image_tag current_user.profile_image %>
 </div>
 <h1><%= t('.title', resource: resource_name.to_s.humanize) %></h1>
 

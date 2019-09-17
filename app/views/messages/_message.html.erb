@@ -7,7 +7,7 @@
       '.html_safe , chatroom_message_path(message.chatroom_id, message.parent.id)%>
   <% end %>
   <div class="message-user-image">
-    <%= user_image(message.user)  %>
+    <%= image_tag url_for(message.user.message_image), class:'user_image'  %>
   </div>
   <strong class="message-user-name">
     <%= message.user.username%>
