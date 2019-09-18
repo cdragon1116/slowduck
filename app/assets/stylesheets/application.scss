@@ -14,8 +14,8 @@
  *= require_self
  */
 
-@import "bootstrap";
-@import "font-awesome";
+// @import "bootstrap";
+// @import "font-awesome";
 /*!
  * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
  * Copyright 2013-2019 Start Bootstrap
@@ -37,68 +37,53 @@ nav a:hover,
 a:hover{
   background-color: transparent;
 }
-.navbar-brand{
-  color: #fff;
-}
-.btn{
-  margin-right: 3px;
-}
-.btn:hover{
-  background-color: #eee;
-  color: #222;
-}
 
-
-
-#sidebar-wrapper {
-  min-height: 100vh;
-  margin-left: -15rem;
-  -webkit-transition: margin .25s ease-out;
-  -moz-transition: margin .25s ease-out;
-  -o-transition: margin .25s ease-out;
-  transition: margin .25s ease-out;
+#pop-up-block{
+    position: fixed;
+    top: 10%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin:auto;
+    z-index:5;
 }
-
-#sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;
+#pop-up-block:after{
+    content:'';
+    position: fixed;
+    display:block;
+    z-index:-1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.7);
+    height: 100vh;
+    width: 100%;
 }
-
-#sidebar-wrapper .list-group {
-  width: 15rem;
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
 }
 
-#page-content-wrapper {
-  min-width: 100vw;
+.sidebar .tab-menu-link{
+    color: #fff;
+    z-index: 1;
+    padding: 16px;
+    text-align:center;
 }
 
-#wrapper.toggled #sidebar-wrapper {
-  margin-left: 0;
+.sidebar.toggled .nav-item{
+    display: flex;
+    flex-flow: column nowrap;
+}
+.sidebar.toggled .tab-menu-link{
+    display: none;
 }
 
 @media (min-width: 768px) {
-  #sidebar-wrapper {
-    margin-left: 0;
-  }
-
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
-
-  #wrapper.toggled #sidebar-wrapper {
-    margin-left: -15rem;
-  }
+    .sidebar .tab-menu-link{
+        position: absolute;
+        left: 10rem;
+        top: 0;
+    }
 }
 
-.user_image{
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 50%;
-}
-.profile-user-image{
-    width: 100px;
-    height: 100px;
-    overflow:hidden;
-    border-radius:50%;
-}

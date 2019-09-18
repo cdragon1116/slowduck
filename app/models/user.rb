@@ -12,14 +12,13 @@ class User < ApplicationRecord
   has_many :chatroom_users
   has_many :chatrooms , through: :chatroom_users
   has_many :messages, dependent: :destroy
-  def message_image
-    return self.image.variant(resize: '35x35!').processed
-  end
-  def profile_image
-    return self.image.variant(resize: '100x100!').processed
+  def resize_image(size = '60x60!')
+    if self.image
+      return self.image.variant(resize: size).processed
+    end
   end
   def default_image
-    if self.image == nil
+    if self.image == nil 
       self.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default_user_image.png')), filename: 'default_user_img.png', content_type: 'image/png')
     end
   end

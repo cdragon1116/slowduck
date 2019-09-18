@@ -1,0 +1,23 @@
+<div class="">
+  <div class="icon d-flex align-items-center">
+    <% if message.id == message.parent_id %>
+      <%= link_to '<i class="fa fa-comment fa-lg text-primary" aria-hidden="true"></i>'.html_safe, chatroom_message_path(message.chatroom_id, message.id)%>
+    <% else %>
+      <%= link_to '<i class="fa fa-share fa-lg text-secondary" aria-hidden="true"></i>
+      '.html_safe , chatroom_message_path(message.chatroom_id, message.parent.id)%>
+  <% end %>
+  <div class="">
+    <%= image_tag url_for(message.user.message_image), class:'img-profile rounded-circle'  %>
+  </div>
+  <strong class="message-user-name">
+    <%= message.user.username%>
+  </strong>
+  <p class="ml-auto pr-5 mb-0 timestamp">
+  <%=  message.created_at.strftime("%Y-%m-%d-%H:%M")%>
+  </p>
+  </div>
+
+  <div class="message-body">
+    <%= raw(markdown(message.body)) %>
+  </div>
+</div>
