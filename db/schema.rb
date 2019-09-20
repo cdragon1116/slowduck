@@ -57,24 +57,12 @@ ActiveRecord::Schema.define(version: 2019_09_16_161405) do
   create_table "messages", force: :cascade do |t|
     t.text "body"
     t.bigint "user_id"
-    t.bigint "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "chatroom_id"
     t.integer "parent_id"
     t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
-    t.index ["post_id"], name: "index_messages_on_post_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "chatroom_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "body"
-    t.index ["chatroom_id"], name: "index_posts_on_chatroom_id"
-    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -86,8 +74,6 @@ ActiveRecord::Schema.define(version: 2019_09_16_161405) do
     t.string "username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -96,8 +82,5 @@ ActiveRecord::Schema.define(version: 2019_09_16_161405) do
   add_foreign_key "chatroom_users", "chatrooms"
   add_foreign_key "chatroom_users", "users"
   add_foreign_key "messages", "chatrooms"
-  add_foreign_key "messages", "posts"
   add_foreign_key "messages", "users"
-  add_foreign_key "posts", "chatrooms"
-  add_foreign_key "posts", "users"
 end

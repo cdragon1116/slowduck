@@ -3,10 +3,10 @@
     <% if message.id == message.parent_id %>
       <%= link_to '<i class="fa fa-comment text-primary" aria-hidden="true"></i>'.html_safe, chatroom_message_path(message.chatroom_id, message.id)%>
     <% else %>
-      <%= link_to '<i class="fa fa-share fa-lg text-secondary" aria-hidden="true"></i>
+      <%= link_to '<i class="fa fa-share text-secondary" aria-hidden="true"></i>
       '.html_safe , chatroom_message_path(message.chatroom_id, message.parent.id)%>
   <% end %>
-  <%= image_tag url_for(message.user.resize_image('32x32!')), class:'img-profile rounded-circle mx-3'  %>
+  <%= image_tag url_for(message.user.resize_image('32x32!')), class:'img-profile rounded-circle ml-3'  %>
   </div>
   <div class="flex-grow-1">
     <span>
