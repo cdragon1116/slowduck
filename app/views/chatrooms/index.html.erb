@@ -1,13 +1,2 @@
 <h4>歡迎使用Chatty</h4>
-<div class="container">
-  <h3 class="my-4">公開聊天室：請謹慎發言</h3>
-  <ul class="list-group">
-    <% @public_chatrooms.each do |chatroom| %>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        <%= chatroom.name%>
-        <%= link_to 'join', join_chatroom_chatroom_users_path(chatroom.id), method:'post', class:'btn' %>
-    </li>
-    <% end%>
-  </ul>
-</div>
 </div>
