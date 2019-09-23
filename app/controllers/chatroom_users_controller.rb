@@ -36,6 +36,7 @@ class ChatroomUsersController < ApplicationController
       redirect_to new_chatroom_chatroom_user_path(@chatroom.id)  
     end
   end
+
   private
     def set_chatroom
       @chatroom = Chatroom.find_by(id: params[:chatroom_id])

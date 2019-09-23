@@ -12,14 +12,10 @@ class MessagesController < ApplicationController
   end
   def create
     message = Message.new(message_params)
-    if message_params.has_key?("parent_id")
-      message.save
+    if message.save
       MessageRelayJob.perform_later(message)
     else
-      message.save
-      message.parent = message
-      message.save
-      MessageRelayJob.perform_later(message)
+      redirect_to chatroom_path(@chatroom), notice: "發送錯誤"
     end
   end
 
