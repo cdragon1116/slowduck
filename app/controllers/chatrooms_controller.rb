@@ -3,10 +3,7 @@ class ChatroomsController < ApplicationController
   helper_method :find_admin
 
   # GET /chatrooms
-  # GET /chatrooms.json
-
   def index
-    @public_chatrooms = Chatroom.where(public:true).limit(10)
     if user_signed_in?
       @chatrooms = current_user.chatrooms
     else
@@ -17,7 +14,7 @@ class ChatroomsController < ApplicationController
   # GET /chatrooms/1
   # GET /chatrooms/1.json
   def show
-    if @chatroom.users.exists?(id:current_user.id) or @chatroom.public == true
+    if @chatroom.users.exists?(id:current_user.id)
       @messages = @chatroom.messages.order(created_at: :desc).limit(50).reverse
     else
       redirect_to chatrooms_url, notice: "You don't have accessbility"
