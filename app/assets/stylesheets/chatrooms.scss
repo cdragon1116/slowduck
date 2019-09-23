@@ -10,30 +10,27 @@
     font-size: 20px;
     margin-top: 10px;
 }
-
 .chatroom_top{
     padding: 20px;
-    height: 80vh;
+    height: 74vh;
     background: #fff;
 }
 [data-behavior='messages']{
     margin-top: 20px;
     width: 100%;
-    height: 60vh;
+    height: 62vh;
     overflow-y: auto; 
 }
-
 .fa{
     padding: 5px;
 }
 .form{
     margin: 5px;
+    margin-top: 10px;
 }
-
 textarea:focus{
     outline: none;
 }
-
 .nav-item{
     position:relative;
 }

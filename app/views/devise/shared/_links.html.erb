@@ -1,4 +1,21 @@
 <div class="form-group">
+  <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <% if OmniAuth::Utils.camelize(provider) == "GoogleOauth2" %>
+        <%= link_to omniauth_authorize_path(resource_name, provider) , class:'btn btn-google btn-user btn-block' do%>
+          <i class="fab fa-google fa-fw"></i> Login with Google
+
+        <% end %>
+      <% elsif OmniAuth::Utils.camelize(provider) == "Facebook" %>
+        <%= link_to omniauth_authorize_path(resource_name, provider) , class:'btn btn-facebook btn-user btn-block' do %>
+          <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+
+        <% end %>
+      <% end %>
+    <% end -%>
+  <% end -%>
+
+  <hr>
   <%- if controller_name != 'sessions' %>
     <%= link_to t(".sign_in"), new_session_path(resource_name), class:'small' %><br />
   <% end -%>
@@ -19,9 +36,4 @@
     <%= link_to t('.didn_t_receive_unlock_instructions'), new_unlock_path(resource_name) , class:'small'%><br />
   <% end -%>
 
-  <%- if devise_mapping.omniauthable? %>
-    <%- resource_class.omniauth_providers.each do |provider| %>
-      <%= link_to t('.sign_in_with_provider', provider: OmniAuth::Utils.camelize(provider)), omniauth_authorize_path(resource_name, provider) , class:'btn btn-danger'%><br />
-    <% end -%>
-  <% end -%>
 </div>

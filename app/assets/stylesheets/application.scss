@@ -14,30 +14,36 @@
  *= require_self
  */
 
-// @import "bootstrap";
-// @import "font-awesome";
-/*!
- * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
- * Copyright 2013-2019 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
- */
-#notice{
-  line-height: 40px;
-}
-
 body {
   overflow-x: hidden;
 }
-nav a:hover, 
-#sidebar-wrapper a:hover {
-  background-color: transparent;
-  color:#fff;
-  text-decoration: none;
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
 }
-a:hover{
-  background-color: transparent;
+// sidebar
+.sidebar .tab-menu-link{
+    color: #fff;
+    z-index: 1;
+    padding: 16px;
+    text-align:center;
 }
-
+.sidebar.toggled .nav-item{
+    display: flex;
+    flex-flow: column nowrap;
+}
+.sidebar.toggled .tab-menu-link{
+    display: none;
+}
+@media (min-width: 768px) {
+    .sidebar .tab-menu-link{
+        position: absolute;
+        left: 10rem;
+        top: 0;
+    }
+}
+// signin/signout page
 #pop-up-block{
     position: fixed;
     top: 10%;
@@ -58,32 +64,3 @@ a:hover{
     height: 100vh;
     width: 100%;
 }
-html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100%;
-}
-
-.sidebar .tab-menu-link{
-    color: #fff;
-    z-index: 1;
-    padding: 16px;
-    text-align:center;
-}
-
-.sidebar.toggled .nav-item{
-    display: flex;
-    flex-flow: column nowrap;
-}
-.sidebar.toggled .tab-menu-link{
-    display: none;
-}
-
-@media (min-width: 768px) {
-    .sidebar .tab-menu-link{
-        position: absolute;
-        left: 10rem;
-        top: 0;
-    }
-}
-
