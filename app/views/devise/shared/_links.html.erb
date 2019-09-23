@@ -21,7 +21,7 @@
 
   <%- if devise_mapping.omniauthable? %>
     <%- resource_class.omniauth_providers.each do |provider| %>
-      <%= link_to t('.sign_in_with_provider', provider: OmniAuth::Utils.camelize(provider)), omniauth_authorize_path(resource_name, provider) , class:'small'%><br />
+      <%= link_to t('.sign_in_with_provider', provider: OmniAuth::Utils.camelize(provider)), omniauth_authorize_path(resource_name, provider) , class:'btn btn-danger'%><br />
     <% end -%>
   <% end -%>
 </div>
