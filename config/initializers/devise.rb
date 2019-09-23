@@ -9,7 +9,8 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '0b32fffd2038e4397fd90b6cb5218d2d14dcfad34aef5bedb6b6baaabb6d7d5e14faa50bcd877c1af0b574958ce63be903d2b7cdd542e923eed6db119fdb777e'
-
+  config.omniauth :facebook, ENV["facebook_key"], ENV["facebook_secret"], scope: "public_profile,email", info_fields: "email,name"
+  config.omniauth :google_oauth2, ENV["google_key"], ENV["google_secret"],{access_type: "offline", approval_prompt: ""}
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
