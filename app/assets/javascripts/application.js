@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require jquery
 //= require jquery_ujs
+//= require jquery.atwho
 //= require bootstrap-sprockets
 //= require popper
 //= require_tree .
@@ -79,6 +80,30 @@ $(document).on('turbolinks:load', function(){
     $(window).on('keyup', function(e){
         if (e.keyCode == 27) window.history.back();
     })
+
+
+    $(function(){
+        let active_chatroom =  $("[data-chatroom-id='#{data.chatroom_id}']")
+        let chatroom =  $("[data-chatroom-id]").data('chatroom-id')
+
+        let q = $('textarea').val()
+        $.ajax({url:`/api/v2/chatrooms/${chatroom}/show_users.json`})
+        .then(function(data){
+            let users = data.map(function(data){
+                return {username: data.username, email:data.email} 
+            })
+            console.log(users)
+            $('textarea').atwho({at:"@", data:users, insertTpl: "@${username}, " ,displayTpl: "<li>${username}-${email}</li>"});
+        })
+
+        $.ajax({url:`/api/v2/chatrooms/${chatroom}/show_tags.json`})
+        .then(function(data){
+            let tags = data.map(function(data){
+                return {tagname: data.tagname} 
+            })
+            $('textarea').atwho({at:"#", data:tags, insertTpl: "${tagname}, " ,displayTpl: "<li>${tagname}</li>"});
+        })
+    });
 
 })
 
