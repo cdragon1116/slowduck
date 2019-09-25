@@ -9,8 +9,7 @@ class Api::V2::ChatroomsController < ApplicationController
   end
 
   def show_tags
-    @tags = @chatroom.tags
-
+    @tags = @chatroom.messages.map{|x| x.tags}.flatten    
     respond_to do |format|
       format.json
     end
@@ -18,6 +17,6 @@ class Api::V2::ChatroomsController < ApplicationController
 
   private
   def set_chatroom
-    @chatroom = Chatroom.find_by(id: params[:id])
+    @chatroom = Chatroom.includes(:messages => :tags).find_by(id: params[:id])
   end
 end
