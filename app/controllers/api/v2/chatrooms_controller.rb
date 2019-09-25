@@ -15,6 +15,13 @@ class Api::V2::ChatroomsController < ApplicationController
     end
   end
 
+  def show_messages
+    @messages = @chatroom.messages    
+    respond_to do |format|
+      format.json
+    end
+  end
+
   private
   def set_chatroom
     @chatroom = Chatroom.includes(:messages => :tags).find_by(id: params[:id])

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         member do 
           get :show_users
           get :show_tags
+          get :show_messages
         end
       end
     end
