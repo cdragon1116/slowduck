@@ -13,7 +13,7 @@
       <%= message.user.username%>
     </span>
     <div class="message-body">
-      <%= markdown(message.body) %>
+      <%= raw(markdown(message.body)) %>
     </div>
   </div>
 </div>

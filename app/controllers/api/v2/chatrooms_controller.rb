@@ -10,6 +10,7 @@ class Api::V2::ChatroomsController < ApplicationController
 
   def show_tags
     @tags = @chatroom.tags
+
     respond_to do |format|
       format.json
     end

@@ -93,7 +93,10 @@ $(document).on('turbolinks:load', function(){
                 return {username: data.username, email:data.email} 
             })
             console.log(users)
-            $('textarea').atwho({at:"@", data:users, insertTpl: "@${username}, " ,displayTpl: "<li>${username}-${email}</li>"});
+            $('textarea').atwho({ at:"@", 
+                                  data:users, 
+                                  insertTpl: "@${username}, " ,
+                                  displayTpl: "<li>${username}-${email}</li>"});
         })
 
         $.ajax({url:`/api/v2/chatrooms/${chatroom}/show_tags.json`})
@@ -101,7 +104,12 @@ $(document).on('turbolinks:load', function(){
             let tags = data.map(function(data){
                 return {tagname: data.tagname} 
             })
-            $('textarea').atwho({at:"#", data:tags, insertTpl: "${tagname}, " ,displayTpl: "<li>${tagname}</li>"});
+            $('textarea').atwho({ at:"#", 
+                                  data:tags, 
+                                  insertTpl: "${tagname} ",
+                                  displayTpl: "<li>${tagname}</li>",
+                                  limit: 10,
+                                });
         })
     });
 
