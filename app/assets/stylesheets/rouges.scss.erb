@@ -1,11 +1,15 @@
-<%# for markdown highlight %>
+
 .message-body{
-  <%= Rouge::Themes::Base16.mode(:light).render %>
+<%= Rouge::Themes::Base16.mode(:light).render(scope: '.highlight') %>
+
   div.highlight {
     font-size: 14px;
     line-height: 18px;
     padding-bottom: 0px;
     margin-bottom: 12px;
+  }
+  .highlight .err{
+      background-color: transparent;
   }
   pre.highlight {
       font-size: 14px;

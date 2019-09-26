@@ -2,3 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.mention-at{
+    background-color: #4e73df;
+}
+.mention-tag{
+    background-color: #888;
+}
+.mention-user{
+    background-color: #4e73df;
+}
+.mention-link{
+    border-radius: 5px;
+    color: #eee;
+    padding: 5px;
+    font-size: 0.9rem;
+}
+.mention-link:hover{
+    background-color: #4e73df;
+    color: #fff;
+    text-decoration:none;
+
+}

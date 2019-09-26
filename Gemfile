@@ -17,6 +17,9 @@ gem 'jquery-rails'
 gem 'font-awesome-rails', '~> 4.6', '>= 4.6.3.1'
 gem 'google-cloud-storage', '~> 1.8', require: false
 gem 'mini_magick', '~> 4.5', '>= 4.5.1'
+gem "sass_rails_patch", "~> 0.0.1"
+gem 'jquery-atwho-rails', '~> 1.5', '>= 1.5.4'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'

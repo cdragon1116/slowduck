@@ -71,4 +71,18 @@ class User < ApplicationRecord
     user.save!
     return user
   end
+
+  def self.scan_user(message)
+    pattern = /(@\S*)/
+    ary =  message.body.split(pattern)
+    new_ary = ary.map do |user|
+      if user.start_with?('@') and find_user = User.find_by(username: user.sub('@', '').sub(',', '') )
+        render_user = ApplicationController.renderer.render( partial:'users/user', locals: {user: find_user} )
+      else
+        user
+      end
+    end
+    message.update(body: new_ary.join(""))
+  end
+
 end
