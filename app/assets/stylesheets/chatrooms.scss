@@ -34,3 +34,38 @@ textarea:focus{
 .nav-item{
     position:relative;
 }
+#search-input:focus{
+  outline: none;
+}
+#right-panel{
+    min-width: 40%;
+    max-width: 40%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+#right-panel.active {
+    display:none;
+}
+@media (max-width: 992px) {
+    #right-panel {
+      min-width: 200px;
+      max-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    #right-panel.active {
+        display: block;
+        position: absolute;
+        height: 90vh;
+        min-width: 100%;
+        max-width: 100%;
+        background-color: #eee;
+        top:  0;
+        left: 0; 
+    }
+    #right-panel {
+      display:none;
+    }
+}
