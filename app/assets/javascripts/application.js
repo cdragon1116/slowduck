@@ -23,6 +23,7 @@
 //
 
 $(document).on('turbolinks:load', function(){
+  toggleLoad()
 
   // Toggle the side navigation
   $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
@@ -37,7 +38,9 @@ $(document).on('turbolinks:load', function(){
   $(window).resize(function() {
     if ($(window).width() < 768) {
       $('.sidebar .collapse').collapse('hide');
+      $('#accordionSidebar').addClass('toggled');
       $('#right-panel').removeClass('active');
+      
     };
   });
 
@@ -82,5 +85,21 @@ $(document).on('turbolinks:load', function(){
     return false
   })
 
+  if ($(window).width() > 768) {
+    $(document).click(function(){
+      $('.panel-collapse.in')
+        .collapse('hide');
+      $('.collapse')
+        .collapse('hide');
+    });
+  }
+
 })
+
+function toggleLoad() {
+    $("#chatroom-loader").removeClass('loader')
+}
+
+
+
 

@@ -56,9 +56,12 @@ $(document).on("turbolinks:load", function() {
     if (e && e.keyCode === 13 && q !== "" ) {
       if ( q !== "@" | q !== "#" ){
         $('#search-input').val('')
-        if ($('#right-panel').hasClass('active')){
-          $('#right-panel').toggleClass('active');
+        $('#search-result').empty()
+        if (!$('#right-panel').hasClass('active')){
+          $('#right-panel').addClass('active');
+          $('#chatroom').addClass('active');
         }
+        $('#loader').addClass("loader");
         request = { query: decodeURIComponent(q) }
         search_messages(request , chatroom)
         return false
@@ -113,6 +116,7 @@ function search_messages(request, chatroom){
       if (messages.length === 0 ){
         messages = [`<div class='navbar'><h2>搜不到啦,想好再搜可以嗎!!!</h2></div>`]
       }
-      $('#search-result').empty().html(messages)
+      $('#search-result').html(messages)
+      $('#loader').removeClass("loader");
     })
 }

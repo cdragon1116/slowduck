@@ -19,9 +19,7 @@
         <%= link_to 'Edit', edit_chatroom_path(@chatroom) %> |
       <% end %>
       <%= link_to 'Back', chatrooms_path %> |
-      <% if @chatroom.public == false %>
-        <%= link_to 'Add member', new_chatroom_chatroom_user_path(@chatroom) %>
-      <% end %>
+      <%= link_to 'Add member', new_chatroom_chatroom_user_path(@chatroom) %>
       <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='message-box'>
         <% @messages.each do |message| %>
           <%= render message %>
@@ -37,8 +35,10 @@
         </div>
       <% end %>
     </div>
+    <div id="chatroom-loader" class="loader"></div>
   </div>
   <nav id="right-panel">
+<div id="loader"></div>
     <div id="search-result">
     </div>
   </nav>

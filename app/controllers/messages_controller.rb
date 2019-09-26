@@ -16,8 +16,6 @@ class MessagesController < ApplicationController
       Tag.scan_tag(message)
       User.scan_user(message)
       MessageRelayJob.perform_later(message)
-    else
-      redirect_to chatroom_path(@chatroom), notice: "發送錯誤"
     end
   end
 
