@@ -39,6 +39,8 @@ $(document).on("turbolinks:load", function() {
   // Right Panel Toggle Button
   $('#rightPanelCollapse').on('click', function () {
     $('#right-panel').toggleClass('active');
+    $('#chatroom').toggleClass('active');
+
   });
 
   // textarea mention-tag trigger
@@ -48,8 +50,8 @@ $(document).on("turbolinks:load", function() {
   atwho_tags('textarea', chatroom)
   atwho_tags('#search-input', chatroom)
 
-  // append  search box result
-  $('#search-input').on('keydown', function(e){
+  // append search box result
+  $('#search-input').on('keypress', function(e){
     let q = encodeURI($('#search-input').val()).trim()
     if (e && e.keyCode === 13 && q !== "" ) {
       if ( q !== "@" | q !== "#" ){
@@ -88,7 +90,7 @@ function atwho_tags(bind_object, chatroom){
   $(bind_object).atwho({ at:"#", 
     searchKey: 'tagname',
     data: null, 
-    limit: 5,
+    limit: 10,
     insertTpl: "${tagname} ",
     displayTpl: "<li>${tagname}</li>",
     callbacks: {
@@ -109,7 +111,7 @@ function search_messages(request, chatroom){
         return `${content}`
       })
       if (messages.length === 0 ){
-        messages = [`<div class='navbar'><h2>沒有這種訊息好嗎!!!</h2></div>`]
+        messages = [`<div class='navbar'><h2>搜不到啦,想好再搜可以嗎!!!</h2></div>`]
       }
       $('#search-result').empty().html(messages)
     })
