@@ -1,6 +1,6 @@
 <div id="chatroom">
   <div class="chatroom_top">
-    <h3><%= @message.user.username%>: <%=  @message.body %></h3>
+    <h3> <%=  @chatroom.name %>:<%= @message.user.username%></h3>
     <%= link_to 'Edit', edit_chatroom_path(@chatroom) %> |
     <%= link_to 'Back', chatroom_path(@chatroom) %>
     <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='messagebox'>

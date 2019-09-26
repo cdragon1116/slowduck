@@ -19,6 +19,7 @@ gem 'google-cloud-storage', '~> 1.8', require: false
 gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 gem "sass_rails_patch", "~> 0.0.1"
 gem 'jquery-atwho-rails', '~> 1.5', '>= 1.5.4'
+gem 'friendly_id', '~> 5.3'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
