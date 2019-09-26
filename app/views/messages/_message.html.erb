@@ -1,10 +1,10 @@
 <div class="icon navbar align-items-start ">
   <div class="navbar">
     <% if message.id == message.parent_id %>
-      <%= link_to '<i class="fa fa-comment text-primary" aria-hidden="true"></i>'.html_safe, chatroom_message_path(message.chatroom_id, message.id)%>
+      <%= link_to '<i class="fa fa-comment text-primary" aria-hidden="true"></i>'.html_safe, chatroom_message_path(message.chatroom.slug , message.slug)%>
     <% else %>
       <%= link_to '<i class="fa fa-share text-secondary" aria-hidden="true"></i>
-      '.html_safe , chatroom_message_path(message.chatroom_id, message.parent.id)%>
+      '.html_safe , chatroom_message_path(message.chatroom.slug, message.parent.slug)%>
   <% end %>
   <%= image_tag url_for(message.user.resize_image('32x32!')), class:'img-profile rounded-circle ml-3'  %>
   </div>
