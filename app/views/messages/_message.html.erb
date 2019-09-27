@@ -1,5 +1,5 @@
-<div class="icon navbar align-items-start ">
-  <div class="navbar">
+<div class="message icon navbar align-items-start flex-nowrap">
+  <div class="navbar flex-nowrap">
     <% if message.id == message.parent_id %>
       <%= link_to '<i class="fa fa-comment text-primary" aria-hidden="true"></i>'.html_safe, chatroom_message_path(message.chatroom.slug , message.slug)%>
     <% else %>
@@ -8,7 +8,7 @@
   <% end %>
   <%= image_tag url_for(message.user.resize_image('32x32!')), class:'img-profile rounded-circle ml-3'  %>
   </div>
-  <div class="flex-grow-1">
+  <div class="flex-grow-1" style="min-width: 0;">
     <span>
       <%= message.user.username%>
     </span>

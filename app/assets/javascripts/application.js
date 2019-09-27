@@ -21,98 +21,85 @@
 //= require_tree .
 //= require_tree ./channels
 //
-//
 
 $(document).on('turbolinks:load', function(){
+  toggleLoad()
 
-    // Toggle the side navigation
-    $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
-        $("body").toggleClass("sidebar-toggled");
-        $(".sidebar").toggleClass("toggled");
-        if ($(".sidebar").hasClass("toggled")) {
-            $('.sidebar .collapse').collapse('hide');
-        };
+  // Toggle the side navigation
+  $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+    $("body").toggleClass("sidebar-toggled");
+    $(".sidebar").toggleClass("toggled");
+    if ($(".sidebar").hasClass("toggled")) {
+      $('.sidebar .collapse').collapse('hide');
+    };
+  });
+
+  // Close any open menu accordions when window is resized below 768px
+  $(window).resize(function() {
+    if ($(window).width() < 768) {
+      $('.sidebar .collapse').collapse('hide');
+      $('#accordionSidebar').addClass('toggled');
+      $('#right-panel').removeClass('active');
+      
+    };
+  });
+
+  // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+  $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function(e) {
+    if ($(window).width() > 768) {
+      var e0 = e.originalEvent,
+        delta = e0.wheelDelta || -e0.detail;
+      this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+      e.preventDefault();
+    }
+  });
+
+  // Scroll to top button appear
+  $(document).on('scroll', function() {
+    var scrollDistance = $(this).scrollTop();
+    if (scrollDistance > 100) {
+      $('.scroll-to-top').fadeIn();
+    } else {
+      $('.scroll-to-top').fadeOut();
+    }
+  });
+
+  // Smooth scrolling using jQuery easing
+  $(document).on('click', 'a.scroll-to-top', function(e) {
+    var $anchor = $(this);
+    $('html, body').stop().animate({
+      scrollTop: ($($anchor.attr('href')).offset().top)
+    }, 1000, 'easeInOutExpo');
+    e.preventDefault();
+  });
+
+  // Close button action to go Back
+  $('.close').on('click', function(){
+    history.go(-1);
+    return false
+  })
+
+  // Keypress ESC goto Index
+  $(window).on('keyup', function(e){
+    if (e.keyCode == 27) document.location.href="/";
+    return false
+  })
+
+  if ($(window).width() > 768) {
+    $(document).click(function(){
+      $('.panel-collapse.in')
+        .collapse('hide');
+      $('.collapse')
+        .collapse('hide');
     });
-
-    // Close any open menu accordions when window is resized below 768px
-    $(window).resize(function() {
-        if ($(window).width() < 768) {
-            $('.sidebar .collapse').collapse('hide');
-        };
-    });
-
-    // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
-    $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function(e) {
-        if ($(window).width() > 768) {
-            var e0 = e.originalEvent,
-                delta = e0.wheelDelta || -e0.detail;
-            this.scrollTop += (delta < 0 ? 1 : -1) * 30;
-            e.preventDefault();
-        }
-    });
-
-    // Scroll to top button appear
-    $(document).on('scroll', function() {
-        var scrollDistance = $(this).scrollTop();
-        if (scrollDistance > 100) {
-            $('.scroll-to-top').fadeIn();
-        } else {
-            $('.scroll-to-top').fadeOut();
-        }
-    });
-
-    // Smooth scrolling using jQuery easing
-    $(document).on('click', 'a.scroll-to-top', function(e) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: ($($anchor.attr('href')).offset().top)
-        }, 1000, 'easeInOutExpo');
-        e.preventDefault();
-    });
-    
-    // ESC go Back
-    $('.close').on('click', function(){
-        console.log('click')
-        history.go(-1);
-        return false
-    })
-    
-    $(window).on('keyup', function(e){
-        if (e.keyCode == 27) window.history.back();
-    })
-
-
-    $(function(){
-        let active_chatroom =  $("[data-chatroom-id='#{data.chatroom_id}']")
-        let chatroom =  $("[data-chatroom-id]").data('chatroom-id')
-
-        let q = $('textarea').val()
-        $.ajax({url:`/api/v2/chatrooms/${chatroom}/show_users.json`})
-        .then(function(data){
-            let users = data.map(function(data){
-                return {username: data.username, email:data.email} 
-            })
-            console.log(users)
-            $('textarea').atwho({ at:"@", 
-                                  data:users, 
-                                  insertTpl: "@${username}, " ,
-                                  displayTpl: "<li>${username}-${email}</li>"});
-        })
-
-        $.ajax({url:`/api/v2/chatrooms/${chatroom}/show_tags.json`})
-        .then(function(data){
-            let tags = data.map(function(data){
-                return {tagname: data.tagname} 
-            })
-            $('textarea').atwho({ at:"#", 
-                                  data:tags, 
-                                  insertTpl: "${tagname} ",
-                                  displayTpl: "<li>${tagname}</li>",
-                                  limit: 10,
-                                });
-        })
-    });
+  }
 
 })
+
+function toggleLoad() {
+    $("#chatroom-loader").removeClass('loader')
+}
+
+
 
 

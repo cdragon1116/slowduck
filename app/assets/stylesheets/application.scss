@@ -44,14 +44,15 @@ html, body {
         top: 0;
     }
 }
+
+
 // signin/signout page
 #pop-up-block{
     position: fixed;
-    top: 10%;
+    top: 10vh;
     left: 0;
     bottom: 0;
     right: 0;
-    margin:auto;
     z-index:5;
 }
 #pop-up-block:after{
@@ -64,4 +65,14 @@ html, body {
     background-color: rgba(0,0,0,.7);
     height: 100vh;
     width: 100%;
+}
+
+
+@media screen and (max-width: 768px){
+  .sidebar .tab-menu-link{
+      display: none;
+  }
+  #pop-up-block{
+    top: -3vh;
+  }
 }

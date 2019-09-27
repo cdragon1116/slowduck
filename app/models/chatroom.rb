@@ -7,6 +7,9 @@ class Chatroom < ApplicationRecord
   extend FriendlyId
     friendly_id :slugged_chatroom, use: :slugged
 
+  def tags
+    messages.map{|message| message.tags}.flatten.uniq
+  end
 
   private
   

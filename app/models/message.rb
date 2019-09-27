@@ -5,8 +5,8 @@ class Message < ApplicationRecord
   belongs_to :parent, class_name: :Message, optional: true
   has_many :messages, class_name: :Message, foreign_key: :parent_id
 
-  has_many :message_tags
-  has_many :tags, through: :message_tags,  dependent: :destroy
+  has_many :message_tags, dependent: :destroy
+  has_many :tags, through: :message_tags, dependent: :destroy
 
   after_create :set_parent
 

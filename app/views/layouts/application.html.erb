@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Chatty</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -23,22 +24,10 @@
           <!-- /Top-bar -->
 
           <!-- Begin-Page-Content -->
-          <div class="container-fluid">
-            <p id="notice"><%= notice %></p>
+          <div class="container-fluid" style="position:relative;">
             <!-- Page Heading -->
-            <div class="container">
               <%= yield %>
-            </div>
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-              <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                  <span>Copyright &copy; SlowDuck 2019</span>
-                </div>
-              </div>
-            </footer>
-            <!-- End of Footer -->
           </div>
           <!-- End-of-Page-Content -->
         </div>
