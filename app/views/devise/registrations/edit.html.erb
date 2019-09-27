@@ -1,4 +1,4 @@
-<%= image_tag current_user.resize_image('100x100!') , class:'rounded-circle' %>
+<%= user_image(current_user, 100) %>
 
 <h1 class="h3 mb-4 text-gray-800"><%= t('.title', resource: resource_name.to_s.humanize) %></h1>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>

@@ -9,6 +9,7 @@
         <img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7e06jw8pcg301700b0b8.gif" alt="">
       </div>
       <div id="inner">
+        <%= render @message %>
         <% @messages.each do |message| %>
           <%= render message %>
         <% end %>

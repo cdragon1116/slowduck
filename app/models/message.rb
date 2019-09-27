@@ -8,22 +8,30 @@ class Message < ApplicationRecord
   has_many :message_tags, dependent: :destroy
   has_many :tags, through: :message_tags, dependent: :destroy
 
-  after_create :set_parent
+  after_create :set_color
 
   extend FriendlyId
   friendly_id :slugged_message, use: :slugged
 
   private
 
-  def set_parent
-    if self.parent_id == nil
-      self.update(parent_id: self.id)
-    end
-  end
-
   def slugged_message
     serial = [*"A".."Z", *0..9].sample(8).join
     "#{serial}#{body}"
+  end
+
+  def set_color
+    if self.parent_id
+      self.update(color: Message.find(self.parent_id).color )
+    else
+      previous = find_previous_parent
+      previous_color = (previous == nil) ? 0 : previous.color
+      self.update( color: (previous_color + 1) % 4 )
+    end
+  end
+
+  def find_previous_parent
+      self.chatroom.messages.where('id < ?', self.id).where('parent_id IS ?', nil).last
   end
 
 end

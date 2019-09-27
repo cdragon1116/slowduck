@@ -146,7 +146,7 @@
           <span class="mr-2 d-none d-lg-inline text-gray-600 small">
             <%= current_user.username %>
           </span>
-          <%= image_tag url_for(current_user.resize_image), class:"img-profile rounded-circle" %>
+          <%= user_image(current_user, 34) %>
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -181,7 +181,7 @@
     <div class="input-group">
       <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" id="search-input">
       <div class="input-group-append">
-        <button class="btn btn-primary" type="button">
+        <button class="btn btn-dark" type="button">
           <i class="fas fa-search fa-sm"></i>
         </button>
       </div>
