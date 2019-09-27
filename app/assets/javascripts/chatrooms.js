@@ -40,7 +40,7 @@ $(document).on("turbolinks:load", function() {
   $('#rightPanelCollapse').on('click', function () {
     $('#right-panel').toggleClass('active');
     $('#chatroom').toggleClass('active');
-
+    $('.form').toggleClass('active');
   });
 
   // textarea mention-tag trigger
@@ -93,6 +93,7 @@ $(document).on("turbolinks:load", function() {
       }
     }
   });
+  
 
 });
 

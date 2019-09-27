@@ -3,23 +3,19 @@
     <div class="chatroom_top">
 
       <div class="row no-gutters justify-content-center">
-        <h3 class="mb-0"><%= @chatroom.name %></h3>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light ml-auto">
-          <div class="row justify-content-end">
-            <button type="button" id="rightPanelCollapse" class="btn btn-dark">
-              <i class="fas fa-align-left"></i>
-              <span>SearchBar</span>
-            </button>
-
-          </div>
-        </nav>
+        <%= link_to new_chatroom_chatroom_user_path(@chatroom), class:'nav-link text-dark' do %>
+      <h3 class="mb-0"><%= @chatroom.name %></h3>
+    <% end %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ml-auto rightPanelToggle d-none d-xl-block">
+      <div class="row justify-content-end">
+        <button type="button" id="rightPanelCollapse" class="btn btn-dark">
+          <i class="fas fa-align-left"></i>
+          <span>SearchBar</span>
+        </button>
+      </div>
+    </nav>
       </div>
 
-      <% if find_admin == current_user %>
-        <%= link_to 'Edit', edit_chatroom_path(@chatroom) %> |
-      <% end %>
-      <%= link_to 'Back', chatrooms_path %> |
-      <%= link_to 'Add member', new_chatroom_chatroom_user_path(@chatroom) %>
       <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='message-box'>
         <div class="load-img text-center">
           <img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7e06jw8pcg301700b0b8.gif" alt="">

@@ -1,6 +1,6 @@
-<div class="message icon navbar align-items-start flex-nowrap" data-message="<%= message.id%>">
+<div class="message icon navbar align-items-start flex-nowrap" data-message="<%= message.id%>" data-parent="<%= message.parent.id%>">
   <div class="navbar flex-nowrap">
-    <% if message.parent_id == nil %>
+    <% if message.parent_id == message.id %>
       <%= link_to "<i class='fa fa-comment #{color(message.color)}' aria-hidden='true'></i>".html_safe, chatroom_message_path(message.chatroom.slug , message.slug)%>
 
     <% else %>

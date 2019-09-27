@@ -29,6 +29,7 @@ $(document).on('turbolinks:load', function(){
   $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
     $("body").toggleClass("sidebar-toggled");
     $(".sidebar").toggleClass("toggled");
+    $(".form").toggleClass("sidebar-toggled");
     if ($(".sidebar").hasClass("toggled")) {
       $('.sidebar .collapse').collapse('hide');
     };
@@ -40,9 +41,12 @@ $(document).on('turbolinks:load', function(){
       $('.sidebar .collapse').collapse('hide');
       $('#accordionSidebar').addClass('toggled');
       $('#right-panel').removeClass('active');
-      
     };
   });
+  
+  if ($(window).width() < 768) {
+    $('#accordionSidebar').addClass('toggled');
+  }
 
   // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
   $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function(e) {

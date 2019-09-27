@@ -12,15 +12,25 @@
     background-color: #4e73df;
 }
 .mention-link{
+    margin: 1px;
+    display:inline-block;
     border-radius: 5px;
     color: #eee;
-    padding: 5px;
+    padding: 4px 5px;
     font-size: 0.9rem;
 }
 .mention-link:hover{
-    background-color: #4e73df;
     color: #fff;
     text-decoration:none;
 
 }
 
+.msg-hover{
+  background-color: #eee;
+}
+.message {
+  -webkit-transition:background .3s;
+  -moz-transition:background .3s;
+  -o-transition:background .3s;
+  transition:background .3s
+}

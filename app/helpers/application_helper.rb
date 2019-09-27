@@ -20,7 +20,7 @@ module ApplicationHelper
     renderer = Rouge::Renderer.new(options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
     
-    render_text =  text.gsub("\n", ' ').gsub("\r\n", '')
+    render_text =  text.gsub("\r\n", "<br>").gsub("\n", '')
     markdown.render(render_text).html_safe
   end
 

@@ -1,3 +1,4 @@
+<div class="container mt-5">
 <%= user_image(current_user, 100) %>
 
 <h1 class="h3 mb-4 text-gray-800"><%= t('.title', resource: resource_name.to_s.humanize) %></h1>
@@ -50,3 +51,5 @@
 <p><%= t('.unhappy') %>? <%= link_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete %>.</p>
 
 <%= link_to t('.back'), :back %>
+
+</div>

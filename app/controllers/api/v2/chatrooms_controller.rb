@@ -20,7 +20,7 @@ class Api::V2::ChatroomsController < ApplicationController
   def get_messages
     query = params["query"].split(" ").map{ |q| q.gsub(/[,]/,'')}
     if query and query.length > 0
-      @messages = @chatroom.messages.select{ |message| 
+      @messages = @chatroom.messages.order(created_at: :desc).select{ |message| 
         query.map{ |q| strip_tags(message.body).include?(q)}.count(true) == query.length
       }
     else
