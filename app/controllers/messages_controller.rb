@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
   end
   def show
     find_message
-    @messages = @message.messages
+    @messages = @message.messages.order(created_at: :desc).reverse
   end
   def create
     message = Message.new(message_params)

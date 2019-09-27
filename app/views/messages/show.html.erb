@@ -3,11 +3,18 @@
     <h3> <%=  @chatroom.name %>:<%= @message.user.username%></h3>
     <%= link_to 'Edit', edit_chatroom_path(@chatroom) %> |
     <%= link_to 'Back', chatroom_path(@chatroom) %>
-    <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='messagebox'>
-      <% @messages.each do |message| %>
-        <%= render message %>
-      <% end %>
+
+    <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='message-box'>
+      <div class="load-img text-center">
+        <img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7e06jw8pcg301700b0b8.gif" alt="">
+      </div>
+      <div id="inner">
+        <% @messages.each do |message| %>
+          <%= render message %>
+        <% end %>
+      </div>
     </div>
+
   </div>
   <%= form_for [@chatroom, Message.new],remote: true, authenticity_token: true do |form| %>
     <div class="form-group">

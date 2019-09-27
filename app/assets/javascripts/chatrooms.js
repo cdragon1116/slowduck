@@ -9,7 +9,7 @@ $(document).on("turbolinks:load", function() {
       }
     }
   });
-  
+
   // when new-message-send scroll bottom
   var element, scrolled;
   scrolled = false;
@@ -22,7 +22,7 @@ $(document).on("turbolinks:load", function() {
   $('[data-behavior=\'messages\']').on('scroll', function() {
     return scrolled = true;
   });
-  
+
   // enable keying tab in textarea
   $('textarea').on('keydown', function() {
     var e, s, v;
@@ -69,6 +69,31 @@ $(document).on("turbolinks:load", function() {
     }
   })
 
+  $('#message-box').scroll(function(){
+    if ($('#message-box').scrollTop() == 0){
+      let pre_id = $('#inner').children('.message:nth-child(1)').data("message")
+      if (pre_id){
+        $('.load-img').css('display','block')
+        $.get(`/api/v2/chatrooms/${chatroom}/next_messages.json?pre_id=` + pre_id)
+          .then(function(data){
+            let messages = data.map(function({content}){
+              return `${content}`
+            })
+            if (messages.length !== 0){
+              $('#inner').prepend(messages)
+              $('#message-box').scrollTop(50);
+              $('.load-img').css('display','none')
+            }
+            else{
+              $('#inner').prepend(`<div class='text-center'>沒東西了啦不要再拉了！！！</div>`)
+              $('.load-img').css('display','none')
+            }
+          })
+
+      }
+    }
+  });
+
 });
 
 
@@ -79,13 +104,13 @@ function atwho_users(bind_object, chatroom){
     insertTpl: "@${username}, " ,
     displayTpl: "<li>${username}-${email}</li>",
     callbacks: {
-        remoteFilter: function(query, callback){
-          q = $(bind_object).val().split(" ").filter( x => x[0] === '@').slice(-1)[0].slice(1)
-          request = { query: decodeURIComponent(q) }
-          $.get(`/api/v2/chatrooms/${chatroom}/show_users.json?` + jQuery.param(request), function(data){
-            callback(data);
-          });
-        }
+      remoteFilter: function(query, callback){
+        q = $(bind_object).val().split(" ").filter( x => x[0] === '@').slice(-1)[0].slice(1)
+        request = { query: decodeURIComponent(q) }
+        $.get(`/api/v2/chatrooms/${chatroom}/get_users.json?` + jQuery.param(request), function(data){
+          callback(data);
+        });
+      }
     }
   });
 }
@@ -97,18 +122,18 @@ function atwho_tags(bind_object, chatroom){
     insertTpl: "${tagname} ",
     displayTpl: "<li>${tagname}</li>",
     callbacks: {
-        remoteFilter: function(query, callback){
-          q = $(bind_object).val().split(" ").filter( x => x[0] === '#').slice(-1)[0]
-          request = { query: decodeURIComponent(q) }
-          $.get(`/api/v2/chatrooms/${chatroom}/show_tags.json?` + jQuery.param(request), function(data){
-            callback(data);
-          });
-        }
+      remoteFilter: function(query, callback){
+        q = $(bind_object).val().split(" ").filter( x => x[0] === '#').slice(-1)[0]
+        request = { query: decodeURIComponent(q) }
+        $.get(`/api/v2/chatrooms/${chatroom}/get_tags.json?` + jQuery.param(request), function(data){
+          callback(data);
+        });
+      }
     }
   });
 }
 function search_messages(request, chatroom){
-  $.get(`/api/v2/chatrooms/${chatroom}/show_messages.json?` + jQuery.param(request))
+  $.get(`/api/v2/chatrooms/${chatroom}/get_messages.json?` + jQuery.param(request))
     .then(function(data){
       let messages = data.map(function({content}){
         return `${content}`
@@ -120,3 +145,4 @@ function search_messages(request, chatroom){
       $('#loader').removeClass("loader");
     })
 }
+

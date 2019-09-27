@@ -1,4 +1,4 @@
-<div class="message icon navbar align-items-start flex-nowrap">
+<div class="message icon navbar align-items-start flex-nowrap" data-message="<%= message.id%>">
   <div class="navbar flex-nowrap">
     <% if message.id == message.parent_id %>
       <%= link_to '<i class="fa fa-comment text-primary" aria-hidden="true"></i>'.html_safe, chatroom_message_path(message.chatroom.slug , message.slug)%>

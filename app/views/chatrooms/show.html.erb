@@ -21,9 +21,14 @@
       <%= link_to 'Back', chatrooms_path %> |
       <%= link_to 'Add member', new_chatroom_chatroom_user_path(@chatroom) %>
       <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='message-box'>
-        <% @messages.each do |message| %>
-          <%= render message %>
-        <% end %>
+        <div class="load-img text-center">
+          <img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7e06jw8pcg301700b0b8.gif" alt="">
+        </div>
+        <div id="inner">
+          <% @messages.each do |message| %>
+            <%= render message %>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="form">
@@ -38,8 +43,9 @@
     <div id="chatroom-loader" class="loader"></div>
   </div>
   <nav id="right-panel">
-<div id="loader"></div>
+    <div id="loader"></div>
     <div id="search-result">
     </div>
   </nav>
 </div>
+
