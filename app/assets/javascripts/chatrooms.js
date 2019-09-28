@@ -56,12 +56,6 @@ $(document).on("turbolinks:load", function() {
     if (e && e.keyCode === 13 && q !== "" ) {
       if ( q !== "@" | q !== "#" ){
         $('#search-input').val('')
-        $('#search-result').empty()
-        if (!$('#right-panel').hasClass('active')){
-          $('#right-panel').addClass('active');
-          $('#chatroom').addClass('active');
-        }
-        $('#loader').addClass("loader");
         request = { query: decodeURIComponent(q) }
         search_messages(request , chatroom)
         return false
@@ -69,6 +63,7 @@ $(document).on("turbolinks:load", function() {
     }
   })
 
+  // scroll to see history message
   $('#message-box').scroll(function(){
     if ($('#message-box').scrollTop() == 0){
       let pre_id = $('#inner').children('.message:nth-child(1)').data("message")
@@ -89,11 +84,17 @@ $(document).on("turbolinks:load", function() {
               $('.load-img').css('display','none')
             }
           })
-
       }
     }
   });
-  
+
+  // mention-link click to search
+  $('.mention-tag, .mention-user').on('click', function(e){
+    e.preventDefault()
+    let q = encodeURI($(this).text())
+    request = { query: decodeURIComponent(q) }
+    search_messages(request , chatroom)
+  })
 
 });
 
@@ -134,6 +135,12 @@ function atwho_tags(bind_object, chatroom){
   });
 }
 function search_messages(request, chatroom){
+  $('#search-result').empty()
+  if (!$('#right-panel').hasClass('active')){
+    $('#right-panel').addClass('active');
+    $('#chatroom').addClass('active');
+  }
+  $('#loader').addClass("loader");
   $.get(`/api/v2/chatrooms/${chatroom}/get_messages.json?` + jQuery.param(request))
     .then(function(data){
       let messages = data.map(function({content}){
