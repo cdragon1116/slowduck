@@ -68,7 +68,7 @@ $(document).on("turbolinks:load", function() {
     if ($('#message-box').scrollTop() == 0){
       let pre_id = $('#inner').children('.message:nth-child(1)').data("message")
       if (pre_id){
-        $('.load-img').css('display','block')
+        $('.history-loader').css('display','block')
         $.get(`/api/v2/chatrooms/${chatroom}/next_messages.json?pre_id=` + pre_id)
           .then(function(data){
             let messages = data.map(function({content}){
@@ -76,12 +76,12 @@ $(document).on("turbolinks:load", function() {
             })
             if (messages.length !== 0){
               $('#inner').prepend(messages)
-              $('#message-box').scrollTop(50);
               $('.load-img').css('display','none')
+              $('#message-box').scrollTop(50);
             }
             else{
               $('#inner').prepend(`<div class='text-center'>沒東西了啦不要再拉了！！！</div>`)
-              $('.load-img').css('display','none')
+              $('.history-loader').css('display','none')
             }
           })
       }
@@ -140,7 +140,7 @@ function search_messages(request, chatroom){
     $('#right-panel').addClass('active');
     $('#chatroom').addClass('active');
   }
-  $('#loader').addClass("loader");
+  $('.result-loader').removeClass("d-none");
   $.get(`/api/v2/chatrooms/${chatroom}/get_messages.json?` + jQuery.param(request))
     .then(function(data){
       let messages = data.map(function({content}){
@@ -150,7 +150,7 @@ function search_messages(request, chatroom){
         messages = [`<div class='navbar'><h2>搜不到啦,想好再搜可以嗎!!!</h2></div>`]
       }
       $('#search-result').html(messages)
-      $('#loader').removeClass("loader");
+      $('.result-loader').addClass("d-none");
     })
 }
 
