@@ -17,8 +17,8 @@
       </div>
 
       <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='message-box'>
-        <div class="load-img text-center">
-          <img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7e06jw8pcg301700b0b8.gif" alt="">
+        <div class="history-loader text-center">
+          <%= image_tag "duck.gif", style:"max-height:50px"%>
         </div>
         <div id="inner">
           <% @messages.each do |message| %>
@@ -40,6 +40,9 @@
   </div>
   <nav id="right-panel">
     <div id="loader"></div>
+      <div class="result-loader text-center d-none">
+        <%= image_tag "duck.gif", style:"max-width:200px"%>
+      </div>
     <div id="search-result">
     </div>
   </nav>
