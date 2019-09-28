@@ -98,6 +98,13 @@ $(document).on('turbolinks:load', function(){
     });
   }
 
+  // set active_chatroom color
+  var active_chatroom;
+  var active_chatroom = $(`[data-behavior='messages']`).data('chatroom-id');
+  var active_link = $(`[data-behavior='chatroom-link'][data-chatroom-id='${active_chatroom}']`)
+  active_link.css('background-color', '#333')
+
+
 })
 
 function toggleLoad() {
