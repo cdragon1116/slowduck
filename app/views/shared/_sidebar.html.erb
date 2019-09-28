@@ -15,11 +15,11 @@
   <% if user_signed_in? %>
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+    <div class="sidebar-heading my-2">
       Chatroom 
     </div>
 
-    <% current_user.chatrooms.each do |room|%>
+    <% current_user.group_chatrooms.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <%= link_to  room, class:'nav-link', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
@@ -38,12 +38,28 @@
       </li>
     <% end %>
 
+    <!-- Heading -->
+    <div class="sidebar-heading my-2">
+      1-1 Chat
+    </div>
 
-    <!-- Divider -->
+    <!-- divider -->
     <hr class="sidebar-divider">
 
+    <% current_user.one_on_one_chatrooms.each do |room|%>
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <%= link_to  room, class:'nav-link', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
+          <span><%= "#{room.one_on_one_name(current_user)} <i class='fa fa-exclamation d-none' aria-hidden='true'></i>".html_safe %></span>
+        <% end %>
+        <%= link_to  hide_chatroom_chatroom_path(room.id), class:'tab-menu-link close1on1 ' ,method:'post' do %>
+          <i class="fas fa-times"></i>
+        <% end %>
+      </li>
+    <% end %>
+
     <!-- Heading -->
-    <div class="sidebar-heading">
+    <div class="sidebar-heading my-2">
       Addons
     </div>
 

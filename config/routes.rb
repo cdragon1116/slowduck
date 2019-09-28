@@ -1,19 +1,22 @@
 Rails.application.routes.draw do
   resources :chatrooms do
-    resources :chatroom_users do 
-      collection do 
-        post :join
-      end 
-    end
+    resources :chatroom_users 
     resources :messages
+    collection do 
+      post :create_one_on_one
+    end
+    member do 
+      post :hide_chatroom
+    end
   end 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     omniauth_callbacks: "users/omniauth_callbacks"
   }
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   root 'chatrooms#index'
+
   namespace :api do 
     namespace :v2 do
       resources :chatrooms ,only:[:show] do 

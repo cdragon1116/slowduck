@@ -136,3 +136,11 @@ $input-border-focus: transparend;
   border-radius: 20px;
   background-color: #777;
 }
+
+
+.close1on1{
+  display: none;
+}
+li.nav-item:hover > .close1on1{
+  display:block
+}

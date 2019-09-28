@@ -2,20 +2,17 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
-         
+    :recoverable, :rememberable, :validatable,
+    :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+
   validates :username, presence: true, allow_blank: false
   validates_uniqueness_of :username
   has_one_attached :image
-         
+
   has_many :chatroom_users
   has_many :chatrooms , through: :chatroom_users
   has_many :messages, dependent: :destroy
 
-  def resize_image(size = 60)
-    self.image.variant(resize: "#{size}x#{size}").processed
-  end
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -30,14 +27,14 @@ class User < ApplicationRecord
         existing_user.save!
         return existing_user
       else
-    # Uncomment the section below if you want users to be created if they don't exist
+        # Uncomment the section below if you want users to be created if they don't exist
         user = User.create(
-            username: data["name"],
-            email: data["email"],
-            password: Devise.friendly_token[0,20],
-            google_token: access_token.credentials.token,
-            google_uid: access_token.uid
-          )
+          username: data["name"],
+          email: data["email"],
+          password: Devise.friendly_token[0,20],
+          google_token: access_token.credentials.token,
+          google_uid: access_token.uid
+        )
       end
     end
   end
@@ -80,6 +77,19 @@ class User < ApplicationRecord
       end
     end
     message.update(body: new_ary.join(""))
+  end
+
+  def group_chatrooms
+    self.chatrooms.where(status: nil)
+  end
+
+  def one_on_one_chatrooms
+    display_room = self.chatroom_users.where(display: 1).pluck(:chatroom_id)
+    self.chatrooms.where(status: '1on1').where(id: display_room)
+  end
+
+  def resize_image(size = 60)
+    self.image.variant(resize: "#{size}x#{size}").processed
   end
 
 end
