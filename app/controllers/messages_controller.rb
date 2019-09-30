@@ -10,12 +10,13 @@ class MessagesController < ApplicationController
     find_message
     @messages = @message.messages.order(created_at: :desc).reverse
   end
+
   def create
     message = Message.new(message_params)
     if message.save
-      Tag.scan_tag(message)
-      User.scan_user(message)
       MessageRelayJob.perform_later(message)
+    else
+      redirect_to root_path, notice: "有問題"
     end
   end
 
@@ -23,12 +24,12 @@ class MessagesController < ApplicationController
   end
   private
     def set_chatroom
-      @chatroom = Chatroom.find(params[:chatroom_id])
+      @chatroom = Chatroom.friendly.find(params[:chatroom_id])
     end
     def message_params
       params.require(:message).permit(:body, :parent_id, :user_id, :chatroom_id)
     end
     def find_message
-      @message = Message.find(params[:id])
+      @message = Message.friendly.find(params[:id])
     end
 end
