@@ -14,6 +14,9 @@ class MessagesController < ApplicationController
   def create
     message = Message.new(message_params)
     if message.save
+      if message.chatroom.status == "1on1"
+        message.chatroom.chatroom_users.update(display: true)
+      end
       MessageRelayJob.perform_later(message)
     else
       redirect_to root_path, notice: "有問題"
