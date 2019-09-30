@@ -30,9 +30,9 @@
         <% end %>
         <div id="collapse<%= room.id%>" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <%= link_to 'Edit', edit_chatroom_path(room.id), class:'collapse-item' %> 
-            <%= link_to 'Add member', new_chatroom_chatroom_user_path(room.id), class:'collapse-item' %>
-            <%= link_to 'Delete', chatroom_path(room.id), class:'collapse-item' ,method:'delete', data:{confirm:'你確定要刪除聊天室嗎'} %>
+            <%= link_to 'Edit', edit_chatroom_path(room.slug), class:'collapse-item' %> 
+            <%= link_to 'Add member', new_chatroom_chatroom_user_path(room.slug), class:'collapse-item' %>
+            <%= link_to 'Delete', chatroom_path(room.id), class:'collapse-item' , method:'delete', data:{confirm:'你確定要刪除聊天室嗎'} %>
           </div>
         </div>
       </li>
