@@ -84,10 +84,10 @@ $(document).on('turbolinks:load', function(){
   })
 
   // Keypress ESC goto Index
-  $(window).on('keyup', function(e){
-    if (e.keyCode == 27) document.location.href="/";
-    return false
-  })
+  // $(window).on('keyup', function(e){
+    // if (e.keyCode == 27) document.location.href="/";
+    // return false
+  // })
 
   if ($(window).width() > 768) {
     $(document).click(function(){

@@ -64,17 +64,17 @@ class Message < ApplicationRecord
     pattern = /(#\S+)/
     ary =  self.body.split(pattern)
     new_ary = ary.map do |tag|
-      if tag.start_with?('#')
-        new_tag = Tag.where(tagname: tag).first_or_create
-        self.tags << new_tag
-        render_tag = ApplicationController.renderer.render( partial:'tags/tag', locals: {tag: new_tag} )
+      tag_ary = tag.split("")
+      if tag_ary.select{|x| x == '#'}.length == 1 and !tag_ary.include?(' ')
+          new_tag = Tag.where(tagname: tag).first_or_create
+          self.tags << new_tag
+          render_tag = ApplicationController.renderer.render( partial:'tags/tag', locals: {tag: new_tag} )
       else
         tag
       end
     end
     self.body = new_ary.join("")
   end
-
 
 end
 
