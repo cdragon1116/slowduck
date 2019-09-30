@@ -1,12 +1,14 @@
-<div class="message icon navbar align-items-start flex-nowrap">
+<div class="message icon navbar align-items-start flex-nowrap" data-message="<%= message.id%>" data-parent="<%= message.parent.id%>">
   <div class="navbar flex-nowrap">
-    <% if message.id == message.parent_id %>
-      <%= link_to '<i class="fa fa-comment text-primary" aria-hidden="true"></i>'.html_safe, chatroom_message_path(message.chatroom.slug , message.slug)%>
+    <% if message.parent_id == message.id %>
+      <%= link_to "<i class='fa fa-comment #{color(message.color)}' aria-hidden='true'></i>".html_safe, chatroom_message_path(message.chatroom.slug , message.slug)%>
+
     <% else %>
-      <%= link_to '<i class="fa fa-share text-secondary" aria-hidden="true"></i>
-      '.html_safe , chatroom_message_path(message.chatroom.slug, message.parent.slug)%>
-  <% end %>
-  <%= image_tag url_for(message.user.resize_image('32x32!')), class:'img-profile rounded-circle ml-3'  %>
+      <%= link_to "<i class='fa fa-share #{color(message.color)}' aria-hidden='true'></i>".html_safe , chatroom_message_path(message.chatroom.slug, message.parent.slug)%>
+    <% end %>
+    <div class="img ml-3">
+      <%= user_image(message.user, 32) %>
+    </div>
   </div>
   <div class="flex-grow-1" style="min-width: 0;">
     <span>

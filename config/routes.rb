@@ -18,9 +18,10 @@ Rails.application.routes.draw do
     namespace :v2 do
       resources :chatrooms ,only:[:show] do 
         member do 
-          get :show_users
-          get :show_tags
-          get :show_messages
+          get :get_users
+          get :get_tags
+          get :get_messages
+          get :next_messages
         end
       end
     end

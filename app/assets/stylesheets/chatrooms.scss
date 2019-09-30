@@ -1,48 +1,69 @@
 // Place all the styles related to the Chatrooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$input-border-focus: transparend;
 
 
 #chatroom {
-    width: 100%;
+    min-width: 100%;
+    min-height: calc(100vh - 4.375rem);
     flex-flow: column nowrap;
     padding: 0px 0px 20px;
-    line-height: 40px;
     font-size: 20px;
 }
 #chatroom.active{
-    width:60%;
+    min-width:60%;
 }
 .chatroom_top{
-    padding: 20px;
-    height: 75vh;
+    box-sizing: border-box;
+    height: 90%;
     background: #fff;
 }
-[data-behavior='messages']{
-    margin-top: 20px;
+#message-box{
     width: 100%;
-    height: 55vh;
+    height: 75vh;
     overflow-y: auto; 
 }
 .fa{
     padding: 5px;
 }
 .form{
-    margin: 5px;
-    margin-top: 10px;
+    width: calc(100vw - 14rem);
+    min-height: 10%;
+    position:fixed;
+    bottom:0;
+    padding: 5px;
+    background-color: #fff;
+
+  textarea{
+    box-sizing: border-box;
+    width: 100%;
+    height:100%;
+    padding: 1%;
+    border:none;
+  }
+  textarea:focus{
+    box-shadow :none;
+  }
 }
-textarea:focus{
-    outline: none;
+.form.sidebar-toggled{
+    width: calc(100vw - 6.5rem);
 }
+
 .nav-item{
     position:relative;
 }
+// .message:hover{
+  // background-color:#eee;
+// }
+
 .message-body{
   overflow-wrap: break-word;
-
 }
+
 #search-input:focus{
   outline: none;
+  box-shadow:none;
 }
 #right-panel{
     position: relative;
@@ -51,16 +72,18 @@ textarea:focus{
 
 #right-panel.active {
     display:block;
-    padding: 20px;
     min-width: 40%;
     max-width: 40%;
-    max-height: 90vh;
+    height: calc(100vh - 4.35rem);
     overflow-y: auto;
+    background-color: #fff;
+    border-left: 8px solid #eee;
 }
 @media (max-width: 992px) {
     #right-panel {
       min-width: 200px;
       max-width: 200px;
+    overflow-y: auto;
     }
 }
 
@@ -81,25 +104,35 @@ textarea:focus{
     #chatroom.active{
         width:100%;
     }
+    .form{
+      width: 100%;
+    }
+
+  #message-box{
+      height: calc(70vh - 1.5rem);
+  }
 }
 
 
-.loader {
-  position:absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  margin: auto;
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
+// scrool-bar
+#message-box::-webkit-scrollbar-track,
+#right-panel::-webkit-scrollbar-track
+{
+	// -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  // background-color: #F5F5F5;
+  border-radius: 20px;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+#message-box::-webkit-scrollbar,
+#right-panel::-webkit-scrollbar
+{
+	width: 6px;
+  // background-color: #F5F5F5;
+}
+
+#message-box::-webkit-scrollbar-thumb,
+#right-panel::-webkit-scrollbar-thumb
+{
+  border-radius: 20px;
+  background-color: #777;
 }

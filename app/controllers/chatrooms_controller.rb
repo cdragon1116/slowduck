@@ -16,7 +16,7 @@ class ChatroomsController < ApplicationController
   # GET /chatrooms/1.json
   def show
     if @chatroom.users.exists?(id: current_user.id)
-      @messages = @chatroom.messages.order(created_at: :desc).limit(50).reverse
+      @messages = @chatroom.messages.order(created_at: :desc).limit(10).reverse
     else
       redirect_to chatrooms_url, notice: "You don't have accessbility"
     end
@@ -64,14 +64,12 @@ class ChatroomsController < ApplicationController
   # DELETE /chatrooms/1
   # DELETE /chatrooms/1.json
   def destroy
-    if find_admin == current_user
+    if @chatroom.users.length == 1
       @chatroom.destroy
-      respond_to do |format|
-        format.html { redirect_to chatrooms_url, notice: 'Chatroom was successfully destroyed.' }
-        format.json { head :no_content }
-      end
+      redirect_to root_path, notice: '成功刪除聊天室'
     else 
-      redirect_to chatroom_path(@chatroom), notice: 'You are not Chatroom admin!'
+      @chatroom.chatroom_users.find_by(user_id: current_user.id).destroy
+      redirect_to root_path, notice: '已退出聊天室!'
     end
   end
 

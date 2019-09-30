@@ -86,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   margin-top: 0;
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
 }
 
 abbr[title],
@@ -9567,7 +9567,8 @@ a:focus {
 }
 
 #wrapper #content-wrapper {
-  background-color: #f8f9fc;
+  // background-color: #f8f9fc;
+  background-color: #fff;
   width: 100%;
   overflow-x: hidden;
 }
@@ -10583,21 +10584,23 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+  background: url("https://image.flaticon.com/icons/svg/135/135077.svg");
   background-position: center;
-  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .bg-register-image {
-  background: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
+  background: url("https://image.flaticon.com/icons/svg/135/135077.svg");
   background-position: center;
-  background-size: cover;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .bg-password-image {
-  background: url("https://source.unsplash.com/oWTW-jNGl9I/600x800");
+  background: url("https://image.flaticon.com/icons/svg/135/135077.svg");
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 form.user .custom-checkbox.small label {

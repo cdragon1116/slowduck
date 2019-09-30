@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
   <!-- Sidebar - Brand -->
   <%= link_to chatrooms_path, class:'sidebar-brand d-flex align-items-center justify-content-center' do %> 
     <div class="sidebar-brand-icon rotate-n-15">
@@ -8,16 +8,6 @@
     <div class="sidebar-brand-text mx-3">Slowduck</div>
   <% end %>
 
-  <!-- Divider -->
-  <hr class="sidebar-divider my-0">
-
-  <!-- Nav Item - Dashboard -->
-  <li class="nav-item">
-    <%= link_to chatrooms_path, class:"nav-link" do %> 
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Dashboard</span>
-    <% end %>
-  </li>
 
   <!-- Divider -->
   <hr class="sidebar-divider">
@@ -40,9 +30,9 @@
         <% end %>
         <div id="collapse<%= room.id%>" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <%= link_to 'Edit', edit_chatroom_path(room.id), class:'collapse-item' %> 
-            <%= link_to 'Add member', new_chatroom_chatroom_user_path(room.id), class:'collapse-item' %>
-            <%= link_to 'Delete', chatroom_path(room.id), class:'collapse-item' ,method:'delete', data:{confirm:'你確定要刪除聊天室嗎'} %>
+            <%= link_to 'Edit', edit_chatroom_path(room.slug), class:'collapse-item' %> 
+            <%= link_to 'Add member', new_chatroom_chatroom_user_path(room.slug), class:'collapse-item' %>
+            <%= link_to 'Delete', chatroom_path(room.id), class:'collapse-item' , method:'delete', data:{confirm:'你確定要刪除聊天室嗎'} %>
           </div>
         </div>
       </li>
