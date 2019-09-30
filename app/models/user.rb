@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :chatroom_users
   has_many :chatrooms , through: :chatroom_users
   has_many :messages, dependent: :destroy
+  has_many :notifications, foreign_key: :recipient_id
 
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)

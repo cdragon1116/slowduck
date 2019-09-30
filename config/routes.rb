@@ -29,5 +29,9 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :notifications, only: [:index] do
+    post :mark_as_read, on: :collection
+    post :mark_as_read, on: :member
+  end
 end
 

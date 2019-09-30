@@ -23,16 +23,16 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <%= link_to  room, class:'nav-link', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
-          <span><%= "#{room.name}<i class='fa fa-exclamation d-none' aria-hidden='true'></i>".html_safe %></span>
+          <span><%= "#{room.name}<i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
         <% end %>
         <%= link_to '#', class:'tab-menu-link', data: {toggle:'collapse', target:"#collapse#{room.id}"} do %>
           <i class="fas fa-fw fa-cog"></i>
         <% end %>
         <div id="collapse<%= room.id%>" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <%= link_to 'Edit', edit_chatroom_path(room.id), class:'collapse-item' %> 
-            <%= link_to 'Add member', new_chatroom_chatroom_user_path(room.id), class:'collapse-item' %>
-            <%= link_to 'Delete', chatroom_path(room.id), class:'collapse-item' ,method:'delete', data:{confirm:'你確定要刪除聊天室嗎'} %>
+            <%= link_to 'Edit', edit_chatroom_path(room.slug), class:'collapse-item' %> 
+            <%= link_to 'Add member', new_chatroom_chatroom_user_path(room.slug), class:'collapse-item' %>
+            <%= link_to 'Delete', chatroom_path(room.id), class:'collapse-item' , method:'delete', data:{confirm:'你確定要刪除聊天室嗎'} %>
           </div>
         </div>
       </li>

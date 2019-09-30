@@ -4,6 +4,7 @@ $(document).on("turbolinks:load", function() {
   $('#new_message').on("keypress", function(e) {
     if (e && e.keyCode === 13) {
       if (!e.shiftKey) {
+        console.log('hi')
         e.preventDefault();
         return $(this).submit();
       }
@@ -95,6 +96,9 @@ $(document).on("turbolinks:load", function() {
     request = { query: decodeURIComponent(q) }
     search_messages(request , chatroom)
   })
+  
+
+
 
 });
 
