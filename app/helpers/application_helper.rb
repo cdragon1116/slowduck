@@ -22,8 +22,21 @@ module ApplicationHelper
 
     # text = text.gsub("\r\n", "<br>").gsub("\n", '')
     markdown_text = markdown.render(text)
+    
+    # 修正非code換行問題
     markdown_text.gsub!('<br>', '')
-    return markdown_text.html_safe
+
+    # 修正code 縮排問題
+    pattern = /(<\s*code[^>]*>)/
+    ary = markdown_text.split(pattern)
+    final_text = ary.map do |x|
+      if x.start_with?("<code")
+        x = x + "\r\n"
+      else
+        x
+      end
+    end
+    return final_text.join("").html_safe
   end
 
   def stripdown(text)

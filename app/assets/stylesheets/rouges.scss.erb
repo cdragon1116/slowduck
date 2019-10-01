@@ -1,27 +1,20 @@
 
 .message-body{
-  <%= Rouge::Themes::Base16.mode(:light).render(scope: '.highlight') %>
+  <%= Rouge::Themes::Base16.mode(:dark).render(scope: '.highlight') %>
   
-  code{
-    margin: 1rem;
-    padding: 10px;
-  }
-
-  div.highlight {
+  pre{
+    background-color: #fafafa;
+    padding: 0 20px 18px;
+    margin: 10px 20px;
+    border: 1px solid #ccc;
     font-size: 14px;
     line-height: 18px;
-    padding-bottom: 0px;
-    margin-bottom: 12px;
+  }
+  .highlight {
+    background-color: #333;
   }
   .highlight .err{
     background-color: transparent;
-  }
-  pre.highlight {
-    font-size: 14px;
-    line-height: 18px;
-    border-radius: 5px;
-    padding-bottom: 10px;
-    width: 90%;
   }
   p{
     font-size:16px;
@@ -33,9 +26,11 @@
     padding-left: 1em;
     background-color: #fff;
   }
+
   ul li {
     list-style: square inside;
   }
+
   ol li {
     list-style: decimal inside;
   }
