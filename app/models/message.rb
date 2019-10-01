@@ -9,7 +9,7 @@ class Message < ApplicationRecord
   has_many :message_tags, dependent: :destroy
   has_many :tags, through: :message_tags, dependent: :destroy
 
-  after_save :scan_tag, :scan_user
+  after_create :scan_tag, :scan_user
   after_create :set_parent, :set_color
 
   extend FriendlyId
@@ -57,7 +57,7 @@ class Message < ApplicationRecord
         user
       end
     end
-    self.body = new_ary.join("")
+    self.update(body: new_ary.join(""))
     recipients.uniq.each do |recipient|
       Notification.create(recipient: recipient, actor: self.user, action: 'mention', notifiable: self, message_id: self.id)
     end
@@ -76,7 +76,7 @@ class Message < ApplicationRecord
         tag
       end
     end
-    self.body = new_ary.join("")
+    self.update(body: new_ary.join(""))
   end
 
 end

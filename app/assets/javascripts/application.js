@@ -24,6 +24,7 @@
 
 $(document).on('turbolinks:load', function(){
   toggleLoad()
+  $.rails.refreshCSRFTokens();
 
   // Toggle the side navigation
   $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {

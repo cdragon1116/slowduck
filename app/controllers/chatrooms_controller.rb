@@ -2,6 +2,7 @@ class ChatroomsController < ApplicationController
   before_action :authenticate_user! , except: [:index]
   before_action :set_chatroom, only: [:show, :edit, :update, :destroy, :hide_chatroom]
   helper_method :find_admin
+  skip_before_action :verify_authenticity_token, only: :create_one_on_one
 
   # GET /chatrooms
   def index
