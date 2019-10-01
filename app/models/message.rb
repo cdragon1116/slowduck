@@ -49,8 +49,10 @@ class Message < ApplicationRecord
       if user.start_with?('@') and find_user = User.find_by(username: user.sub('@', '').sub(',', '') )
         if find_user != self.user
           recipients << find_user
+          render_user = ApplicationController.renderer.render( partial:'users/user', locals: {user: find_user} )
+        else 
+          render_user = ApplicationController.renderer.render( partial:'users/user', locals: {user: find_user} )
         end
-        render_user = ApplicationController.renderer.render( partial:'users/user', locals: {user: find_user} )
       else
         user
       end
