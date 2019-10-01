@@ -49,10 +49,11 @@
     <% current_user.one_on_one_chatrooms.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <%= link_to  room, class:'nav-link', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
-          <span><%= "#{room.one_on_one_name(current_user)} <i class='fa fa-exclamation d-none' aria-hidden='true'></i>".html_safe %></span>
+        <%= link_to  room, class:'nav-link d-flex flex-row align-items-center pr-5', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
+          <%= user_image(room.one_on_one(current_user) , 34) %>
+          <span class="ml-3"><%= "#{room.one_on_one(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
         <% end %>
-        <%= link_to  hide_chatroom_chatroom_path(room.id), class:'tab-menu-link close1on1 ' ,method:'post' do %>
+        <%= link_to  hide_chatroom_chatroom_path(room.id), class:'tab-menu-link close1on1', method:'post' do %>
           <i class="fas fa-times"></i>
         <% end %>
       </li>

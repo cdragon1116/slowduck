@@ -12,8 +12,8 @@ class Chatroom < ApplicationRecord
     messages.map{|message| message.tags}.flatten.uniq
   end
     
-  def one_on_one_name(current_user)
-    self.users.where('user_id != ? ', current_user.id).first.username
+  def one_on_one(current_user)
+    self.users.where('user_id != ? ', current_user.id).first
   end
 
   private

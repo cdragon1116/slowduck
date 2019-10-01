@@ -5,7 +5,9 @@
       <%= link_to chatroom_path(@chatroom), class:'nav-link' do  %>
         <i class="fas fa-backspace fa-lg text-dark"></i>
       <% end %>
-      <h3 class='m-0'> <%=  @chatroom.name %>:<%= @message.user.username%></h3>
+      <nav class='navbar'>
+        <h3 class='mb-0 mr-3'><%= @messages.first.user.username %>:</h3><%= truncate( markdown(@messages.first.body), :length => 300, :escape => false) %>
+    </nav>
     </div>
 
     <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='message-box'>

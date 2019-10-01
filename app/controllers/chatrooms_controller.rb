@@ -12,7 +12,7 @@ class ChatroomsController < ApplicationController
   # GET /chatrooms/1.json
   def show
     if @chatroom.users.exists?(id: current_user.id)
-      @messages = @chatroom.messages.order(created_at: :desc).limit(10).reverse
+      @messages = @chatroom.messages.order(created_at: :desc).limit(15).reverse
     else
       redirect_to chatrooms_url, notice: "You don't have accessbility"
     end
