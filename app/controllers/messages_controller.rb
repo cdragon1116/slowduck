@@ -20,8 +20,6 @@ class MessagesController < ApplicationController
       else
         MessageRelayJob.perform_later(message)
       end
-    else
-      redirect_to root_path, notice: "有問題"
     end
   end
 
