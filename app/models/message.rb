@@ -15,8 +15,10 @@ class Message < ApplicationRecord
 
   private
   def slugged_message
-    serial = [*"A".."Z", *0..9].sample(8).join
-    "#{serial}#{body}"
+    [
+      :body,
+      [:body, SecureRandom.hex[0, 8]]
+    ]
   end
 
   def set_parent

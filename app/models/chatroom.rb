@@ -10,11 +10,18 @@ class Chatroom < ApplicationRecord
   def tags
     messages.map{|message| message.tags}.flatten.uniq
   end
-
+  
+  def normalize_friendly_id(input)
+    input.to_s.to_slug.normalize.to_s
+  end
+  
   private
   
   def slugged_chatroom
-    serial = [*"A".."Z", *0..9].sample(8).join
-    "#{serial}#{name}"
+    [
+      :name,
+      [:name, SecureRandom.hex[0, 8]]
+    ]
   end
+  
 end
