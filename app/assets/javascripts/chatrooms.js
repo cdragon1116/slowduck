@@ -2,6 +2,7 @@ $(document).on("turbolinks:load", function() {
 
   // submit textarea when enter
   $('#new_message').on("keypress", function(e) {
+    
     if (e && e.keyCode === 13) {
       if (!e.shiftKey) {
         e.preventDefault();
@@ -90,11 +91,12 @@ $(document).on("turbolinks:load", function() {
 
   // mention-link click to search
   $('.mention-tag, .mention-user').on('click', function(e){
-    e.preventDefault()
     let q = encodeURI($(this).text())
     request = { query: decodeURIComponent(q) }
     search_messages(request , chatroom)
+    e.preventDefault()
   })
+  
 
 });
 

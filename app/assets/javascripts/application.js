@@ -24,6 +24,7 @@
 
 $(document).on('turbolinks:load', function(){
   toggleLoad()
+  $.rails.refreshCSRFTokens();
 
   // Toggle the side navigation
   $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
@@ -84,10 +85,10 @@ $(document).on('turbolinks:load', function(){
   })
 
   // Keypress ESC goto Index
-  $(window).on('keyup', function(e){
-    if (e.keyCode == 27) document.location.href="/";
-    return false
-  })
+  // $(window).on('keyup', function(e){
+    // if (e.keyCode == 27) document.location.href="/";
+    // return false
+  // })
 
   if ($(window).width() > 768) {
     $(document).click(function(){

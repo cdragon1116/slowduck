@@ -19,9 +19,24 @@ module ApplicationHelper
     # renderer = Redcarpet::Render::HTML.new(options)
     renderer = Rouge::Renderer.new(options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
+
+    # text = text.gsub("\r\n", "<br>").gsub("\n", '')
+    markdown_text = markdown.render(text)
     
-    render_text =  text.gsub("\r\n", "<br>").gsub("\n", '')
-    markdown.render(render_text).html_safe
+    # 修正非code換行問題
+    markdown_text.gsub!('<br>', '')
+
+    # 修正code 縮排問題
+    pattern = /(<\s*code[^>]*>)/
+    ary = markdown_text.split(pattern)
+    final_text = ary.map do |x|
+      if x.start_with?("<code")
+        x = x + "\r\n"
+      else
+        x
+      end
+    end
+    return final_text.join("").html_safe
   end
 
   def stripdown(text)
