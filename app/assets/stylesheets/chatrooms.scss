@@ -8,7 +8,7 @@ $input-border-focus: transparend;
     min-width: 100%;
     min-height: calc(100vh - 4.375rem);
     flex-flow: column nowrap;
-    padding: 0px 0px 20px;
+    padding: 10px 0px 20px;
     font-size: 20px;
 }
 #chatroom.active{
@@ -18,10 +18,17 @@ $input-border-focus: transparend;
     box-sizing: border-box;
     height: 90%;
     background: #fff;
+
+    h3 a{
+      color: #333;
+    }
+    a:hover{
+      text-decoration: none;
+    }
 }
 #message-box{
     width: 100%;
-    height: 75vh;
+    height: 74vh;
     overflow-y: auto; 
 }
 .fa{
@@ -135,4 +142,12 @@ $input-border-focus: transparend;
 {
   border-radius: 20px;
   background-color: #777;
+}
+
+
+.close1on1{
+  display: none;
+}
+li.nav-item:hover > .close1on1{
+  display:block
 }
