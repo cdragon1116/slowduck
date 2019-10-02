@@ -23,6 +23,7 @@ html, body {
     padding: 0 !important;
     width: 100%;
 }
+
 // sidebar
 .sidebar .tab-menu-link{
     color: #fff;
@@ -106,3 +107,9 @@ html, body {
 .history-loader{
   display: none;
 }
+
+.notification-list{
+  overflow: auto;
+  height: 300px;
+}
+

@@ -3,9 +3,7 @@
     <div class="chatroom_top">
 
       <div class="row no-gutters justify-content-center">
-        <%= link_to new_chatroom_chatroom_user_path(@chatroom), class:'nav-link text-dark' do %>
-      <h3 class="mb-0"><%= @chatroom.name %></h3>
-    <% end %>
+        <h3 class='mb-0 nav-link text-dark'><%= chatroom_link(@chatroom) %></h3>
     <nav class="navbar navbar-expand-lg navbar-light bg-light ml-auto rightPanelToggle d-none d-xl-block">
       <div class="row justify-content-end">
         <button type="button" id="rightPanelCollapse" class="btn btn-dark">

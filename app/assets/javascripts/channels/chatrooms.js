@@ -22,7 +22,7 @@ App.chatrooms = App.cable.subscriptions.create("ChatroomsChannel", {
       }, 300);
       console.log(document.hidden && Notification.permission == "granted")
     } else {
-      $(`[data-behavior='chatroom-link'][data-chatroom-id='${data.chatroom_id}']`).removeClass('d-none');
+      $(`[data-behavior='chatroom-link'][data-chatroom-id='${data.chatroom_id}'] .fa-exclamation`).removeClass('d-none');
       $(`[data-behavior='chatroom-link'][data-chatroom-id='${data.chatroom_id}']`).css({
         "color": "#fff"
       });

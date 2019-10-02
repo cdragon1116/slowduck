@@ -20,4 +20,12 @@ module MessagesHelper
       "<div class='img-profile rounded-circle'><i class='fas fa-user-circle fa-lg' style='width:#{size}px; height:#{size}px;'></i></div>".html_safe
     end
   end
+  def message_icon(message)
+    if message.parent_id == message.id
+      link_to "<i class='fa fa-comment #{color(message.color)}' aria-hidden='true'></i>".html_safe, chatroom_message_path(message.chatroom.slug , message.slug)
+    else
+      link_to "<i class='fa fa-share #{color(message.color)}' aria-hidden='true'></i>".html_safe , chatroom_message_path(message.chatroom.slug, message.parent.slug)
+    end
+
+  end
 end
