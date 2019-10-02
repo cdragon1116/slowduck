@@ -7,7 +7,11 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
+    <script>
+		$(function () {
+			$('#message_body').emoji({place: 'before'});
+		})
+	  </script>
   </head>
   <body id="page-top">
     <div class="d-flex" id="wrapper">

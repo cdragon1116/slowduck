@@ -34,3 +34,17 @@ a.mention-link{
   -o-transition:background .3s;
   transition:background .3s
 }
+
+#message_body{
+    position: relative;
+}
+
+.form-group{
+    position: relative;
+}
+
+#emoji-list{
+    position: absolute;
+    bottom: 78px;
+    left: 15px;
+  }
