@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="d-flex flex-column">
-      <div class="small text-gray-500"><%= "by #{notification.actor.username} - from #{notification.notifiable.chatroom.name}" %></div>
+      <div class="small text-gray-500"><%= " #{notification.actor.username} - 來自 #{notification.notifiable.chatroom.name}" %></div>
       <%= truncate( markdown(notification.notifiable.body), :length => 100, :escape => false) %>
     </div>
     <% end %>

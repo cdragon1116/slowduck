@@ -7,27 +7,32 @@
   </div>
 
   <%= form_for [@chatroom, @chatroom_user] do |form| %>
-    <div class="form-group row">
+    <div class="form-group row justify-content-center">
       <%= form.fields_for :user do |user_field| %>
-        <%= user_field.label :email, 'email' ,:class => 'col-form-label col-xl-2' %>
-        <%= user_field.text_field :email, :class => 'form-control col-xl-10' %><br/>
+        <%= user_field.text_field :email, :class => 'form-control col-10 col-md-9' %><br/>
       <% end %>
-    </div>
-    <div class="form-group row justify-content-lg-end">
-      <%= form.submit :class => 'btn btn-secondary mx-2' %>
+      <%= form.submit "Add Member", :class => 'btn btn-secondary form-group mx-2 col-10 col-md-2' %>
     </div>
   <% end %>
 
-
   <h3 class="my-4">成員列表</h3>
-  <ul class="list-group">
+  <div class="row justify-content-around">
     <% @chatroom_users.each do |user| %>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <strong><%= user.username%></strong>
-        <% unless user == current_user %>
-          <%= link_to 'destroy', chatroom_chatroom_user_path(@chatroom.id, user.id), method:'delete', data:{confirm: "你確定嗎？"} %>
-        <% end %>
-      </li>
-    <% end%>
-  </ul>
+      <div class="navbar border rounded m-3" style='width: 500px' >
+        <div class="d-flex align-items-center justify-content-center mx-3">
+          <%= user_image(user, 30) %>
+        <div class="ml-2">
+          <%=user.username %>
+          <div class="smaill text-gray-500"><%= user.email %></div>
+        </div>
+        </div>
+        <div class="leave">
+          <%= link_to  chatroom_chatroom_user_path(@chatroom.id, user.id), method:'delete', data:{confirm: "你確定嗎？"}, class:'nav-link'  do %>
+            <i class="fas fa-times text-dark"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
 </div>

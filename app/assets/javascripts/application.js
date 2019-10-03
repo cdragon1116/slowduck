@@ -102,8 +102,10 @@ $(document).on('turbolinks:load', function(){
   // set active_chatroom color
   var active_chatroom;
   var active_chatroom = $(`[data-behavior='messages']`).data('chatroom-id');
-  var active_link = $(`[data-behavior='chatroom-link'][data-chatroom-id='${active_chatroom}']`).parent()
-  active_link.css('background-color', '#333')
+  var active_link = $(`[data-behavior='chatroom-link'][data-chatroom-id='${active_chatroom}']`)
+  active_link.parent().css('background-color', '#fec52a')
+  active_link.parent().children(1).css({'color':'#333', 'font-weight': 700})
+  active_link.css({'color':'#333', 'font-weight': 700})
 
 
 })
@@ -165,7 +167,7 @@ function toggleLoad() {
 				input.selectionEnd = endPos + 2;
 			}
 
-			var $button = $("<span id='emoji-button-area'>").html(settings.button).css({cursor: 'pointer', 'font-size': settings.fontSize}).on('click', showEmoji);
+			var $button = $("<div id='emoji-button-area'>").html(settings.button).css({cursor: 'pointer', 'font-size': settings.fontSize}).on('click', showEmoji);
 			var $list = $('<div id=emoji-list>').css(defaults.listCSS).css(settings.listCSS);
 			for (var n in settings.emojis) {
 				if (n > 0 && n % settings.rowSize == 0) {

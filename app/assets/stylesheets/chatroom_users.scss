@@ -1,3 +1,21 @@
 // Place all the styles related to the chatroom_users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.users-list{
+  max-width: 1000px;
+  margin: auto;
+}
+.user-info{
+  width: 300px;
+  float: left;
+}
+.leave{
+  opacity: 0;
+  transition: .5s;
+}
+.user-info:hover .leave{
+  opacity: 100;
+}
+#userInfoMenu{
+  min-width:200px;
+}

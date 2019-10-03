@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
   <!-- Sidebar - Brand -->
   <%= link_to chatrooms_path, class:'sidebar-brand d-flex align-items-center justify-content-center' do %> 
     <div class="sidebar-brand-icon rotate-n-15">
@@ -16,59 +16,64 @@
 
     <!-- Heading -->
     <div class="sidebar-heading my-2">
-      Chatroom 
+      群組聊天室 
     </div>
 
+    
     <% current_user.group_chatrooms.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <%= link_to  room, class:'nav-link', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
-          <span><%= "#{room.name}<i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
+          <span><%= "#{room.name}" %></span>
+          <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>
         <% end %>
         <%= link_to '#', class:'tab-menu-link', data: {toggle:'collapse', target:"#collapse#{room.id}"} do %>
           <i class="fas fa-fw fa-cog"></i>
         <% end %>
         <div id="collapse<%= room.id%>" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <%= link_to 'Edit', edit_chatroom_path(room.slug), class:'collapse-item' %> 
-            <%= link_to 'Add member', new_chatroom_chatroom_user_path(room.slug), class:'collapse-item' %>
-            <%= link_to 'Delete', chatroom_path(room.id), class:'collapse-item' , method:'delete', data:{confirm:'你確定要刪除聊天室嗎'} %>
+            <%= link_to '編輯', edit_chatroom_path(room.slug), class:'collapse-item' %> 
+            <%= link_to '退出', chatroom_path(room.id), class:'collapse-item' , method:'delete', data:{confirm:'你確定要刪除聊天室嗎'} %>
           </div>
         </div>
       </li>
     <% end %>
 
-    <!-- Heading -->
-    <div class="sidebar-heading my-2">
-      1-1 Chat
-    </div>
-
     <!-- divider -->
     <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading my-2">
+      一對一對話
+    </div>
+
 
     <% current_user.one_on_one_chatrooms.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <%= link_to  room, class:'nav-link d-flex flex-row align-items-center pr-5', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
-          <%= user_image(room.one_on_one(current_user) , 34) %>
+          <%= user_image(room.one_on_one(current_user) , 32) %>
           <span class="ml-3"><%= "#{room.one_on_one(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
         <% end %>
-        <%= link_to  hide_chatroom_chatroom_path(room.id), class:'tab-menu-link close1on1', method:'post' do %>
+        <%= link_to  hide_chatroom_chatroom_path(room.id), class:'tab-menu-link close1on1 mt-1', method:'post' do %>
           <i class="fas fa-times"></i>
         <% end %>
       </li>
     <% end %>
 
+    <!-- divider -->
+    <hr class="sidebar-divider">
     <!-- Heading -->
     <div class="sidebar-heading my-2">
-      Addons
+      功能    
     </div>
+
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
       <%= link_to  new_chatroom_path, class:'nav-link' do  %>
-        <i class="fas fa-fw fa-table"></i>
-        <span>New Chatroom</span>
+        <i class="fas fa-fw fa-table mx-2"></i>
+        <span>新增聊天群組</span>
       <% end %>
     </li>
 

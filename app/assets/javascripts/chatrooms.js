@@ -23,8 +23,7 @@ $(document).on("turbolinks:load", function() {
   $('[data-behavior=\'messages\']').on('scroll', function() {
     return scrolled = true;
   });
-
-  // enable keying tab in textarea
+// enable keying tab in textarea
   $('textarea').on('keydown', function() {
     var e, s, v;
     if (event.keyCode === 9) {
@@ -97,9 +96,21 @@ $(document).on("turbolinks:load", function() {
     e.preventDefault()
   })
   
+  $(function () {
+    $('#message_body').emoji({place: 'before'});
+  })
+
 
 });
 
+$(document).on('click', '#editChatroomName', function(e){
+  e.preventDefault()
+  var editForm = $('[data-attribute="editChatroom"]')
+  var originName = $('[data-attribute="editChatroom"] h3').html()
+  editForm.html(`
+    <input class="form-control col-12 col-md-4 mx-2" type="text" value="${originName}" name="chatroom[name]" id="chatroom_name" />
+    <input type="submit" name="commit" value="更新" class="btn btn-dark btn-sm small" id="updateChatroom" data-disable-with="更新" />`)
+})
 
 function atwho_users(bind_object, chatroom){
   $(bind_object).atwho({ at:"@", 

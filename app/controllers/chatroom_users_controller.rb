@@ -9,9 +9,9 @@ class ChatroomUsersController < ApplicationController
     @user_email = chatroom_user_params[:user][:email]
     if @user = User.find_by(email: @user_email)
       @chatroom.chatroom_users.where(user_id: @user).first_or_create
-      redirect_to new_chatroom_chatroom_user_path(@chatroom.id)
+      redirect_to edit_chatroom_path(@chatroom.id)
     else 
-      redirect_to new_chatroom_chatroom_user_path(@chatroom.id), notice: "沒有此用戶"
+      redirect_to edit_chatroom_path(@chatroom.id), notice: "沒有此用戶"
     end
   end
 
@@ -20,11 +20,11 @@ class ChatroomUsersController < ApplicationController
 
   def destroy
     if find_admin != current_user
-      redirect_to new_chatroom_chatroom_user_path(@chatroom.id) , notice:"You're not admin"
+      redirect_to edit_chatroom_path(@chatroom.id) , notice:"You're not admin"
     else
       @chatroom_user = ChatroomUser.find_by(chatroom_id: @chatroom.id ,user_id: params[:id])
       @chatroom_user.destroy
-      redirect_to new_chatroom_chatroom_user_path(@chatroom.id)  
+      redirect_to edit_chatroom_path(@chatroom.id)  
     end
   end
 

@@ -1,68 +1,71 @@
 // Place all the styles related to the Chatrooms controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// They will automatically be included in application.css.  // You can use Sass (SCSS) here: http://sass-lang.com/
 $input-border-focus: transparend;
 
-
 #chatroom {
-    min-width: 100%;
-    min-height: calc(100vh - 4.375rem);
-    flex-flow: column nowrap;
-    padding: 10px 0px 20px;
-    font-size: 20px;
-}
-#chatroom.active{
-    min-width:60%;
-}
-.chatroom_top{
-    box-sizing: border-box;
-    height: 90%;
-    background: #fff;
+  over-flow:hidden;
+  box-sizing: border-box;
+  min-width: 100%;
+  min-height: calc(100vh - 4.375rem);
+  flex-flow: column nowrap;
+  font-size: 20px;
+  background-color: #fff;
 
-    h3 a{
-      color: #333;
-    }
-    a:hover{
-      text-decoration: none;
-    }
+  .chatroom-name{
+   padding: 5px 10px;
+   height: 3rem; 
+  }
+
+  .chatroom-name a{
+    color: #333;
+  }
+
+  #message-box{
+      width: 100%;
+      height: calc(100vh - 12.375rem );
+      overflow-y: auto; 
+  }
+
 }
-#message-box{
-    width: 100%;
-    height: 74vh;
-    overflow-y: auto; 
-}
-.fa{
-    padding: 5px;
-}
+
 .form{
-    width: calc(100vw - 14rem);
-    min-height: 10%;
-    position:fixed;
-    bottom:0;
-    padding: 5px;
-    background-color: #fff;
-
-  textarea{
     box-sizing: border-box;
+    width: calc(100vw - 14rem);
+
+  textarea.form-control{
+    box-sizing: border-box;
+    padding: 10px;
     width: 100%;
-    height:100%;
-    padding: 1%;
+    height: 5rem;
     border:none;
   }
-  textarea:focus{
+  textarea.form-control:focus{
     box-shadow :none;
+  }
+  div#emoji-button-area{
+    box-sizing: border-box;
+    padding: 0 5px;
+  }
+  div#emoji-list{
+    max-width: 302px;
+    border-radius: 5px;
+    padding: 10px;
   }
 }
 .form.sidebar-toggled{
     width: calc(100vw - 6.5rem);
 }
+#chatroom.active{
+    min-width:60%;
+}
 
+
+.fa{
+    padding: 5px;
+}
 .nav-item{
     position:relative;
 }
-// .message:hover{
-  // background-color:#eee;
-// }
 
 .message-body{
   overflow-wrap: break-word;
@@ -95,6 +98,9 @@ $input-border-focus: transparend;
 }
 
 @media (max-width: 768px) {
+    #right-panel {
+      display:none;
+    }
     #right-panel.active {
         display: block;
         position: absolute;
@@ -105,19 +111,16 @@ $input-border-focus: transparend;
         top:  0;
         left: 0; 
     }
-    #right-panel {
-      display:none;
-    }
     #chatroom.active{
         width:100%;
     }
     .form{
       width: 100%;
     }
+    #rightPanelCollapse{
+      display:none;
+    }
 
-  #message-box{
-      height: calc(70vh - 1.5rem);
-  }
 }
 
 
@@ -125,8 +128,6 @@ $input-border-focus: transparend;
 #message-box::-webkit-scrollbar-track,
 #right-panel::-webkit-scrollbar-track
 {
-	// -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
-  // background-color: #F5F5F5;
   border-radius: 20px;
 }
 
@@ -134,7 +135,6 @@ $input-border-focus: transparend;
 #right-panel::-webkit-scrollbar
 {
 	width: 6px;
-  // background-color: #F5F5F5;
 }
 
 #message-box::-webkit-scrollbar-thumb,
@@ -148,6 +148,20 @@ $input-border-focus: transparend;
 .close1on1{
   display: none;
 }
+
 li.nav-item:hover > .close1on1{
   display:block
+}
+
+#emoji-button-area::before{
+  content:'';
+  display: inline-block;
+  height: 100%;
+  width: 0;
+  vertical-align: middle;
+}
+
+#emoji-button-area{
+  vertical-align: middle;
+
 }

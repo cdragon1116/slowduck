@@ -26,6 +26,8 @@ class ChatroomsController < ApplicationController
 
   # GET /chatrooms/1/edit
   def edit
+    @chatroom_users = @chatroom.users
+    @chatroom_user = ChatroomUser.new
   end
 
   # POST /chatrooms
@@ -46,9 +48,7 @@ class ChatroomsController < ApplicationController
 
   def create_one_on_one
     message_user = User.find_by(id: params[:user_id])
-    if current_user == message_user
-      redirect_to chatroom_path(params[:chatroom_id]), notice:"不能對自己創建聊天室"
-    elsif Conversation.between(current_user.id, message_user.id).present?
+    if Conversation.between(current_user.id, message_user.id).present?
       @conversation = Conversation.between(current_user.id, message_user.id).first
       @chatroom = Chatroom.find_by(id: @conversation.chatroom_id) 
       @chatroom.chatroom_users.where(user_id:current_user.id).update(display: true)
@@ -76,14 +76,8 @@ class ChatroomsController < ApplicationController
   # PATCH/PUT /chatrooms/1
   # PATCH/PUT /chatrooms/1.json
   def update
-    respond_to do |format|
-      if @chatroom.update(chatroom_params)
-        format.html { redirect_to @chatroom, notice: 'Chatroom was successfully updated.' }
-        format.json { render :show, status: :ok, location: @chatroom }
-      else
-        format.html { render :edit }
-        format.json { render json: @chatroom.errors, status: :unprocessable_entity }
-      end
+    unless @chatroom.update(chatroom_params)
+      redirect_to edit_chatroom_path , notice: "聊天室名稱不能為空白"
     end
   end
 
