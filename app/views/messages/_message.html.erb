@@ -1,23 +1,40 @@
 <div class="message icon navbar align-items-start flex-nowrap" data-message="<%= message.id%>" data-parent="<%= message.parent.id%>">
-  <div class="navbar flex-nowrap">
+  <div class="navbar flex-nowrap align-items-start p-0">
     <%= message_icon(message) %>
-    <div class="img ml-3">
-      <%= form_tag create_one_on_one_chatrooms_path, :method=> :post , :id => "#{message.id}" do %>
-        <%= hidden_field_tag "user_id",  message.user.id %>
-        <%= hidden_field_tag "chatroom_id",  message.chatroom.id %>
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <%= link_to '#', :onclick => "$('##{message.id}').submit()" do  %>
+
+    <div class="nav-item dropdown no-arrow mx-1 dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="userInfoDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= user_image(message.user, 32) %>
+      </a>
+
+      <div class="dropdown-menu shadow animated--grow-in dropdown-menu-left py-0" aria-labelledby="userInfoDropdown" >
+        <div class="d-flex align-items-center justify-content-center mx-3">
           <%= user_image(message.user, 32) %>
+        <div class="ml-2 py-2">
+          <%= message.user.username %>
+          <div class="small text-gray-500"><%= message.user.email %></div>
+        </div>
+        </div>
+        <% if current_user != message.user  %>
+          <%= form_tag create_one_on_one_chatrooms_path, :method=> :post , :id => "#{message.id}", :class=>'drop-down-item, text-center' do %>
+            <%= hidden_field_tag "user_id",  message.user.id %>
+            <%= hidden_field_tag "chatroom_id",  message.chatroom.id %>
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <%= link_to '#', :onclick => "$('##{message.id}').submit()",:class =>'dropdown-item text-center small text-gray-500 bg-dark rounded-bottom' do  %>
+              <div>create-1-on-1 Chat</div>
+            <% end %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-  </div>
-  <div class="flex-grow-1" style="min-width: 0;">
-    <span>
-      <%= message.user.username%>
-    </span>
-    <div class="message-body">
-      <%= markdown(message.body) %>
     </div>
-  </div>
+
+    <div class="flex-grow-1" style="min-width: 0;">
+      <span>
+        <%= message.user.username%>
+      </span>
+      <div class="message-body">
+        <%= markdown(message.body) %>
+      </div>
+    </div>
 </div>

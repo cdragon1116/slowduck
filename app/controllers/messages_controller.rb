@@ -16,10 +16,8 @@ class MessagesController < ApplicationController
     if message.save
       if message.chatroom.status == "1on1"
         message.chatroom.chatroom_users.update(display: true)
-        MessageRelayJob.perform_later(message)
-      else
-        MessageRelayJob.perform_later(message)
       end
+        MessageRelayJob.perform_later(message, current_user)
     end
   end
 
