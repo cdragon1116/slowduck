@@ -16,6 +16,7 @@ class ChatroomsController < ApplicationController
     end
     if @chatroom.users.exists?(id: current_user.id)
       @messages = @chatroom.messages.order(created_at: :desc).limit(15).reverse
+      @chatroom_users = @chatroom.users.order(online: :desc)
     else
       redirect_to chatrooms_url, notice: "You don't have accessbility"
     end

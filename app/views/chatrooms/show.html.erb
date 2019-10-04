@@ -1,12 +1,25 @@
 <div class="d-flex flex-nowrap w-100 align-items-stretch">
   <div id="chatroom" >
-    <div class="row no-gutters align-items-center justify-content-between chatroom-name">
-      <h3 class='mb-0 text-dark'><%= chatroom_link(@chatroom) %></h3>
+    <div class="row no-gutters align-items-center justify-content-between chatroom-name shadow border-left">
+      <h3 class='h4 mb-0 text-light'><%= chatroom_link(@chatroom) %></h3>
+
+      <nav class="navbar p-0 ml-3 mr-auto align-items-center chatroom-users">
+        <% @chatroom_users.each do |user| %>
+          <% if user.online == 1 %> 
+              <%= render 'shared/user_online', user:user %> 
+          <% else %>
+              <%= render 'shared/user_offline', user:user %> 
+          <% end %>
+        <% end %>
+      </nav>
+
+
       <button type="button" id="rightPanelCollapse" class="btn btn-sm btn-dark">
         <i class="fas fa-align-left"></i>
         <span>SearchBar</span>
       </button>
     </div>
+
 
     <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='message-box'>
       <div class="history-loader text-center">
@@ -38,12 +51,12 @@
   <nav id="right-panel">
     <div id="loader"></div>
     <div class="result-loader text-center d-none">
-        <div class="ducks">
-          <%= image_tag "duck.svg", :title => "title", :class => "duck duck1" %>
-          <%= image_tag "duck.svg", :title => "title", :class => "duck duck2" %>
-          <%= image_tag "duck.svg", :title => "title", :class => "duck duck3" %>
-          <%= image_tag "duck.svg", :title => "title", :class => "duck duck4" %>
-        </div>
+      <div class="ducks">
+        <%= image_tag "duck.svg", :title => "title", :class => "duck duck1" %>
+        <%= image_tag "duck.svg", :title => "title", :class => "duck duck2" %>
+        <%= image_tag "duck.svg", :title => "title", :class => "duck duck3" %>
+        <%= image_tag "duck.svg", :title => "title", :class => "duck duck4" %>
+      </div>
     </div>
     <div id="search-result">
     </div>

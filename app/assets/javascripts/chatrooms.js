@@ -3,8 +3,7 @@ $(document).on("turbolinks:load", function() {
   // submit textarea when enter
   $('#new_message').on("keypress", function(e) {
     
-    if (e && e.keyCode === 13) {
-      if (!e.shiftKey) {
+    if (e && e.keyCode === 13) { if (!e.shiftKey) {
         e.preventDefault();
         return $(this).submit();
       }
@@ -115,7 +114,7 @@ $(document).on('click', '#editChatroomName', function(e){
 })
 
 function atwho_users(bind_object, chatroom){
-  $(bind_object).atwho({ at:"", 
+  $(bind_object).atwho({ at:"@", 
     searchKey: 'username',
     data: null, 
     insertTpl: "@${username}, " ,

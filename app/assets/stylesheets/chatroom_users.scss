@@ -19,3 +19,12 @@
 #userInfoMenu{
   min-width:200px;
 }
+
+@media (max-width: 768px) {
+  nav.chatroom-users{
+    display: none;
+  }
+}
+.offline{
+  opacity: .4;
+}
