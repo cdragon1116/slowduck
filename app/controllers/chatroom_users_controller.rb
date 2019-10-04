@@ -6,13 +6,19 @@ class ChatroomUsersController < ApplicationController
   end
 
   def create
-    @user_email = chatroom_user_params[:user][:email]
-    if @user = User.find_by(email: @user_email)
-      @chatroom.chatroom_users.where(user_id: @user).first_or_create
-      redirect_to edit_chatroom_path(@chatroom.id)
-    else 
-      redirect_to edit_chatroom_path(@chatroom.id), notice: "沒有此用戶"
+    user_list = chatroom_user_params[:user][:email].split(" ")
+
+    user_list.map{|user| user.strip}.each do |user|
+      if User.find_by(email: user)
+        @user = User.find_by(email: user) 
+      else 
+        @user = User.find_by(username: user)
+      end
+      if @user
+        @chatroom.chatroom_users.where(user_id: @user).first_or_create
+      end
     end
+    redirect_to edit_chatroom_path(@chatroom.id)
   end
 
   def show

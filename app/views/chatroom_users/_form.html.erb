@@ -5,7 +5,7 @@
 <%= form_for [chatroom, chatroom_user] do |form| %>
   <div class="form-group row justify-content-center">
     <%= form.fields_for :user do |user_field| %>
-      <%= user_field.text_field :email, :class => 'form-control col-11 col-md-11', :placeholder =>'輸入使用者Email' %><br/>
+      <%= user_field.text_field :email, :class => 'form-control col-11 col-md-11', :placeholder =>'輸入使用者Email或名稱 / @查詢已知使用者' %><br/>
     <% end %>
   </div>
 <% end %>

@@ -45,10 +45,12 @@ $(document).on("turbolinks:load", function() {
 
   // textarea mention-tag trigger
   var chatroom = $("[data-behavior='messages']").data('chatroom-id') 
+  var edit_chatroom = $("[data-attribute='editChatroom']").data('chatroom-id')
   atwho_users('textarea', chatroom)
   atwho_users('#search-input', chatroom)
   atwho_tags('textarea', chatroom)
   atwho_tags('#search-input', chatroom)
+  atwho_relative_users('#chatroom_user_user_email', edit_chatroom)
 
   // append search box result
   $('#search-input').on('keypress', function(e){
@@ -113,7 +115,7 @@ $(document).on('click', '#editChatroomName', function(e){
 })
 
 function atwho_users(bind_object, chatroom){
-  $(bind_object).atwho({ at:"@", 
+  $(bind_object).atwho({ at:"", 
     searchKey: 'username',
     data: null, 
     insertTpl: "@${username}, " ,
@@ -123,6 +125,23 @@ function atwho_users(bind_object, chatroom){
         q = $(bind_object).val().split(" ").filter( x => x[0] === '@').slice(-1)[0].slice(1)
         request = { query: decodeURIComponent(q) }
         $.get(`/api/v2/chatrooms/${chatroom}/get_users.json?` + jQuery.param(request), function(data){
+          callback(data);
+        });
+      }
+    }
+  });
+}
+function atwho_relative_users(bind_object, chatroom){
+  $(bind_object).atwho({ at:"@", 
+    searchKey: 'email',
+    data: null, 
+    insertTpl: "${email}" ,
+    displayTpl: "<li>${username}-${email}</li>",
+    callbacks: {
+      remoteFilter: function(query, callback){
+        q = $(bind_object).val()
+        request = { query: decodeURIComponent(q) }
+        $.get(`/api/v2/chatrooms/${chatroom}/get_relative_users.json?` + jQuery.param(request), function(data){
           callback(data);
         });
       }

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     namespace :v2 do
       resources :chatrooms ,only:[:show] do 
         member do 
+          get :get_relative_users
           get :get_users
           get :get_tags
           get :get_messages
