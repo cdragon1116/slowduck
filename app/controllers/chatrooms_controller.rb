@@ -11,6 +11,9 @@ class ChatroomsController < ApplicationController
   # GET /chatrooms/1
   # GET /chatrooms/1.json
   def show
+    unless @chatroom.status == "1on1"
+      current_user.update(last_visited_chatroom: @chatroom.id)
+    end
     if @chatroom.users.exists?(id: current_user.id)
       @messages = @chatroom.messages.order(created_at: :desc).limit(15).reverse
     else
@@ -70,7 +73,12 @@ class ChatroomsController < ApplicationController
     
   def hide_chatroom
     @chatroom.chatroom_users.find_by(user_id:current_user.id).update(display:0)
-    redirect_to root_path
+    if current_user.last_visited_chatroom 
+      redirect_to chatroom_path( current_user.last_visited_chatroom )
+    else
+      redirect_to root_path
+    end
+
   end
 
   # PATCH/PUT /chatrooms/1
