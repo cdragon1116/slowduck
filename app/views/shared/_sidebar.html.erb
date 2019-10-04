@@ -2,8 +2,8 @@
 <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
   <!-- Sidebar - Brand -->
   <%= link_to chatrooms_path, class:'sidebar-brand d-flex align-items-center justify-content-center' do %> 
-    <div class="sidebar-brand-icon rotate-n-15">
-      <i class="far fa-grin-alt"></i>
+    <div class="sidebar-brand-icon">
+  <%= image_tag "duck-plain.svg", :title => "title", :class => "sidebar-brand-icon svg-inline--fa" %>
     </div>
     <div class="sidebar-brand-text mx-3">Slowduck</div>
   <% end %>
@@ -50,8 +50,8 @@
 
     <% current_user.one_on_one_chatrooms.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <%= link_to  room, class:'nav-link d-flex flex-row align-items-center pr-5', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
+      <li class="nav-item py-0">
+        <%= link_to  room, class:'nav-link d-flex flex-row align-items-center pr-5 py-3', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
           <%= user_image(room.one_on_one(current_user) , 32) %>
           <span class="ml-3"><%= "#{room.one_on_one(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
         <% end %>

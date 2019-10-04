@@ -1,6 +1,7 @@
 class Api::V2::ChatroomsController < ApplicationController
   before_action :set_chatroom
   include ActionView::Helpers::SanitizeHelper
+
   def get_users
     query = params["query"] 
     @users = @chatroom.users.select{|user| user.username.include?(query)}

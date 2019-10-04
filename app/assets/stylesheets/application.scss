@@ -15,17 +15,19 @@
  */
 
 html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
 }
 
 a:hover{
   text-decoration: none;
 }
+
 .fa{
-    padding: 5px;
+  padding: 5px;
 }
+
 
 // sidebar
 .sidebar{
@@ -35,24 +37,24 @@ a:hover{
   background-color: #333;
 }
 .sidebar .tab-menu-link{
-    color: #fff;
-    z-index: 1;
-    padding: 16px;
-    text-align:center;
+  color: #fff;
+  z-index: 1;
+  padding: 16px;
+  text-align:center;
 }
 .sidebar.toggled .nav-item{
-    display: flex;
-    flex-flow: column nowrap;
+  display: flex;
+  flex-flow: column nowrap;
 }
 .sidebar.toggled .tab-menu-link{
-    display: none;
+  display: none;
 }
 @media (min-width: 768px) {
-    .sidebar .tab-menu-link{
-        position: absolute;
-        left: 10rem;
-        top: 0;
-    }
+  .sidebar .tab-menu-link{
+    position: absolute;
+    left: 10rem;
+    top: 0;
+  }
 
   body {
     overflow-y: hidden;
@@ -63,52 +65,6 @@ a:hover{
   .sidebar.toggled{
     min-width: 6.5rem;
   }
-}
-
-
-// signin/signout page
-#pop-up-block{
-    position: fixed;
-    top: 10vh;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index:5;
-}
-#pop-up-block:after{
-    content:'';
-    position: fixed;
-    display:block;
-    z-index:-1;
-    top: 0;
-    left: 0;
-    background-color: rgba(0,0,0,.7);
-    height: 100vh;
-    width: 100%;
-}
-
-
-@media screen and (max-width: 768px){
-  .sidebar .tab-menu-link{
-      display: none;
-  }
-  #pop-up-block{
-    top: -3vh;
-  }
-}
-// index-page welcome-text
-.welcome-text{
-  text-align: center;
-  margin: auto;
-  margin-top: 10vh;
-}
-.welcome-page {
-  background-color: #fff;
-  text-align:center;
-}
-.welcome-page img{
-  max-width:200px;
-  margin-top: 30px;
 }
 
 // loader 
@@ -132,7 +88,7 @@ a:hover{
   height: 300px;
 }
 
-// scrool-bar #message-box::-webkit-scrollbar-track,
+// scrool-bar style
 #message-box::-webkit-scrollbar-track,
 #right-panel::-webkit-scrollbar-track,
 .sidebarbar::-webkit-scrollbar-track,
@@ -144,7 +100,7 @@ a:hover{
 #right-panel::-webkit-scrollbar,
 .sidebar::-webkit-scrollbar
 {
-	width: 4px;
+  width: 4px;
 }
 
 #message-box::-webkit-scrollbar-thumb,
@@ -154,16 +110,25 @@ a:hover{
   border-radius: 20px;
   background-color: #777;
 }
+
+.container-fluid{
 input.form-control{
   border: none;
   border-bottom: 1px solid #666;
   border-radius: 0;
 }
-
 input.form-control:focus{
   outline: none;
   box-shadow: none;
 }
+
+}
 .clearfix{
   clear: both;
+}
+.fa-bell{
+  color: #fec52a;
+}
+.text-prime{
+  color: #fec52a;
 }

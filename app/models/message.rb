@@ -32,15 +32,18 @@ class Message < ApplicationRecord
 
   def set_color
     if self.parent_id == self.id
+      self.update(color: 0)
+    elsif Message.where(parent_id: self.parent_id).length == 2
       previous_color = (previous_parent == nil) ? 0 : previous_parent.color
-      self.update(color: (previous_color + 1) % 4)
+      self.update(color: (previous_color + 1) % 3 + 1)
+      Message.find(self.parent_id).update(color: self.color)
     else
       self.update(color: Message.find(self.parent_id).color)
     end
   end
 
   def previous_parent
-    self.chatroom.messages.where('id < ?', self.id ).where('id = parent_id').last
+    self.chatroom.messages.where('id < ?', self.id ).where('id = parent_id').where('color > 0').last
   end
 
   def scan_user

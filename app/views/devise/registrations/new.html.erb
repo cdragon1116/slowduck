@@ -1,49 +1,49 @@
 <div class="container" id="pop-up-block">
-  <div class="card o-hidden border-0 shadow-lg my-5">
-    <div class="card-body p-0">
-      <!-- Nested Row within Card Body -->
-      <div class="row">
-        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-        <div class="col-lg-7">
-          <div class="p-5">
-            <div class="text-center">
-              <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
-            </div>
-
-            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "user"}) do |f| %>
-              <%= bootstrap_devise_error_messages! %>
-              <form class="user">
-                <div class="form-group row">
-                  <div class="col-sm-12 mb-3 mb-sm-0">
-                    <%= f.text_field :username, autofocus: false , class: 'form-control form-control-user', id:"exampleLastName", placeholder:"User Name" %>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <%= f.email_field :email, class:"form-control form-control-user",  id:"exampleInputEmail",  placeholder:"Email Address"%>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <%= f.password_field :password, autocomplete: 'current-password', class:"form-control form-control-user" , id:"exampleInputPassword" , placeholder:"Password"%>
-                    <% if @minimum_password_length %>
-                      <small class="form-text text-muted"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
-                    <% end %>
-                  </div>
-                  <div class="col-sm-6">
-                    <%= f.password_field :password_confirmation, autocomplete: 'current-password', class:"form-control form-control-user", id:"exampleRepeatPassword",  placeholder:"Repeat Password"%>
-                  </div>
-                </div>
-                <%= f.submit t('.sign_up'), class: 'btn btn-dark btn-user btn-block' %>
-                <hr>
+  <div class="row justify-content-center">
+    <div class="col-xl-8 col-lg-8 col-md-9">
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+          <!-- Nested Row within Card Body -->
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="p-5">
                 <div class="text-center">
-                  <%= render 'devise/shared/links' %>
+                  <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                 </div>
-              <% end %>
-
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "user"}) do |f| %>
+                  <%= bootstrap_devise_error_messages! %>
+                  <form class="user">
+                    <div class="form-group row">
+                      <div class="col-sm-12 mb-3 mb-sm-0">
+                        <%= f.text_field :username, autofocus: false , class: 'form-control form-control-user', id:"exampleLastName", placeholder:"User Name" %>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <%= f.email_field :email, class:"form-control form-control-user",  id:"exampleInputEmail",  placeholder:"Email Address"%>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <%= f.password_field :password, autocomplete: 'current-password', class:"form-control form-control-user" , id:"exampleInputPassword" , placeholder:"Password"%>
+                        <% if @minimum_password_length %>
+                          <small class="form-text text-muted"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
+                        <% end %>
+                      </div>
+                      <div class="col-sm-6">
+                        <%= f.password_field :password_confirmation, autocomplete: 'current-password', class:"form-control form-control-user", id:"exampleRepeatPassword",  placeholder:"Repeat Password"%>
+                      </div>
+                    </div>
+                    <%= f.submit t('.sign_up'), class: 'btn btn-dark btn-user btn-block' %>
+                    <hr>
+                    <div class="text-center">
+                      <%= render 'devise/shared/links' %>
+                    </div>
+                  <% end %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </div>
 
