@@ -100,8 +100,10 @@ $(document).on('turbolinks:load', function(){
   }
 
   // set active_chatroom color
-  var active_chatroom;
   var active_chatroom = $(`[data-behavior='messages']`).data('chatroom-id');
+  if ($(`[data-behavior='editChatroom']`).length !== 0){
+    active_chatroom = $('[data-behavior="editChatroom"]').data('chatroom-id');
+  }
   var active_link = $(`[data-behavior='chatroom-link'][data-chatroom-id='${active_chatroom}']`)
   active_link.parent().css('background-color', '#fec52a')
   active_link.parent().children(1).css({'color':'#333', 'font-weight': 700})

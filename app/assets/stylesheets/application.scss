@@ -42,11 +42,19 @@ a:hover{
   padding: 16px;
   text-align:center;
 }
+.sidebar .nav-item .nav-link{
+  padding-right: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 .sidebar.toggled .nav-item{
   display: flex;
   flex-flow: column nowrap;
 }
 .sidebar.toggled .tab-menu-link{
+  display: none;
+}
+.sidebar.toggled .img-profile{
   display: none;
 }
 @media (min-width: 768px) {

@@ -1,12 +1,12 @@
 newName = $('#chatroom_name').val()
-editForm = $('[data-attribute="editChatroom"]')
+editForm = $('[data-behavior="editChatroom"]')
 editForm.html('')
 editForm.html(`
     <h3 class='text-dark'>${newName}</h3>
     <a href='#' class="mx-4 text-dark small" id="editChatroomName">編輯</a>
   `)
 
-var active_chatroom = $(`[data-attribute='editChatroom']`).data('chatroom-id');
+var active_chatroom = $(`[data-behavior='editChatroom']`).data('chatroom-id');
 var active_link = $(`[data-behavior='chatroom-link'][data-chatroom-id='${active_chatroom}'] span`)
 active_link.html(newName)
 

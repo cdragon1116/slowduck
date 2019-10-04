@@ -45,7 +45,7 @@ $(document).on("turbolinks:load", function() {
 
   // textarea mention-tag trigger
   var chatroom = $("[data-behavior='messages']").data('chatroom-id') 
-  var edit_chatroom = $("[data-attribute='editChatroom']").data('chatroom-id')
+  var edit_chatroom = $("[data-behavior='editChatroom']").data('chatroom-id')
   atwho_users('textarea', chatroom)
   atwho_users('#search-input', chatroom)
   atwho_tags('textarea', chatroom)
@@ -107,8 +107,8 @@ $(document).on("turbolinks:load", function() {
 
 $(document).on('click', '#editChatroomName', function(e){
   e.preventDefault()
-  var editForm = $('[data-attribute="editChatroom"]')
-  var originName = $('[data-attribute="editChatroom"] h3').html()
+  var editForm = $('[data-behavior="editChatroom"]')
+  var originName = $('[data-behavior="editChatroom"] h3').html()
   editForm.html(`
     <input class="form-control col-12 col-md-4 mx-2" type="text" value="${originName}" name="chatroom[name]" id="chatroom_name" />
     <input type="submit" name="commit" value="更新" class="btn btn-dark btn-sm small" id="updateChatroom" data-disable-with="更新" />`)
