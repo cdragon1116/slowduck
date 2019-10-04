@@ -1,15 +1,17 @@
 <div class="d-flex flex-nowrap w-100 align-items-stretch">
   <div id="chatroom" >
     <div class="row no-gutters align-items-center justify-content-between chatroom-name shadow border-left">
-      <h3 class='h4 mb-0 text-light'><%= chatroom_link(@chatroom) %></h3>
+      <h3 class='h4 mb-0'><%= chatroom_link(@chatroom) %></h3>
 
       <nav class="navbar p-0 ml-3 mr-auto align-items-center chatroom-users">
-        <% @chatroom_users.each do |user| %>
-          <% if user.online == 1 %> 
-              <%= render 'shared/user_online', user:user %> 
-          <% else %>
-              <%= render 'shared/user_offline', user:user %> 
-          <% end %>
+        <% @chatroom_users_online.each do |user| %>
+          <%= render 'shared/user_online', user:user %> 
+        <% end %>
+        <% if @chatroom_users_offline.size != 0 %>
+          <div class="small mx-2">|</div>
+        <% end %>
+        <% @chatroom_users_offline.each do |user| %>
+          <%= render 'shared/user_offline', user:user %> 
         <% end %>
       </nav>
 

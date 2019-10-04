@@ -16,7 +16,9 @@ class ChatroomsController < ApplicationController
     end
     if @chatroom.users.exists?(id: current_user.id)
       @messages = @chatroom.messages.order(created_at: :desc).limit(15).reverse
-      @chatroom_users = @chatroom.users.order(online: :desc)
+      @chatroom_users_online = @chatroom.users.where(online: 1).limit(10)
+      @chatroom_users_offline = @chatroom.users.where(online: 0).limit(10)
+      
     else
       redirect_to chatrooms_url, notice: "You don't have accessbility"
     end
@@ -105,7 +107,7 @@ class ChatroomsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chatroom
-      @chatroom = Chatroom.includes(:messages).find(params[:id])
+      @chatroom = Chatroom.includes(:messages, :users).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

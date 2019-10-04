@@ -11,7 +11,7 @@ class Api::V2::ChatroomsController < ApplicationController
 
   def get_users
     query = params["query"] 
-    @users = @chatroom.users.select{|user| user.username.include?(query)} - [current_user]
+    @users = @chatroom.users - [current_user]
     respond_to do |format|
       format.json
     end

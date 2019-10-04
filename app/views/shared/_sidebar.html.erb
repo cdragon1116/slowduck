@@ -33,7 +33,7 @@
         <div id="collapse<%= room.id%>" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <%= link_to '編輯', edit_chatroom_path(room.slug), class:'collapse-item' %> 
-            <%= link_to '退出', chatroom_path(room.id), class:'collapse-item' , method:'delete', data:{confirm:'你確定要刪除聊天室嗎'} %>
+            <%= link_to '退出', chatroom_path(room.id), class:'collapse-item' , method:'delete', data:{confirm:'你確定要退出聊天室嗎'} %>
           </div>
         </div>
       </li>

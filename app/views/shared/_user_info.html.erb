@@ -2,5 +2,5 @@
   <a class="nav-link dropdown-toggle" href="#" id="userInfoDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <%= user_image(user, 32) %>
   </a>
-  <%= render 'shared/user_dropdown' , user: user %>
+  <%= render 'shared/user_dropdown' , user: user, current_user: current_user %>
 </div>

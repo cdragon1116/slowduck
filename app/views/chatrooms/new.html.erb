@@ -1,9 +1,12 @@
-<div class="container mt-5">
-  <h1 class='small text-gray-900 mb-4'>創建聊天室</h1>
-  <%= form_for(@chatroom) do |form| %>
-  <div class="form-group row">
-    <%= form.text_field :name, :class => 'form-control col-12 col-xl-5', :placeholder => '輸入聊天室名稱' %>
-    <%= form.submit :class => 'btn btn-sm btn-dark mx-3' %>
+<div class="container mt-5 text-center">
+  <div class="d-inline-block m-auto">
+    <h1 class='small text-gray-900 mb-4'>創建聊天室</h1>
+    <%= form_for(@chatroom) do |form| %>
+      <div class="form-group row flex-row">
+        <%= form.text_field :name, :class => 'form-control col-12 col-md-7', :placeholder => '輸入聊天室名稱' %>
+        <%= form.submit "創建", :class => 'col-12 col-md-4 btn btn-sm btn-dark mt-3 mt-md-0 mx-md-1' %>
+
+      </div>
+    <% end %>
   </div>
-  <% end %>
 </div>
