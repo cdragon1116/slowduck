@@ -118,7 +118,7 @@ function atwho_users(bind_object, chatroom){
     searchKey: 'username',
     data: null, 
     insertTpl: "@${username}, " ,
-    displayTpl: "<li>${username}-${email}</li>",
+    displayTpl: "<li>${username} <small>${email}</small></li>",
     callbacks: {
       remoteFilter: function(query, callback){
         q = $(bind_object).val().split(" ").filter( x => x[0] === '@').slice(-1)[0].slice(1)
@@ -135,7 +135,7 @@ function atwho_relative_users(bind_object, chatroom){
     searchKey: 'email',
     data: null, 
     insertTpl: "${email}" ,
-    displayTpl: "<li>${username}-${email}</li>",
+    displayTpl: "<li>${image}${username}-<small>${email}</small></li>",
     callbacks: {
       remoteFilter: function(query, callback){
         q = $(bind_object).val()

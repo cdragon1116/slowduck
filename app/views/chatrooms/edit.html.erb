@@ -1,8 +1,9 @@
 
+
   <%= link_to chatroom_path(@chatroom), class:'nav-link m-4 d-inline-block' do  %>
     <i class="fas fa-backspace fa-lg text-dark"></i>
   <% end %>
-  <div class="container px-3">
+  <div class="container px-5">
     <div>
       <%= render 'form', chatroom: @chatroom %>
       <%= render 'chatroom_users/form', chatroom: @chatroom, chatroom_user: @chatroom_user, chatroom_users: @chatroom_users %>

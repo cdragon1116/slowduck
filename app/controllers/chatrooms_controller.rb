@@ -28,6 +28,7 @@ class ChatroomsController < ApplicationController
   # GET /chatrooms/new
   def new
     @chatroom = Chatroom.new
+    @friends = current_user.chatrooms.map{|r| r.users}.flatten.uniq
   end
 
   # GET /chatrooms/1/edit

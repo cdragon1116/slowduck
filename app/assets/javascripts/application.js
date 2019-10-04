@@ -22,12 +22,22 @@
 //= require_tree ./channels
 //
 
-$(document).on('turbolinks:load', function(){
-  toggleLoad()
+// full-page loader
+$(function() {
+    document.addEventListener('turbolinks:request-start', function() {
+  $('.loading-block').removeClass('d-none')
+    });
+
+    document.addEventListener("turbolinks:request-end", function(){
+  $('.loading-block').addClass('d-none')
+    });
+});
+
+$(document).on('turbolinks:load', function(e){
   $.rails.refreshCSRFTokens();
 
   // Toggle the side navigation
-  $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+  $("#sidebarToggleTop").on('click', function(e) {
     $("body").toggleClass("sidebar-toggled");
     $(".sidebar").toggleClass("toggled");
     $(".form").toggleClass("sidebar-toggled");
@@ -44,7 +54,7 @@ $(document).on('turbolinks:load', function(){
       $('#right-panel').removeClass('active');
     };
   });
-  
+
   if ($(window).width() < 768) {
     $('#accordionSidebar').addClass('toggled');
   }
@@ -84,12 +94,6 @@ $(document).on('turbolinks:load', function(){
     return false
   })
 
-  // Keypress ESC goto Index
-  // $(window).on('keyup', function(e){
-    // if (e.keyCode == 27) document.location.href="/";
-    // return false
-  // })
-
   if ($(window).width() > 768) {
     $(document).click(function(){
       $('.panel-collapse.in')
@@ -111,13 +115,8 @@ $(document).on('turbolinks:load', function(){
 
 
 })
- 
-function toggleLoad() {
-    $("#chatroom-loader").removeClass('loader')
-}
 
-
-(function ($) {
+$(function ($) {
 	$.fn.emoji = function (params) {
 		var defaults = {
 			button: '&#x1F642;',
@@ -169,7 +168,7 @@ function toggleLoad() {
 				input.selectionEnd = endPos + 2;
 			}
 
-			var $button = $("<div id='emoji-button-area'>").html(settings.button).css({cursor: 'pointer', 'font-size': settings.fontSize}).on('click', showEmoji);
+			var $button = $("<span id='emoji-button-area'>").html(settings.button).css({cursor: 'pointer', 'font-size': settings.fontSize}).on('click', showEmoji);
 			var $list = $('<div id=emoji-list>').css(defaults.listCSS).css(settings.listCSS);
 			for (var n in settings.emojis) {
 				if (n > 0 && n % settings.rowSize == 0) {
@@ -187,5 +186,4 @@ function toggleLoad() {
 		return this;
 	};
 }
-)(jQuery);
-
+);

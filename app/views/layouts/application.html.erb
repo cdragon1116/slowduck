@@ -3,6 +3,7 @@
   <head>
     <title>SlowDuck</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="turbolinks-cache-control" content="no-cache">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -25,7 +26,19 @@
           <!-- Begin-Page-Content -->
           <div class="container-fluid" style="position:relative;">
             <!-- Page Heading -->
-              <%= yield %>
+            <%= yield %>
+
+            <div class="loading-block d-none">
+              <div class="black"></div>
+              <div class="page-loader text-center">
+                <div class="ducks">
+                  <%= image_tag "duck.svg", :title => "title", :class => "duck duck1" %>
+                  <%= image_tag "duck.svg", :title => "title", :class => "duck duck2" %>
+                  <%= image_tag "duck.svg", :title => "title", :class => "duck duck3" %>
+                  <%= image_tag "duck.svg", :title => "title", :class => "duck duck4" %>
+                </div>
+              </div>
+            </div>
 
           </div>
           <!-- End-of-Page-Content -->
@@ -41,7 +54,5 @@
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fas fa-angle-up"></i>
     </a>
-     
-
   </body>
 </html>

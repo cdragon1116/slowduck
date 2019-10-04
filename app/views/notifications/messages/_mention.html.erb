@@ -6,8 +6,13 @@
       </div>
     </div>
     <div class="d-flex flex-column">
-      <div class="small text-gray-500"><%= " #{notification.actor.username} - 來自 #{notification.notifiable.chatroom.name}" %></div>
-      <%= truncate( markdown(notification.notifiable.body), :length => 100, :escape => false) %>
+      <% if notification.notifiable.chatroom.status == '1on1' %>
+        <div class="small text-gray-500"><%= " #{notification.actor.username}" %></div>
+      <% else %>
+        <div class="small text-gray-500"><%= " #{notification.actor.username} - 來自 #{notification.notifiable.chatroom.name}" %></div>
+      <% end %>
+
+      <%= truncate( markdown(notification.notifiable.body), :length => 120, :escape => false) %>
     </div>
-    <% end %>
+  <% end %>
 </div>

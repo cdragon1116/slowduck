@@ -3,7 +3,7 @@
   <!-- Sidebar - Brand -->
   <%= link_to chatrooms_path, class:'sidebar-brand d-flex align-items-center justify-content-center' do %> 
     <div class="sidebar-brand-icon">
-  <%= image_tag "duck-plain.svg", :title => "title", :class => "sidebar-brand-icon svg-inline--fa" %>
+      <%= image_tag "duck-plain.svg", :title => "title", :class => "sidebar-brand-icon svg-inline--fa" %>
     </div>
     <div class="sidebar-brand-text mx-3">Slowduck</div>
   <% end %>
@@ -15,15 +15,15 @@
   <% if user_signed_in? %>
 
     <!-- Heading -->
-    <div class="sidebar-heading my-2">
+    <div class="sidebar-heading my-3">
       群組聊天室 
     </div>
 
-    
+
     <% current_user.group_chatrooms.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <%= link_to  room, class:'nav-link', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
+        <%= link_to  room, class:'nav-link py-3', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
           <span><%= "#{room.name}" %></span>
           <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>
         <% end %>
@@ -51,9 +51,16 @@
     <% current_user.one_on_one_chatrooms.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item py-0">
-        <%= link_to  room, class:'nav-link d-flex flex-row align-items-center', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
-          <%= user_image(room.one_on_one(current_user) , 32) %>
-          <span class="ml-3"><%= "#{room.one_on_one(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
+        <%= link_to  room, class:'nav-link d-flex flex-row align-items-center py-3', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
+          <% if room.one_on_one(current_user).online == 1 %>
+            <%= user_image(room.one_on_one(current_user) , 32) %>
+            <span class="ml-3"><%= "#{room.one_on_one(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
+          <% else %>
+            <div class="offline">
+              <%= user_image(room.one_on_one(current_user) , 32) %>
+              <span class="ml-3"><%= "#{room.one_on_one(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
+            </div>
+          <% end %>
         <% end %>
         <%= link_to  hide_chatroom_chatroom_path(room.id), class:'tab-menu-link close1on1 mt-1', method:'post' do %>
           <i class="fas fa-times"></i>
@@ -61,21 +68,6 @@
       </li>
     <% end %>
 
-    <!-- divider -->
-    <hr class="sidebar-divider">
-    <!-- Heading -->
-    <div class="sidebar-heading my-2">
-      功能    
-    </div>
-
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <%= link_to  new_chatroom_path, class:'nav-link' do  %>
-        <i class="fas fa-fw fa-table mx-2"></i>
-        <span>新增聊天群組</span>
-      <% end %>
-    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
@@ -84,8 +76,10 @@
 
   <!-- Sidebar Toggler (Sidebar) -->
   <div class="text-center d-none d-md-inline">
-    <button class="rounded-circle border-0" id="sidebarToggle">
-      <i class="fas fa-toggle-on" style="color:white;"></i>
+    <button class="rounded-circle border-0 new-chatroom">
+      <%= link_to  new_chatroom_path, class:'nav-link' do  %>
+        <i class="fas fa-plus text-dark"></i>
+      <% end %>
     </button>
   </div>
 
