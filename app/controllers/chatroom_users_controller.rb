@@ -1,22 +1,15 @@
 class ChatroomUsersController < ApplicationController
   before_action :set_chatroom
   def new
-    @chatroom_users = @chatroom.users
     @chatroom_user = ChatroomUser.new
+    @chatroom_users = @chatroom.users
   end
 
   def create
-    user_list = chatroom_user_params[:user][:email].split(" ")
-
-    user_list.map{|user| user.strip}.each do |user|
-      if User.find_by(email: user)
-        @user = User.find_by(email: user) 
-      else 
-        @user = User.find_by(username: user)
-      end
-      if @user
-        @chatroom.chatroom_users.where(user_id: @user).first_or_create
-      end
+    user_list = scan_users(chatroom_user_params[:user][:email])
+    user_list.each do |user|
+      @user =  User.find_by(email: user) || User.find_by(username: user)
+      @chatroom.chatroom_users.where(user_id: @user).first_or_create if @user
     end
     redirect_to edit_chatroom_path(@chatroom.id)
   end
@@ -27,7 +20,6 @@ class ChatroomUsersController < ApplicationController
   def destroy
     @chatroom_user = ChatroomUser.find_by(chatroom_id: @chatroom.id ,user_id: params[:id])
     if @chatroom.users.size == 1
-      @chatroom_user.destroy
       @chatroom.destroy
     else
       @chatroom_user.destroy
@@ -44,5 +36,8 @@ class ChatroomUsersController < ApplicationController
     end
     def find_admin
       ChatroomUser.find_by(chatroom_id: @chatroom.id ,admin: true).user
+    end
+    def scan_users(string)
+      string.split(" ").map{ |user| user.strip }
     end
 end

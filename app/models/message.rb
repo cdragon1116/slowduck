@@ -9,12 +9,11 @@ class Message < ApplicationRecord
   has_many :message_tags, dependent: :destroy
   has_many :tags, through: :message_tags, dependent: :destroy
 
-  after_create :scan_tag, :scan_user
-  after_create :set_parent, :set_color
+  after_create :scan_tag, :scan_user, :set_parent, :set_color
 
   extend FriendlyId
   friendly_id :slugged_message, use: :slugged
-  
+
 
   private
   def slugged_message

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :chatrooms do
     resources :chatroom_users 
     resources :messages
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
       post :hide_chatroom
     end
   end 
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
@@ -30,6 +32,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
   resources :notifications, only: [:index] do
     post :mark_as_read, on: :collection
     post :mark_as_read, on: :member

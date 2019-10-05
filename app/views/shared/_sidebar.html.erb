@@ -48,17 +48,17 @@
     </div>
 
 
-    <% current_user.one_on_one_chatrooms.each do |room|%>
+    <% current_user.conversations.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item py-0">
         <%= link_to  room, class:'nav-link d-flex flex-row align-items-center py-3', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
-          <% if room.one_on_one(current_user).online == 1 %>
-            <%= user_image(room.one_on_one(current_user) , 32) %>
-            <span class="ml-3"><%= "#{room.one_on_one(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
+          <% if room.conversation_with(current_user).online == 1 %>
+            <%= user_image(room.conversation_with(current_user) , 32) %>
+            <span class="ml-3"><%= "#{room.conversation_with(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
           <% else %>
             <div class="offline">
-              <%= user_image(room.one_on_one(current_user) , 32) %>
-              <span class="ml-3"><%= "#{room.one_on_one(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
+              <%= user_image(room.conversation_with(current_user) , 32) %>
+              <span class="ml-3"><%= "#{room.conversation_with(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
             </div>
           <% end %>
         <% end %>
