@@ -7,7 +7,7 @@ class Chatroom < ApplicationRecord
 
   
   extend FriendlyId
-    friendly_id :slugged_chatroom, use: :slugged
+  friendly_id :slugged_chatroom, use: :slugged
 
   def update_display(user, boolean)
     chatroom_users.where(user: user).update(display: boolean)

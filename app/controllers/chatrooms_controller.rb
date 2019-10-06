@@ -1,21 +1,16 @@
 class ChatroomsController < ApplicationController
   before_action :authenticate_user! , except: [:index]
   before_action :set_chatroom, only: [:show, :edit, :update, :destroy, :hide_chatroom]
-  helper_method :find_admin
+  before_action :authenticate_chatroom_user! , only: [:show, :edit, :update, :destroy, :hide_chatroom]
   skip_before_action :verify_authenticity_token, only: :create_one_on_one
 
   def index
   end
 
   def show
-    update_visited_chatroom(@chatroom)
-    if @chatroom.users.exists?(id: current_user.id)
-      @messages = @chatroom.initialize_messages
-      @chatroom_users_online = @chatroom.online_users.limit(10)
-      @chatroom_users_offline = @chatroom.offline_users.limit(10)
-    else
-      redirect_to chatrooms_url, notice: "You don't have accessbility"
-    end
+    @messages = @chatroom.initialize_messages
+    @chatroom_users_online = @chatroom.online_users
+    @chatroom_users_offline = @chatroom.offline_users
   end
 
   def new
@@ -30,14 +25,10 @@ class ChatroomsController < ApplicationController
 
   def create
     @chatroom = Chatroom.new(chatroom_params)
-    respond_to do |format|
-      if @chatroom.save and ChatroomUser.create(user: current_user, chatroom: @chatroom, admin:true)
-        format.html { redirect_to @chatroom, notice: 'Chatroom was successfully created.' }
-        format.json { render :show, status: :created, location: @chatroom }
-      else
-        format.html { render :new }
-        format.json { render json: @chatroom.errors, status: :unprocessable_entity }
-      end
+    if @chatroom.save and ChatroomUser.create(user: current_user, chatroom: @chatroom, admin:true)
+      redirect_to @chatroom, notice: '群組新增成功!'
+    else
+      render :new 
     end
   end
 
@@ -99,4 +90,11 @@ class ChatroomsController < ApplicationController
         current_user.update(last_visited_chatroom: chatroom.id)
       end
     end
+
+    def authenticate_chatroom_user!
+      unless @chatroom.users.exists?(id: current_user.id)
+        redirect_to chatrooms_url, notice: "你沒有權限!"
+      end
+    end
+
 end

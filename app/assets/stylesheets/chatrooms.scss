@@ -1,6 +1,5 @@
 // Place all the styles related to the Chatrooms controller here.
 // They will automatically be included in application.css.  // You can use Sass (SCSS) here: http://sass-lang.com/
-$input-border-focus: transparend;
 
 #chatroom {
   over-flow:hidden;
@@ -59,14 +58,6 @@ $input-border-focus: transparend;
     min-width:60%;
 }
 
-
-.fa{
-    padding: 5px;
-}
-.nav-item{
-    position:relative;
-}
-
 .message-body{
   overflow-wrap: break-word;
 }
@@ -75,6 +66,8 @@ $input-border-focus: transparend;
   outline: none;
   box-shadow:none;
 }
+
+// right-panel
 #right-panel{
     position: relative;
     display:none;
@@ -117,14 +110,10 @@ $input-border-focus: transparend;
     .form{
       width: 100%;
     }
-    #rightPanelCollapse{
-      display:none;
-    }
-
 }
 
 
-// scrool-bar
+// scroll-bar
 #message-box::-webkit-scrollbar-track,
 #right-panel::-webkit-scrollbar-track
 {
@@ -144,7 +133,7 @@ $input-border-focus: transparend;
   background-color: #777;
 }
 
-
+// sidebar-conversation-hide-btn
 .close1on1{
   display: none;
 }
@@ -153,6 +142,7 @@ li.nav-item:hover > .close1on1{
   display:block
 }
 
+// emoji-style
 #emoji-button-area::before{
   content:'';
   display: inline-block;

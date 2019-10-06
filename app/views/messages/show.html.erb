@@ -1,12 +1,12 @@
 <div id="chatroom">
 
   <div class="chatroom_top">
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center shadow">
       <%= link_to chatroom_path(@chatroom), class:'nav-link' do  %>
         <i class="fas fa-backspace fa-lg text-dark"></i>
       <% end %>
       <nav class='navbar'>
-        <h3 class='mb-0 mr-3'><%= @messages.first.user.username %>:</h3><%= truncate( markdown(@messages.first.body), :length => 300, :escape => false) %>
+        <h3 class='h4 mb-0 mr-3'><%= @messages.first.user.username %>:</h3><%= truncate( markdown(@messages.first.body), :length => 300, :escape => false) %>
     </nav>
     </div>
 

@@ -19,6 +19,29 @@ html, body {
   width: 100%;
 }
 
+.nav-item{
+  position:relative;
+}
+
+.form-group{
+  position: relative;
+}
+
+.container-fluid{
+  position: relative;
+  min-height: calc(100vh - 4.375rem);
+
+  input.form-control{
+    border: none;
+    border-bottom: 1px solid #666;
+    border-radius: 0;
+  }
+
+  input.form-control:focus{
+    outline: none;
+    box-shadow: none;
+  }
+}
 a:hover{
   text-decoration: none;
 }
@@ -31,10 +54,19 @@ a.dropdown-item:active{
   padding: 5px;
 }
 
+.fa-bell{
+  color: #fec52a;
+}
+
+.clearfix{
+  clear: both;
+}
+
 .btn:focus{
   box-shadow: none;
   outline: none;
 }
+
 // sidebar
 .sidebar{
   height: 100vh;
@@ -42,16 +74,19 @@ a.dropdown-item:active{
   overflow-x: hidden;
   background-color: #333;
 }
+.sidebar .new-chatroom {
+    width: 2.5rem;
+    height: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    background: #fff;
+}
 .sidebar .tab-menu-link{
   color: #fff;
   z-index: 1;
   padding: 16px;
   text-align:center;
-}
-.sidebar .nav-item .nav-link{
-  padding-right: 3rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 .sidebar.toggled .nav-item{
   display: flex;
@@ -63,6 +98,13 @@ a.dropdown-item:active{
 .sidebar.toggled .img-profile{
   display: none;
 }
+.sidebar{
+  min-width: 6.5rem;
+}
+.sidebar.toggled{
+  min-width: 0;
+}
+
 @media (min-width: 768px) {
   .sidebar .tab-menu-link{
     position: absolute;
@@ -98,7 +140,7 @@ a.dropdown-item:active{
 }
 .page-loader{
   z-index:10;
-  position:fixed;
+  position:absolute;
   top: 0;
   right: 0;
   left: 0;
@@ -118,6 +160,7 @@ a.dropdown-item:active{
   left: 0;
 }
 
+// notification-list
 .notification-list{
   overflow: auto;
   height: 300px;
@@ -146,32 +189,20 @@ a.dropdown-item:active{
   background-color: #777;
 }
 
-.container-fluid{
-input.form-control{
-  border: none;
-  border-bottom: 1px solid #666;
-  border-radius: 0;
-}
-input.form-control:focus{
-  outline: none;
-  box-shadow: none;
-}
 
-}
-.clearfix{
-  clear: both;
-}
-.fa-bell{
-  color: #fec52a;
-}
+// theme-yellow
 .text-prime{
   color: #fec52a;
 }
-.sidebar .new-chatroom {
-    width: 2.5rem;
-    height: 2.5rem;
-    text-align: center;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    background: #fff;
+.bg-prime{
+  background-color: #fec52a;
+} 
+.btn-prime{
+  background-color: #fec52a;
+  color: #fff;
 }
+.btn-prime:hover{
+  background-color: #ffba00;
+  color: #fff;
+}
+

@@ -19,7 +19,7 @@ class Api::V2::ChatroomsController < ApplicationController
 
   def get_tags
     query = params["query"]
-    @tags = @chatroom.tags.select{|tag| tag.tagname.include?(query)}
+    @tags = @chatroom.tags
     respond_to do |format|
       format.json
     end

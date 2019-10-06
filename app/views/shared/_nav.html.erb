@@ -21,9 +21,9 @@
       <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
         <form class="form-inline mr-auto w-100 navbar-search">
           <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="輸入關鍵字..." aria-label="Search" aria-describedby="basic-addon2">
+            <input type="text" class="search-input form-control bg-light border-0 small" placeholder="輸入關鍵字..." aria-label="Search" aria-describedby="basic-addon2" >
             <div class="input-group-append">
-              <button class="btn btn-primary" type="button">
+              <button class="search-btn btn btn-dark" type="button" >
                 <i class="fas fa-search fa-sm"></i>
               </button>
             </div>
@@ -36,18 +36,18 @@
     <% if user_signed_in?%>
     <!-- Nav Item - Alerts -->
     <li class="nav-item dropdown no-arrow mx-1">
-      <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-bell fa-fw"></i>
         <!-- Counter - Alerts -->
         <span class="badge badge-danger badge-counter" data-behavior='unread-count'><%= current_user.notifications.unread.size if current_user.notifications.unread.size > 0 %></span>
       </a>
       <!-- Dropdown - Alerts -->
-      <div class="dropdown-list dropdown-menu shadow animated--grow-in" aria-labelledby="alertsDropdown" id="bell-alert">
+      <div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-sm-left dropdown-menu-lg-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="bell-alert">
         <h6 class="bg-dark p-2 text-light text-center small mb-0">
           未讀通知列表
         </h6>
         <div class="notification-list">
-        <% current_user.notifications.unread.limit(10).each do |notification| %>
+        <% notifications.each do |notification| %>
           <%= render 'notifications/messages/mention', notification: notification %>
         <% end %>
         </div>
@@ -97,9 +97,9 @@
   <!-- Topbar Search -->
   <div class="d-none d-sm-inline-block form-inline ml-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
     <div class="input-group">
-      <input type="text" class="form-control bg-light border-0 small" placeholder="輸入關鍵字..." aria-label="Search" aria-describedby="basic-addon2" id="search-input">
+      <input type="text" class="search-input form-control bg-light border-0 small" placeholder="輸入關鍵字..." aria-label="Search" aria-describedby="basic-addon2" >
       <div class="input-group-append">
-        <button class="btn btn-dark" type="button">
+        <button class="search-btn btn btn-dark" type="button">
           <i class="fas fa-search fa-sm"></i>
         </button>
       </div>

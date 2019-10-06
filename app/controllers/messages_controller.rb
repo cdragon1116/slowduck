@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
-  before_action :set_chatroom
   before_action :authenticate_user!
+  before_action :set_chatroom
   include MessagesHelper
 
   def index

@@ -15,21 +15,12 @@
         <% end %>
       </nav>
 
-
-      <button type="button" id="rightPanelCollapse" class="btn">
-      <i class="fas fa-toggle-on"></i>
-      </button>
     </div>
 
 
     <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='message-box'>
       <div class="history-loader text-center">
-        <div class="ducks">
-          <%= image_tag "duck.svg", :title => "title", :class => "duck duck1" %>
-          <%= image_tag "duck.svg", :title => "title", :class => "duck duck2" %>
-          <%= image_tag "duck.svg", :title => "title", :class => "duck duck3" %>
-          <%= image_tag "duck.svg", :title => "title", :class => "duck duck4" %>
-        </div>
+        <%= render 'shared/ducks' %>
       </div>
       <div id="inner">
         <% @messages.each do |message| %>
@@ -44,20 +35,21 @@
           <%= form.text_area :body, :class => 'input form-control',:placeholder => "有話快說！！！", autofocus: true %>
           <%= form.hidden_field :user_id, :value => current_user.id %>
           <%= form.hidden_field :chatroom_id, :value => @chatroom.id %>
+          <%= form.button :submit , :class => 'btn' do %>
+            <i class="fas fa-sign-in-alt text-dark"></i>
+          <% end %>
         </div>
       <% end %>
     </div>
     <div id="chatroom-loader" class="loader"></div>
   </div>
   <nav id="right-panel">
+      <button type="button" id="rightPanelCollapse" class="btn">
+        <i class="fas fa-toggle-on"></i>
+      </button>
     <div id="loader"></div>
     <div class="result-loader text-center d-none">
-      <div class="ducks">
-        <%= image_tag "duck.svg", :title => "title", :class => "duck duck1" %>
-        <%= image_tag "duck.svg", :title => "title", :class => "duck duck2" %>
-        <%= image_tag "duck.svg", :title => "title", :class => "duck duck3" %>
-        <%= image_tag "duck.svg", :title => "title", :class => "duck duck4" %>
-      </div>
+      <%= render 'shared/ducks' %>
     </div>
     <div id="search-result">
     </div>

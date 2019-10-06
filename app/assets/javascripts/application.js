@@ -34,7 +34,6 @@ $(function() {
 });
 
 $(document).on('turbolinks:load', function(e){
-  $.rails.refreshCSRFTokens();
 
   // Toggle the side navigation
   $("#sidebarToggleTop").on('click', function(e) {
@@ -50,7 +49,6 @@ $(document).on('turbolinks:load', function(e){
   $(window).resize(function() {
     if ($(window).width() < 768) {
       $('.sidebar .collapse').collapse('hide');
-      $('#accordionSidebar').addClass('toggled');
       $('#right-panel').removeClass('active');
     };
   });
@@ -94,6 +92,7 @@ $(document).on('turbolinks:load', function(e){
     return false
   })
 
+  // Close collapse panel when document on click
   if ($(window).width() > 768) {
     $(document).click(function(){
       $('.panel-collapse.in')
@@ -104,11 +103,11 @@ $(document).on('turbolinks:load', function(e){
   }
 
   // set active_chatroom color
-  var active_chatroom = $(`[data-behavior='messages']`).data('chatroom-id');
+  let active_chatroom = $(`[data-behavior='messages']`).data('chatroom-id');
   if ($(`[data-behavior='editChatroom']`).length !== 0){
     active_chatroom = $('[data-behavior="editChatroom"]').data('chatroom-id');
   }
-  var active_link = $(`[data-behavior='chatroom-link'][data-chatroom-id='${active_chatroom}']`)
+  let active_link = $(`[data-behavior='chatroom-link'][data-chatroom-id='${active_chatroom}']`)
   active_link.parent().css('background-color', '#fec52a')
   active_link.parent().children(1).css({'color':'#333', 'font-weight': 700})
   active_link.css({'color':'#333', 'font-weight': 700})

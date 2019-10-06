@@ -3,16 +3,16 @@
   <head>
     <title>SlowDuck</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="turbolinks-cache-control" content="no-cache">
+    <meta name="turbolinks-cache-control" content="no-cache">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body id="page-top">
+    <!-- Page Wrapper -->
     <div class="d-flex" id="wrapper">
-
-      <%= render 'shared/sidebar' %> 
+      <%= render 'shared/sidebar' , group_chatrooms: @group_chatrooms, conversations: @conversations %> 
 
       <!-- Page Content -->
       <div id="content-wrapper" class="d-flex flex-column">
@@ -20,23 +20,18 @@
         <div class="content">
 
           <!-- Top-bar -->
-          <%= render 'shared/nav' %>
+          <%= render 'shared/nav', notifications: @notifications %>
           <!-- /Top-bar -->
 
           <!-- Begin-Page-Content -->
-          <div class="container-fluid" style="position:relative;">
+          <div class="container-fluid">
             <!-- Page Heading -->
             <%= yield %>
 
             <div class="loading-block d-none">
               <div class="black"></div>
               <div class="page-loader text-center">
-                <div class="ducks">
-                  <%= image_tag "duck.svg", :title => "title", :class => "duck duck1" %>
-                  <%= image_tag "duck.svg", :title => "title", :class => "duck duck2" %>
-                  <%= image_tag "duck.svg", :title => "title", :class => "duck duck3" %>
-                  <%= image_tag "duck.svg", :title => "title", :class => "duck duck4" %>
-                </div>
+                <%= render 'shared/ducks' %>
               </div>
             </div>
 

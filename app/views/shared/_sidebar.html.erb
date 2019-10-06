@@ -15,15 +15,15 @@
   <% if user_signed_in? %>
 
     <!-- Heading -->
-    <div class="sidebar-heading my-3">
-      群組聊天室 
+    <div class="sidebar-heading my-2 my-md-3">
+      群組 
     </div>
 
 
-    <% current_user.group_chatrooms.each do |room|%>
+    <% group_chatrooms.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <%= link_to  room, class:'nav-link py-3', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
+        <%= link_to  room, class:'nav-link py-2 py-md-3 pr-md-5', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
           <span><%= "#{room.name}" %></span>
           <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>
         <% end %>
@@ -44,25 +44,22 @@
 
     <!-- Heading -->
     <div class="sidebar-heading my-2">
-      一對一對話
+      一對一
     </div>
 
 
-    <% current_user.conversations.each do |room|%>
+    <% conversations.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item py-0">
-        <%= link_to  room, class:'nav-link d-flex flex-row align-items-center py-3', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
-          <% if room.conversation_with(current_user).online == 1 %>
-            <%= user_image(room.conversation_with(current_user) , 32) %>
-            <span class="ml-3"><%= "#{room.conversation_with(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
-          <% else %>
-            <div class="offline">
-              <%= user_image(room.conversation_with(current_user) , 32) %>
-              <span class="ml-3"><%= "#{room.conversation_with(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
+        <%= link_to  room, class:'nav-link d-flex flex-row align-items-center justify-content-center justify-content-md-start py-2 py-md-3 pr-md-5', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
+            <div class="<%= conversation_online?(room, current_user) %>">
+              <div class="img d-none d-md-inline">
+                <%= user_image(room.conversation_with(current_user) , 32) %>
+              </div>
+              <span class="ml-md-3"><%= "#{room.conversation_with(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
             </div>
-          <% end %>
         <% end %>
-        <%= link_to  hide_chatroom_chatroom_path(room.id), class:'tab-menu-link close1on1 mt-1', method:'post' do %>
+        <%= link_to  hide_chatroom_chatroom_path(room.id), class:'tab-menu-link close1on1 mt-md-1 d-none d-md-inline', method:'post' do %>
           <i class="fas fa-times"></i>
         <% end %>
       </li>
@@ -74,9 +71,8 @@
 
   <% end %>
 
-  <!-- Sidebar Toggler (Sidebar) -->
-  <div class="text-center d-none d-md-inline">
-    <button class="rounded-circle border-0 new-chatroom">
+  <div class="text-center ">
+    <button class="rounded-circle border-0 new-chatroom bg-light mt-3 mt-md-2">
       <%= link_to  new_chatroom_path, class:'nav-link' do  %>
         <i class="fas fa-plus text-dark"></i>
       <% end %>

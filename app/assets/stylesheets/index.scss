@@ -2,13 +2,13 @@
 .welcome-text{
   text-align: center;
   margin: auto;
-  margin-top: 10vh;
+  padding-top: 10vh;
 }
 .welcome-page {
   background-color: #fff;
   text-align:center;
   margin: auto;
-  margin-top: 20vh;
+  padding-top: 20vh;
 }
 
 .brand-logo.index{
@@ -22,7 +22,6 @@
 @media (min-width: 768px) {
   .index.brand-logo{
     width: 500px;
-
   }
   .duck-index{
     width: 200px;
