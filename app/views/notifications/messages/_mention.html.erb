@@ -1,8 +1,9 @@
-<div class="d-flex dropdown-item align-items-center" data-behavior='notification' data-notification="<%= notification.id%>">
-  <%= link_to chatroom_message_path(notification.notifiable.chatroom, notification.notifiable) do %> 
+
+<%= link_to chatroom_message_path(notification.notifiable.chatroom, notification.notifiable) do %> 
+  <div class="d-flex dropdown-item align-items-center" data-behavior='notification' data-notification="<%= notification.id%>">
     <div class="mr-3">
       <div class="icon-circle bg-dark">
-        <i class="fas fa-file-alt text-white"></i>
+        <i class="fas fa-comments text-light"></i>
       </div>
     </div>
     <div class="d-flex flex-column">
@@ -12,7 +13,9 @@
         <div class="small text-gray-500"><%= " #{notification.actor.username} - 來自 #{notification.notifiable.chatroom.name}" %></div>
       <% end %>
 
-      <%= truncate( markdown(notification.notifiable.body), :length => 120, :escape => false) %>
+      <div>
+        <%= truncate( strip_tags(notification.notifiable.body), :length => 80, :escape => false) %>
+      </div>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>

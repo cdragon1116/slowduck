@@ -53,7 +53,7 @@ class ChatroomsController < ApplicationController
     
   def hide_chatroom
     @chatroom.update_display(current_user, false)
-    if current_user.chatrooms.length > 0 
+    if current_user.group_chatrooms.length > 0 
       redirect_to chatroom_path( current_user.group_chatrooms.first )
     else
       redirect_to root_path

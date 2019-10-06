@@ -10,6 +10,7 @@ class ChatroomUsersController < ApplicationController
     user_list.each do |user|
       @user =  User.find_by(email: user) || User.find_by(username: user)
       @chatroom.chatroom_users.where(user_id: @user).first_or_create if @user
+      Notification.create(recipient: @user, actor: current_user, action: 'invite', notifiable: @chatroom)
     end
     redirect_to edit_chatroom_path(@chatroom.id)
   end
@@ -21,8 +22,10 @@ class ChatroomUsersController < ApplicationController
     @chatroom_user = ChatroomUser.find_by(chatroom_id: @chatroom.id ,user_id: params[:id])
     if @chatroom.users.size == 1
       @chatroom.destroy
+      redirect_to root_path
     else
       @chatroom_user.destroy
+      Notification.create(recipient: @chatroom_user.user, actor: current_user, action: 'kickout', notifiable: @chatroom)
       redirect_to edit_chatroom_path(@chatroom.id)  
     end
   end

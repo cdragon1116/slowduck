@@ -1,13 +1,14 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_chatroom
+  before_action :find_message, only: [:show]
   include MessagesHelper
 
   def index
     render html:params
   end
   def show
-    find_message
+    @message.notifications.update(read_at: Time.zone.now)
     @messages = @message.messages.order(created_at: :desc).reverse
   end
 

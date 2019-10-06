@@ -4,7 +4,7 @@ class Message < ApplicationRecord
   belongs_to :chatroom
   belongs_to :parent, class_name: :Message, optional: true
   has_many :messages, class_name: :Message, foreign_key: :parent_id
-  has_many :notifications , dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   has_many :message_tags, dependent: :destroy
   has_many :tags, through: :message_tags, dependent: :destroy
@@ -63,7 +63,7 @@ class Message < ApplicationRecord
     end
     self.update(body: new_ary.join(""))
     recipients.uniq.each do |recipient|
-      Notification.create(recipient: recipient, actor: self.user, action: 'mention', notifiable: self, message_id: self.id)
+      notification = Notification.create(recipient: recipient, actor: self.user, action: 'mention', notifiable: self)
     end
   end
 

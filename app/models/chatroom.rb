@@ -4,6 +4,7 @@ class Chatroom < ApplicationRecord
   has_many :users, through: :chatroom_users, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_one :conversation , dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   
   extend FriendlyId
