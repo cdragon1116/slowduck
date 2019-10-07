@@ -67,6 +67,11 @@ a.dropdown-item:active{
   outline: none;
 }
 
+.close.devise{
+  position: absolute;
+  right:20px;
+  top: 5px;
+}
 // sidebar
 .sidebar{
   height: 100vh;
