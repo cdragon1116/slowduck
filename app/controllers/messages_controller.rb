@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
   end
   def show
     @message.notifications.update(read_at: Time.zone.now)
-    @messages = @message.messages.order(created_at: :desc).reverse
+    @messages = @message.messages.includes(:user, :parent, :chatroom).order(created_at: :desc).reverse
   end
 
   def create

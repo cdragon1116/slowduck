@@ -23,11 +23,12 @@ class Chatroom < ApplicationRecord
   end
 
   def initialize_messages
-    messages.order(created_at: :desc).limit(15).reverse
+    messages.includes(:parent, :user => :image_attachment).order(created_at: :desc).limit(15).reverse
   end
 
   def tags
-    messages.map{|message| message.tags}.flatten.uniq
+    messages_ids = self.messages.ids
+    Tag.joins(:message_tags).where('message_id IN (?)', messages_ids).distinct
   end
   
   def conversation_with(current_user)

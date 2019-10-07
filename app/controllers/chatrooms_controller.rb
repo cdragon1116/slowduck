@@ -6,7 +6,6 @@ class ChatroomsController < ApplicationController
 
   def index
   end
-
   def show
     current_user.is_online
     @messages = @chatroom.initialize_messages
@@ -20,7 +19,7 @@ class ChatroomsController < ApplicationController
   end
 
   def edit
-    @chatroom_users = @chatroom.users
+    @chatroom_users = @chatroom.users.includes(:image_attachment)
     @chatroom_user = ChatroomUser.new
   end
 
@@ -79,7 +78,7 @@ class ChatroomsController < ApplicationController
 
   private
     def set_chatroom
-      @chatroom = Chatroom.includes(:messages, :users).find(params[:id])
+      @chatroom = Chatroom.find(params[:id])
     end
 
     def chatroom_params

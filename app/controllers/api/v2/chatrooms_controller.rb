@@ -2,8 +2,8 @@ class Api::V2::ChatroomsController < ApplicationController
   before_action :set_chatroom
   include ActionView::Helpers::SanitizeHelper
   def get_relative_users
-    query = params["query"] 
-    @users = current_user.chatrooms.map{ |c| c.users }.flatten.uniq - @chatroom.users
+    query = params["query"]
+    @users = current_user.relative_users
     respond_to do |format|
       format.json
     end
@@ -11,7 +11,7 @@ class Api::V2::ChatroomsController < ApplicationController
 
   def get_users
     query = params["query"] 
-    @users = @chatroom.users - [current_user]
+    @users = @chatroom.users
     respond_to do |format|
       format.json
     end
@@ -49,6 +49,6 @@ class Api::V2::ChatroomsController < ApplicationController
 
   private
   def set_chatroom
-    @chatroom = Chatroom.includes(:users, :messages => :tags).find_by(id: params[:id])
+    @chatroom = Chatroom.find_by(id: params[:id])
   end
 end
