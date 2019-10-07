@@ -44,9 +44,9 @@ $(document).on("turbolinks:load", function() {
   // textarea mention-tag trigger
   var chatroom = $("[data-behavior='messages']").data('chatroom-id') 
   var edit_chatroom = $("[data-behavior='editChatroom']").data('chatroom-id')
-  atwho_users('textarea', chatroom)
+  atwho_users('#message_body', chatroom)
   atwho_users('.search-input', chatroom)
-  atwho_tags('textarea', chatroom)
+  atwho_tags('#message_body', chatroom)
   atwho_tags('.search-input', chatroom)
   atwho_relative_users('#chatroom_user_user_email', edit_chatroom)
 
