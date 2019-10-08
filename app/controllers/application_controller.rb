@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
       if user_signed_in?
         @group_chatrooms = current_user.group_chatrooms
         @conversations = current_user.conversations
-        @notifications = current_user.notifications.unread.order(created_at: :desc)
+        @notifications = current_user.notifications.includes( :notifiable, :actor ).unread.order(created_at: :desc)
       else
         @group_chatrooms = []
         @conversations = []

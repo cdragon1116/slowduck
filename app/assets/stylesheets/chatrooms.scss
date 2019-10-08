@@ -30,6 +30,7 @@
 .form{
     box-sizing: border-box;
     width: calc(100vw - 14rem);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   textarea.form-control{
     box-sizing: border-box;

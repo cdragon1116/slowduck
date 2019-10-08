@@ -82,7 +82,8 @@ class User < ApplicationRecord
   end
 
   def relative_users
-    chatrooms.map{|room| room.users}.flatten.uniq
+    chatroom_ids = self.chatrooms.map{|room| room.id}
+    User.includes(:image_attachment).joins(:chatroom_users).where('chatroom_id IN (?) ', chatroom_ids).distinct
   end
 
   def is_online

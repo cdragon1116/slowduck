@@ -6,9 +6,9 @@ class ChatroomsController < ApplicationController
 
   def index
   end
-
   def show
     current_user.is_online
+    @chatroom.notifications.where(recipient_id: current_user.id ).update(read_at: Time.zone.now)
     @messages = @chatroom.initialize_messages
     @chatroom_users_online = @chatroom.online_users
     @chatroom_users_offline = @chatroom.offline_users
@@ -20,7 +20,7 @@ class ChatroomsController < ApplicationController
   end
 
   def edit
-    @chatroom_users = @chatroom.users
+    @chatroom_users = @chatroom.users.includes(:image_attachment)
     @chatroom_user = ChatroomUser.new
   end
 
@@ -79,7 +79,7 @@ class ChatroomsController < ApplicationController
 
   private
     def set_chatroom
-      @chatroom = Chatroom.includes(:messages, :users).find(params[:id])
+      @chatroom = Chatroom.find(params[:id])
     end
 
     def chatroom_params

@@ -1,4 +1,10 @@
 Rails.application.configure do
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet_bullet_logger = true
+    Bullet.console = true
+  end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -61,6 +67,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "smtp.mailgun.org",
@@ -71,4 +78,5 @@ Rails.application.configure do
     password: '4e375c7b61711e5bbc1a0d6bc506f8b4-19f318b0-63ed2945', #信箱密碼 
     enable_starttls_auto: true
   }
+
 end
