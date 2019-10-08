@@ -23,7 +23,7 @@ class Chatroom < ApplicationRecord
   end
 
   def initialize_messages
-    messages.includes(:parent, :user => :image_attachment).order(created_at: :desc).limit(15).reverse
+    messages.includes(:parent, :user => :image_attachment ).order(created_at: :desc).limit(15).reverse
   end
 
   def tags

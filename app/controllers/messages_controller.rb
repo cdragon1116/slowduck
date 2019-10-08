@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
     render html:params
   end
   def show
-    @message.notifications.update(read_at: Time.zone.now)
+    @message.notifications.where(recipient_id: current_user.id ).update(read_at: Time.zone.now)
     @messages = @message.messages.includes(:user, :parent, :chatroom).order(created_at: :desc).reverse
   end
 

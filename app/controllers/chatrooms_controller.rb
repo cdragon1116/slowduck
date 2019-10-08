@@ -8,6 +8,7 @@ class ChatroomsController < ApplicationController
   end
   def show
     current_user.is_online
+    @chatroom.notifications.where(recipient_id: current_user.id ).update(read_at: Time.zone.now)
     @messages = @chatroom.initialize_messages
     @chatroom_users_online = @chatroom.online_users
     @chatroom_users_offline = @chatroom.offline_users

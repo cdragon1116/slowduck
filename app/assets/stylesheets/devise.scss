@@ -6,6 +6,7 @@
   bottom: 0;
   right: 0;
   z-index:20;
+  overflow-y: auto;
 }
 #pop-up-block:after{
   content:'';
