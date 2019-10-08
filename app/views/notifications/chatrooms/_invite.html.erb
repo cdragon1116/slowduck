@@ -7,7 +7,7 @@
     </div>
 
     <div class="d-flex flex-column">
-      <% if notification.notifiable.status == '1on1' %>
+      <% if notification.notifiable.room_type == 1 %>
         <div class="small text-gray-500"><%= " #{notification.actor.username}跟你開啟1-1對話" %></div>
       <% else %>
         <div class="text-500"><%= "#{notification.actor.username} - 把你加入至 #{notification.notifiable.name}" %></div>

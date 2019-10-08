@@ -5,7 +5,8 @@
     "@rails/webpacker": "^4.0.7",
     "file-loader": "^4.2.0",
     "jquery": "^3.4.1",
-    "jquery.emojiarea.js": "^0.1.8-beta"
+    "jquery.emojiarea.js": "^0.1.8-beta",
+    "jslint": "^0.12.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.8.1"

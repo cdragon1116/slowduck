@@ -59,7 +59,7 @@
               <span class="ml-md-3"><%= "#{room.conversation_with(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
             </div>
         <% end %>
-        <%= link_to  hide_chatroom_chatroom_path(room.id), class:'tab-menu-link close1on1 mt-md-1 d-none d-md-inline', method:'post' do %>
+        <%= link_to  hide_chatroom_chatroom_path(room.id), class:'tab-menu-link hide-conversation mt-md-1', method:'post' do %>
           <i class="fas fa-times"></i>
         <% end %>
       </li>

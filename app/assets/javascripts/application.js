@@ -1,6 +1,5 @@
 // This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
+// listed below.  //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, or any plugin's
 // vendor/assets/javascripts directory can be referenced here using a relative path.
 //
@@ -25,11 +24,11 @@
 // full-page loader
 $(function() {
     document.addEventListener('turbolinks:request-start', function() {
-  $('.loading-block').removeClass('d-none')
+  $('.loading-block').removeClass('d-none');
     });
 
     document.addEventListener("turbolinks:request-end", function(){
-  $('.loading-block').addClass('d-none')
+  $('.loading-block').addClass('d-none');
     });
 });
 
@@ -42,7 +41,7 @@ $(document).on('turbolinks:load', function(e){
     $(".form").toggleClass("sidebar-toggled");
     if ($(".sidebar").hasClass("toggled")) {
       $('.sidebar .collapse').collapse('hide');
-    };
+    }
   });
 
   // Close any open menu accordions when window is resized below 768px
@@ -50,7 +49,7 @@ $(document).on('turbolinks:load', function(e){
     if ($(window).width() < 768) {
       $('.sidebar .collapse').collapse('hide');
       $('#right-panel').removeClass('active');
-    };
+    }
   });
 
   if ($(window).width() < 768) {
@@ -67,20 +66,11 @@ $(document).on('turbolinks:load', function(e){
     }
   });
 
-  // Smooth scrolling using jQuery easing
-  $(document).on('click', 'a.scroll-to-top', function(e) {
-    var $anchor = $(this);
-    $('html, body').stop().animate({
-      scrollTop: ($($anchor.attr('href')).offset().top)
-    }, 1000, 'easeInOutExpo');
-    e.preventDefault();
-  });
-
   // Close button action to go Back
   $('.close').on('click', function(){
     history.go(-1);
-    return false
-  })
+    return false;
+  });
 
   // Close collapse panel when document on click
   if ($(window).width() > 768) {
@@ -93,7 +83,7 @@ $(document).on('turbolinks:load', function(e){
   }
 
   // set active_chatroom color
-  let active_chatroom = $(`[data-behavior='messages']`).data('chatroom-id');
+  var active_chatroom = $(`[data-behavior='messages']`).data('chatroom-id');
   if ($(`[data-behavior='editChatroom']`).length !== 0){
     active_chatroom = $('[data-behavior="editChatroom"]').data('chatroom-id');
   }
