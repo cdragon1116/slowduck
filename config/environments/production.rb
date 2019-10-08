@@ -99,5 +99,17 @@ Rails.application.configure do
   config.web_socket_server_url = "wss://cchattyme.herokuapp.com/cable" 
   config.action_cable.allowed_request_origins = ['https://cchattyme.herokuapp.com', 'http://cchattyme.herokuapp.com']
 
+  config.action_mailer.raise_delivery_errors = false #測試可改true，但如果已上線的話建議改回false
+  config.action_mailer.default_url_options = { host: ENV["WEB_PATH"]} #production的絕對網址
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "gmail.com",
+    authentication: "plain",
+    user_name: ENV["GMAIL_USERNAME"], #你的帳號
+    password: ENV["GMAIL_PASSWORD"], #信箱密碼 
+    enable_starttls_auto: true 
+  }
 end
 
