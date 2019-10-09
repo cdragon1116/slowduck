@@ -16,10 +16,8 @@ class Message < ApplicationRecord
 
   private
   def slugged_message
-    [
-      :body,
-      [:body, SecureRandom.hex[0, 8]]
-    ]
+    SecureRandom.hex[0, 8]
+  
   end
 
   def set_parent
