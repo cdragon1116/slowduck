@@ -39,7 +39,7 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { host: "http://localhost:3000" }
-  config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
+  config.action_mailer.smtp_settings = config_for(:application).symbolize_keys
 
   config.action_mailer.perform_caching = false
 
@@ -74,8 +74,8 @@ Rails.application.configure do
     port: 587,
     domain: "gmail.com",
     authentication: "plain",
-    user_name: 'postmaster@sandboxe9c7ccc0be2d42469a7991c83a3416d6.mailgun.org', #你的帳號
-    password: '4e375c7b61711e5bbc1a0d6bc506f8b4-19f318b0-63ed2945', #信箱密碼 
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_PASSWORD"],
     enable_starttls_auto: true
   }
 
