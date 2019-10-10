@@ -6,10 +6,10 @@
   </button>
 
 
-  <div class="nav-item mr-1 text-center small d-none d-md-block" id="notice">
+  <div class="nav-item mr-1 text-center" id="notice">
    <%= notice %>
   </div>
- <!-- Topbar Navbar -->
+  <!-- Topbar Navbar -->
   <ul class="navbar-nav ml-auto">
 
     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -21,9 +21,9 @@
       <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
         <form class="form-inline mr-auto w-100 navbar-search">
           <div class="input-group">
-            <input type="text" class="search-input form-control bg-light border-0 small" placeholder="輸入關鍵字..." aria-label="Search" aria-describedby="basic-addon2" >
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="search-btn btn btn-dark" type="button" >
+              <button class="btn btn-primary" type="button">
                 <i class="fas fa-search fa-sm"></i>
               </button>
             </div>
@@ -36,22 +36,22 @@
     <% if user_signed_in?%>
     <!-- Nav Item - Alerts -->
     <li class="nav-item dropdown no-arrow mx-1">
-      <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-bell fa-fw"></i>
         <!-- Counter - Alerts -->
         <span class="badge badge-danger badge-counter" data-behavior='unread-count'><%= current_user.notifications.unread.size if current_user.notifications.unread.size > 0 %></span>
       </a>
       <!-- Dropdown - Alerts -->
-      <div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-md-left dropdown-menu-xl-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="bell-alert">
-        <h6 class="bg-dark p-2 text-light text-center small mb-0">
-          未讀通知列表
+      <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="bell-alert">
+        <h6 class="dropdown-header bg-dark">
+          UnRead Notifications
         </h6>
         <div class="notification-list">
-        <% notifications.each do |notification| %>
-        <%= render "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}", notification: notification %>
+        <% current_user.notifications.unread.limit(10).each do |notification| %>
+          <%= render 'notifications/messages/mention', notification: notification %>
         <% end %>
         </div>
-        <%= link_to mark_as_read_notifications_path, method: :post, remote: true,  id:'mark-as-read', class:'dropdown-item text-center small text-gray-500' do %> 
+        <%= link_to mark_as_read_notifications_path, method: :post, remote: true, class:'dropdown-item text-center small text-gray-500' do %> 
           全部標示為已讀 
         <% end %>
       </div>
@@ -70,25 +70,25 @@
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
         <%= link_to edit_user_registration_path, class:'dropdown-item' do %>
             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-            個人資料
+            Profile
             <% end %>
           <a class="dropdown-item" href="#">
             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-            設定
+            Settings
           </a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-            登出
+            Logout
           </a>
         </div>
       </li>
     <% else%>
       <li class="nav-item">
-        <%= link_to '登入', new_user_session_path, class:'mx-2 nav-link'%>
+        <%= link_to 'Sign In', new_user_session_path, class:'mx-2 nav-link'%>
       </li>
       <li class="nav-item">
-        <%= link_to '註冊', new_user_registration_path, class:'mx-2 nav-link'%>
+        <%= link_to 'Sign Up', new_user_registration_path, class:'mx-2 nav-link'%>
       </li>
     <% end %>
 
@@ -97,9 +97,9 @@
   <!-- Topbar Search -->
   <div class="d-none d-sm-inline-block form-inline ml-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
     <div class="input-group">
-      <input type="text" class="search-input form-control bg-light border-0 small" placeholder="輸入關鍵字..." aria-label="Search" aria-describedby="basic-addon2" >
+      <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" id="search-input">
       <div class="input-group-append">
-        <button class="search-btn btn btn-dark" type="button">
+        <button class="btn btn-dark" type="button">
           <i class="fas fa-search fa-sm"></i>
         </button>
       </div>

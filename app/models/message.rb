@@ -4,20 +4,24 @@ class Message < ApplicationRecord
   belongs_to :chatroom
   belongs_to :parent, class_name: :Message, optional: true
   has_many :messages, class_name: :Message, foreign_key: :parent_id
-  has_many :notifications, as: :notifiable, dependent: :destroy 
+  has_many :notifications , dependent: :destroy
+
   has_many :message_tags, dependent: :destroy
   has_many :tags, through: :message_tags, dependent: :destroy
 
-  after_create :scan_tag, :scan_user, :set_parent, :set_color
+  after_create :scan_tag, :scan_user
+  after_create :set_parent, :set_color
 
   extend FriendlyId
   friendly_id :slugged_message, use: :slugged
-
+  
 
   private
   def slugged_message
-    SecureRandom.hex[0, 8]
-  
+    [
+      :body,
+      [:body, SecureRandom.hex[0, 8]]
+    ]
   end
 
   def set_parent
@@ -28,18 +32,15 @@ class Message < ApplicationRecord
 
   def set_color
     if self.parent_id == self.id
-      self.update(color: 0)
-    elsif Message.where(parent_id: self.parent_id).length == 2
       previous_color = (previous_parent == nil) ? 0 : previous_parent.color
-      self.update(color: (previous_color + 1) % 3 + 1)
-      Message.find(self.parent_id).update(color: self.color)
+      self.update(color: (previous_color + 1) % 4)
     else
       self.update(color: Message.find(self.parent_id).color)
     end
   end
 
   def previous_parent
-    self.chatroom.messages.where('id < ?', self.id ).where('id = parent_id').where('color > 0').last
+    self.chatroom.messages.where('id < ?', self.id ).where('id = parent_id').last
   end
 
   def scan_user
@@ -60,7 +61,7 @@ class Message < ApplicationRecord
     end
     self.update(body: new_ary.join(""))
     recipients.uniq.each do |recipient|
-      notification = Notification.create(recipient: recipient, actor: self.user, action: 'mention', notifiable: self)
+      Notification.create(recipient: recipient, actor: self.user, action: 'mention', notifiable: self, message_id: self.id)
     end
   end
 

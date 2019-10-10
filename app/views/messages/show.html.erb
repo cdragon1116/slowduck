@@ -1,20 +1,18 @@
-<div class="d-flex flex-nowrap w-100 align-items-stretch">
-  <div id="chatroom">
-    <div class="d-flex align-items-center shadow">
+<div id="chatroom">
+
+  <div class="chatroom_top">
+    <div class="d-flex align-items-center">
       <%= link_to chatroom_path(@chatroom), class:'nav-link' do  %>
-        <i class="fas fa-backspace fa text-dark"></i>
+        <i class="fas fa-backspace fa-lg text-dark"></i>
       <% end %>
-      <nav class='navbar align-items-start'>
-        <h3 class='h4 mb-0 mr-3'><%= @messages.first.user.username %>:</h3>
-        <p class='h4'>
-        <%= truncate( strip_tags(@messages.first.body), :length => 50, :escape => false) %>
-        </p>
-      </nav>
+      <nav class='navbar'>
+        <h3 class='mb-0 mr-3'><%= @messages.first.user.username %>:</h3><%= truncate( markdown(@messages.first.body), :length => 300, :escape => false) %>
+    </nav>
     </div>
 
     <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='message-box'>
       <div class="history-loader text-center">
-        <%= render 'shared/ducks' %>
+        <%= image_tag "duck.gif", style:"max-height:50px"%>
       </div>
       <div id="inner">
         <% @messages.each do |message| %>
@@ -22,19 +20,17 @@
         <% end %>
       </div>
     </div>
-
-    <div class="form">
-      <%= form_for [@chatroom, Message.new],remote: true, authenticity_token: true do |form| %>
-        <div class="form-group d-flex align-itmes-center mb-0">
-          <%= form.text_area :body, rows: 2, :class => 'input form-control',:placeholder => "有話快說！！！", autofocus: true %>
-          <%= form.hidden_field :user_id, :value => current_user.id %>
-          <%= form.hidden_field :chatroom_id, :value => @chatroom.id %>
-          <%= form.hidden_field :parent_id, :value => @message.id %>
-          <%= form.button :submit , :class => 'btn' do %>
-            <i class="fas fa-sign-in-alt text-dark"></i>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
   </div>
+
+  <div class="form">
+    <%= form_for [@chatroom, Message.new],remote: true, authenticity_token: true do |form| %>
+      <div class="form-group">
+        <%= form.text_area :body, rows: 2, :class => 'input form-control',:placeholder => "有話快說！！！", autofocus: true %>
+        <%= form.hidden_field :user_id, :value => current_user.id %>
+        <%= form.hidden_field :chatroom_id, :value => @chatroom.id %>
+        <%= form.hidden_field :parent_id, :value => @message.id %>
+      </div>
+    <% end %>
+  </div>
+
 </div>

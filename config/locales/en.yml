@@ -31,20 +31,3 @@
 
 en:
   hello: "Hello world"
-  activerecord:
-    errors:
-      models:
-        user:
-          attributes:
-            username:
-              blank: "使用者名稱不能為空白"
-            email:
-              blank: "信箱不能為空白"
-              taken: "信箱已被註冊"
-              invalid: "信箱格式不正確"
-            password:
-              blank: "密碼不能為空白" 
-              too_short: "密碼需要六位以上"
-            password_confirmation:
-              confirmation: "重複確認密碼不符"
-

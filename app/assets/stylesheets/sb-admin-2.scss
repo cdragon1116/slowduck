@@ -6273,7 +6273,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #333 !important;
+  background-color: #5a5c69 !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
@@ -10584,21 +10584,20 @@ a:focus {
 }
 
 .bg-login-image {
-  background: image-url("log-in.jpg");
+  background: url("https://image.flaticon.com/icons/svg/135/135077.svg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .bg-register-image {
-  background: image-url("sign-up.jpg");
+  background: url("https://image.flaticon.com/icons/svg/135/135077.svg");
   background-position: center;
-  background-size: cover;
+  background-size: 100%;
   background-repeat: no-repeat;
 }
 
 .bg-password-image {
-  background: image-url("sign-up.jpg");
+  background: url("https://image.flaticon.com/icons/svg/135/135077.svg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

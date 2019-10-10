@@ -3,16 +3,20 @@
   <head>
     <title>SlowDuck</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="turbolinks-cache-control" content="no-cache">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script>
+		$(function () {
+			$('#message_body').emoji({place: 'before'});
+		})
+	  </script>
   </head>
   <body id="page-top">
-    <!-- Page Wrapper -->
     <div class="d-flex" id="wrapper">
-      <%= render 'shared/sidebar' , group_chatrooms: @group_chatrooms, conversations: @conversations %> 
+
+      <%= render 'shared/sidebar' %> 
 
       <!-- Page Content -->
       <div id="content-wrapper" class="d-flex flex-column">
@@ -20,20 +24,13 @@
         <div class="content">
 
           <!-- Top-bar -->
-          <%= render 'shared/nav', notifications: @notifications %>
+          <%= render 'shared/nav' %>
           <!-- /Top-bar -->
 
           <!-- Begin-Page-Content -->
-          <div class="container-fluid">
+          <div class="container-fluid" style="position:relative;">
             <!-- Page Heading -->
-            <%= yield %>
-
-            <div class="loading-block d-none">
-              <div class="black"></div>
-              <div class="page-loader text-center">
-                <%= render 'shared/ducks' %>
-              </div>
-            </div>
+              <%= yield %>
 
           </div>
           <!-- End-of-Page-Content -->
@@ -46,5 +43,10 @@
 
     <%= render 'shared/logout' %>
     <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+     
+
   </body>
 </html>

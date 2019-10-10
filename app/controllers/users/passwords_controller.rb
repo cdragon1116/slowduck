@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::PasswordsController < Devise::PasswordsController
-  # layout 'account'
+  layout 'account'
   # GET /resource/password/new
   # def new
   #   super
@@ -9,8 +9,7 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # POST /resource/password
   # def create
-    # render html: params
-    # super
+  #   super
   # end
 
   # GET /resource/password/edit?reset_password_token=abcdef

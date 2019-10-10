@@ -3,15 +3,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">確定要登出嗎?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">請點選確認以登出</div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
-          <%= link_to '確認登出', destroy_user_session_path, method:'delete', class:'btn bg-prime', style:'color:white;' %>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <%= link_to 'Logout', destroy_user_session_path, method:'delete', class:'btn btn-primary', style:'color:white;' %>
           </a>
         </div>
       </div>
