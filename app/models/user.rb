@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :notifications, foreign_key: :recipient_id
 
 
+
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
     user = User.where(:google_token => access_token.credentials.token, :google_uid => access_token.uid ).first    
@@ -71,13 +72,25 @@ class User < ApplicationRecord
     self.chatrooms.where(status: nil)
   end
 
-  def one_on_one_chatrooms
+  def conversations
     display_room = self.chatroom_users.where(display: 1).pluck(:chatroom_id)
-    self.chatrooms.where(status: '1on1').where(id: display_room)
+    chatrooms.where(status: '1on1').where(id: display_room)
   end
 
   def resize_image(size = 60)
     self.image.variant(resize: "#{size}x#{size}").processed
   end
 
+  def relative_users
+    chatroom_ids = self.chatrooms.map{|room| room.id}
+    User.includes(:image_attachment).joins(:chatroom_users).where('chatroom_id IN (?) ', chatroom_ids).distinct
+  end
+
+  def is_online
+    self.update(online: true)
+  end
+
+  def is_offline
+    self.update(online: false)
+  end
 end

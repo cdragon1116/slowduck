@@ -1,7 +1,11 @@
-<div class="container">
-  <h1>Editing Chatroom</h1>
-  <%= render 'form', chatroom: @chatroom %>
-  <%= link_to 'Show', @chatroom %> |
-  <%= link_to 'Back', chatrooms_path %> |
-  <%= link_to 'Destroy', chatroom_path(@chatroom), method:'delete', data:{confirm:'你確定嗎'} %>
-</div>
+
+
+  <%= link_to chatroom_path(@chatroom), class:'nav-link m-4 d-inline-block' do  %>
+    <i class="fas fa-backspace fa-lg text-dark"></i>
+  <% end %>
+  <div class="container px-5">
+    <div>
+      <%= render 'form', chatroom: @chatroom %>
+      <%= render 'chatroom_users/form', chatroom: @chatroom, chatroom_user: @chatroom_user, chatroom_users: @chatroom_users %>
+    </div>
+  </div>

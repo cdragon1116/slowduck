@@ -1,30 +1,32 @@
 class ChatroomUsersController < ApplicationController
   before_action :set_chatroom
   def new
-    @chatroom_users = @chatroom.users
     @chatroom_user = ChatroomUser.new
+    @chatroom_users = @chatroom.users
   end
 
   def create
-    @user_email = chatroom_user_params[:user][:email]
-    if @user = User.find_by(email: @user_email)
-      @chatroom.chatroom_users.where(user_id: @user).first_or_create
-      redirect_to new_chatroom_chatroom_user_path(@chatroom.id)
-    else 
-      redirect_to new_chatroom_chatroom_user_path(@chatroom.id), notice: "沒有此用戶"
+    user_list = scan_users(chatroom_user_params[:user][:email])
+    user_list.each do |user|
+      @user =  User.find_by(email: user) || User.find_by(username: user)
+      @chatroom.chatroom_users.where(user_id: @user).first_or_create if @user
+      Notification.create(recipient: @user, actor: current_user, action: 'invite', notifiable: @chatroom)
     end
+    redirect_to edit_chatroom_path(@chatroom.slug)
   end
 
   def show
   end
 
   def destroy
-    if find_admin != current_user
-      redirect_to new_chatroom_chatroom_user_path(@chatroom.id) , notice:"You're not admin"
+    @chatroom_user = ChatroomUser.find_by(chatroom_id: @chatroom.id ,user_id: params[:id])
+    if @chatroom.users.size == 1
+      @chatroom.destroy
+      redirect_to root_path
     else
-      @chatroom_user = ChatroomUser.find_by(chatroom_id: @chatroom.id ,user_id: params[:id])
       @chatroom_user.destroy
-      redirect_to new_chatroom_chatroom_user_path(@chatroom.id)  
+      Notification.create(recipient: @chatroom_user.user, actor: current_user, action: 'kickout', notifiable: @chatroom)
+      redirect_to edit_chatroom_path(@chatroom.slug)  
     end
   end
 
@@ -38,5 +40,7 @@ class ChatroomUsersController < ApplicationController
     def find_admin
       ChatroomUser.find_by(chatroom_id: @chatroom.id ,admin: true).user
     end
-
+    def scan_users(string)
+      string.split(" ").map{ |user| user.strip }
+    end
 end

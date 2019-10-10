@@ -1,4 +1,12 @@
 $(document).on("turbolinks:load", function() {
+  // textrea on focus scroll bottom
+  $('#message_body').on('focus', function(){
+    element = $('[data-behavior=\'messages\']');
+    element.animate({
+      scrollTop: element.prop('scrollHeight')
+    }, 200);
+  })
+
   // parent message hover with group
   $(document).on("mouseover", '.message',function(e){
     let parent_id = this.dataset.parent

@@ -17,17 +17,26 @@
 //= require jquery_ujs
 //= require jquery.atwho
 //= require bootstrap-sprockets
-//= require popper
+//= require popper 
 //= require_tree .
 //= require_tree ./channels
 //
 
-$(document).on('turbolinks:load', function(){
-  toggleLoad()
-  $.rails.refreshCSRFTokens();
+// full-page loader
+$(function() {
+    document.addEventListener('turbolinks:request-start', function() {
+  $('.loading-block').removeClass('d-none')
+    });
+
+    document.addEventListener("turbolinks:request-end", function(){
+  $('.loading-block').addClass('d-none')
+    });
+});
+
+$(document).on('turbolinks:load', function(e){
 
   // Toggle the side navigation
-  $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+  $("#sidebarToggleTop").on('click', function(e) {
     $("body").toggleClass("sidebar-toggled");
     $(".sidebar").toggleClass("toggled");
     $(".form").toggleClass("sidebar-toggled");
@@ -40,11 +49,10 @@ $(document).on('turbolinks:load', function(){
   $(window).resize(function() {
     if ($(window).width() < 768) {
       $('.sidebar .collapse').collapse('hide');
-      $('#accordionSidebar').addClass('toggled');
       $('#right-panel').removeClass('active');
     };
   });
-  
+
   if ($(window).width() < 768) {
     $('#accordionSidebar').addClass('toggled');
   }
@@ -56,16 +64,6 @@ $(document).on('turbolinks:load', function(){
         delta = e0.wheelDelta || -e0.detail;
       this.scrollTop += (delta < 0 ? 1 : -1) * 30;
       e.preventDefault();
-    }
-  });
-
-  // Scroll to top button appear
-  $(document).on('scroll', function() {
-    var scrollDistance = $(this).scrollTop();
-    if (scrollDistance > 100) {
-      $('.scroll-to-top').fadeIn();
-    } else {
-      $('.scroll-to-top').fadeOut();
     }
   });
 
@@ -84,12 +82,7 @@ $(document).on('turbolinks:load', function(){
     return false
   })
 
-  // Keypress ESC goto Index
-  // $(window).on('keyup', function(e){
-    // if (e.keyCode == 27) document.location.href="/";
-    // return false
-  // })
-
+  // Close collapse panel when document on click
   if ($(window).width() > 768) {
     $(document).click(function(){
       $('.panel-collapse.in')
@@ -100,20 +93,18 @@ $(document).on('turbolinks:load', function(){
   }
 
   // set active_chatroom color
-  var active_chatroom;
-  var active_chatroom = $(`[data-behavior='messages']`).data('chatroom-id');
-  var active_link = $(`[data-behavior='chatroom-link'][data-chatroom-id='${active_chatroom}']`).parent()
-  active_link.css('background-color', '#333')
-
+  let active_chatroom = $(`[data-behavior='messages']`).data('chatroom-id');
+  if ($(`[data-behavior='editChatroom']`).length !== 0){
+    active_chatroom = $('[data-behavior="editChatroom"]').data('chatroom-id');
+  }
+  let active_link = $(`[data-behavior='chatroom-link'][data-chatroom-id='${active_chatroom}']`)
+  active_link.parent().css('background-color', '#fec52a')
+  active_link.parent().children(1).css({'color':'#333', 'font-weight': 700})
+  active_link.css({'color':'#333', 'font-weight': 700})
 
 })
- 
-function toggleLoad() {
-    $("#chatroom-loader").removeClass('loader')
-}
 
-
-(function ($) {
+$(function ($) {
 	$.fn.emoji = function (params) {
 		var defaults = {
 			button: '&#x1F642;',
@@ -183,5 +174,4 @@ function toggleLoad() {
 		return this;
 	};
 }
-)(jQuery);
-
+);

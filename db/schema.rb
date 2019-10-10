@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_175228) do
+ActiveRecord::Schema.define(version: 2019_10_07_144020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2019_09_30_175228) do
     t.datetime "updated_at", null: false
     t.datetime "last_read_at"
     t.boolean "display", default: true
+    t.boolean "online", default: true
     t.index ["chatroom_id"], name: "index_chatroom_users_on_chatroom_id"
     t.index ["user_id"], name: "index_chatroom_users_on_user_id"
   end
@@ -110,16 +111,12 @@ ActiveRecord::Schema.define(version: 2019_09_30_175228) do
     t.string "notifiable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "message_id"
-    t.index ["message_id"], name: "index_notifications_on_message_id"
   end
 
   create_table "tags", force: :cascade do |t|
     t.string "tagname"
-    t.bigint "message_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_tags_on_message_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -135,6 +132,7 @@ ActiveRecord::Schema.define(version: 2019_09_30_175228) do
     t.string "fb_token"
     t.string "google_uid"
     t.string "google_token"
+    t.integer "online", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -147,6 +145,4 @@ ActiveRecord::Schema.define(version: 2019_09_30_175228) do
   add_foreign_key "message_tags", "tags"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
-  add_foreign_key "notifications", "messages"
-  add_foreign_key "tags", "messages"
 end

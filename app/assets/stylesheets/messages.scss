@@ -2,29 +2,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-a.mention-at{
-    background-color: #4e73df;
-}
-a.mention-tag{
-    background-color: #888;
-}
-a.mention-user{
-    background-color: #4e73df;
-}
 a.mention-link{
     margin: 1px;
     display:inline-block;
     border-radius: 5px;
-    color: #eee;
     padding: 4px 5px;
     font-size: 0.9rem;
+    font-weight: 500;
 }
-.mention-link:hover{
+a.mention-tag{
+    color: #eee;
+    background-color: #888;
+}
+a.mention-user{
+  color: #555;
+  background-color: #fec52a;
+}
+.mention-tag:hover{
     color: #fff !important;
     text-decoration:none;
+}
+.mention-user:hover{
+    color: #111 !important;
 
 }
-
 .msg-hover{
   background-color: #eee;
 }
@@ -39,9 +40,6 @@ a.mention-link{
     position: relative;
 }
 
-.form-group{
-    position: relative;
-}
 
 #emoji-list{
     position: absolute;

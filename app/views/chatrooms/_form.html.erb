@@ -1,8 +1,7 @@
-<%= form_with(model: chatroom, local: true) do |form| %>
+<%= form_for chatroom, remote: true do |form| %>
   <% if chatroom.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(chatroom.errors.count, "error") %> prohibited this chatroom from being saved:</h2>
-
       <ul>
       <% chatroom.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,17 +9,9 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="form-group row">
-  <%= form.label :name, 'name' ,:class => 'col-form-label col-xl-2' %>
-  <%= form.text_field :name, :class => 'form-control col-xl-10' %>
+  <div class="row flex-row flex-nowrap align-items-center mb-5" data-behavior='editChatroom' data-chatroom-id='<%= chatroom.id %>'>
+      <h3 class='text-dark'><%= chatroom.name %></h3>
+      <a href="#" class="mx-4 text-dark small" id="editChatroomName">編輯</a>
   </div>
-    <div class="form-group row">
-    <%= form.label :public, 'status' ,:class => 'col-form-label col-xl-2' %>
-  </div>
-
-<div class="form-group row">
-  <%= form.submit :class => 'btn class_name' %>
-</div>
 <% end %>
 

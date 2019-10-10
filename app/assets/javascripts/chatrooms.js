@@ -2,12 +2,9 @@ $(document).on("turbolinks:load", function() {
 
   // submit textarea when enter
   $('#new_message').on("keypress", function(e) {
-    
-    if (e && e.keyCode === 13) {
-      if (!e.shiftKey) {
+    if (e && e.keyCode === 13 && !e.shiftKey)  {
         e.preventDefault();
         return $(this).submit();
-      }
     }
   });
 
@@ -23,8 +20,8 @@ $(document).on("turbolinks:load", function() {
   $('[data-behavior=\'messages\']').on('scroll', function() {
     return scrolled = true;
   });
-
-  // enable keying tab in textarea
+  
+// enable keying tab in textarea
   $('textarea').on('keydown', function() {
     var e, s, v;
     if (event.keyCode === 9) {
@@ -46,22 +43,33 @@ $(document).on("turbolinks:load", function() {
 
   // textarea mention-tag trigger
   var chatroom = $("[data-behavior='messages']").data('chatroom-id') 
-  atwho_users('textarea', chatroom)
-  atwho_users('#search-input', chatroom)
-  atwho_tags('textarea', chatroom)
-  atwho_tags('#search-input', chatroom)
+  var edit_chatroom = $("[data-behavior='editChatroom']").data('chatroom-id')
+  atwho_users('#message_body', chatroom)
+  atwho_users('.search-input', chatroom)
+  atwho_tags('#message_body', chatroom)
+  atwho_tags('.search-input', chatroom)
+  atwho_relative_users('#chatroom_user_user_email', edit_chatroom)
 
   // append search box result
-  $('#search-input').on('keypress', function(e){
-    let q = encodeURI($('#search-input').val()).trim()
-    if (e && e.keyCode === 13 && q !== "" ) {
+  $('.search-input').on('keypress', function(e){
+    let input = $(this).parents('.input-group').children('input.search-input')
+    let q = encodeURI(input.val().trim())
+    if (e.keyCode === 13 && q !== "" ) {
       if ( q !== "@" | q !== "#" ){
-        $('#search-input').val('')
+        $(input).val('')
         request = { query: decodeURIComponent(q) }
         search_messages(request , chatroom)
-        return false
+        $('.dropdown-menu').collapse('hide')
       }
     }
+  })
+  $('.search-btn').on('click', function(e){
+    let input = $(this).parents('.input-group').children('input.search-input')
+    let q = encodeURI(input.val().trim())
+    $(input).val('')
+    request = { query: decodeURIComponent(q) }
+    search_messages(request , chatroom)
+    $('.dropdown-menu').collapse('hide')
   })
 
   // scroll to see history message
@@ -97,21 +105,46 @@ $(document).on("turbolinks:load", function() {
     e.preventDefault()
   })
   
+  $(function () {
+    $('#message_body').emoji({place: 'before'});
+  })
+
 
 });
 
+$(document).on('click', '#editChatroomName', function(e){
+  e.preventDefault()
+  var editForm = $('[data-behavior="editChatroom"]')
+  var originName = $('[data-behavior="editChatroom"] h3').html()
+  editForm.html(`
+    <input class="form-control col-12 col-md-4 mx-2" type="text" value="${originName}" name="chatroom[name]" id="chatroom_name" />
+    <input type="submit" name="commit" value="更新" class="btn btn-dark btn-sm small" id="updateChatroom" data-disable-with="更新" />`)
+})
 
 function atwho_users(bind_object, chatroom){
   $(bind_object).atwho({ at:"@", 
     searchKey: 'username',
     data: null, 
     insertTpl: "@${username}, " ,
-    displayTpl: "<li>${username}-${email}</li>",
+    displayTpl: "<li>${username} <small>${email}</small></li>",
     callbacks: {
       remoteFilter: function(query, callback){
-        q = $(bind_object).val().split(" ").filter( x => x[0] === '@').slice(-1)[0].slice(1)
-        request = { query: decodeURIComponent(q) }
-        $.get(`/api/v2/chatrooms/${chatroom}/get_users.json?` + jQuery.param(request), function(data){
+        $.get(`/api/v2/chatrooms/${chatroom}/get_users.json?`, function(data){
+          callback(data);
+        });
+      }
+    }
+  });
+}
+function atwho_relative_users(bind_object, chatroom){
+  $(bind_object).atwho({ at:"@", 
+    searchKey: 'email',
+    data: null, 
+    insertTpl: "${email}" ,
+    displayTpl: "<li>${image}${username}-<small>${email}</small></li>",
+    callbacks: {
+      remoteFilter: function(query, callback){
+        $.get(`/api/v2/chatrooms/${chatroom}/get_relative_users.json?`, function(data){
           callback(data);
         });
       }
@@ -127,9 +160,7 @@ function atwho_tags(bind_object, chatroom){
     displayTpl: "<li>${tagname}</li>",
     callbacks: {
       remoteFilter: function(query, callback){
-        q = $(bind_object).val().split(" ").filter( x => x[0] === '#').slice(-1)[0]
-        request = { query: decodeURIComponent(q) }
-        $.get(`/api/v2/chatrooms/${chatroom}/get_tags.json?` + jQuery.param(request), function(data){
+        $.get(`/api/v2/chatrooms/${chatroom}/get_tags.json?`, function(data){
           callback(data);
         });
       }

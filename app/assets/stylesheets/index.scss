@@ -1,0 +1,30 @@
+// index-page welcome-text
+.welcome-text{
+  text-align: center;
+  margin: auto;
+  padding-top: 10vh;
+}
+.welcome-page {
+  background-color: #fff;
+  text-align:center;
+  margin: auto;
+  padding-top: 20vh;
+}
+
+.brand-logo.index{
+  width: 85%;
+}
+
+.duck-index{
+  width: 70%;
+}
+
+@media (min-width: 768px) {
+  .index.brand-logo{
+    width: 500px;
+  }
+  .duck-index{
+    width: 200px;
+  }
+}
+

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :chatrooms do
     resources :chatroom_users 
     resources :messages
@@ -9,9 +10,11 @@ Rails.application.routes.draw do
       post :hide_chatroom
     end
   end 
+
   devise_for :users, controllers: {
-    sessions: 'users/sessions',
+    # sessions: 'users/sessions',
     registrations: 'users/registrations',
+    # passwords: 'users/passwords',
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
@@ -21,6 +24,7 @@ Rails.application.routes.draw do
     namespace :v2 do
       resources :chatrooms ,only:[:show] do 
         member do 
+          get :get_relative_users
           get :get_users
           get :get_tags
           get :get_messages
@@ -29,6 +33,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
   resources :notifications, only: [:index] do
     post :mark_as_read, on: :collection
     post :mark_as_read, on: :member

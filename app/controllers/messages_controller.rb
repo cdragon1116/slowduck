@@ -1,14 +1,15 @@
 class MessagesController < ApplicationController
-  before_action :set_chatroom
   before_action :authenticate_user!
+  before_action :set_chatroom
+  before_action :find_message, only: [:show]
   include MessagesHelper
 
   def index
     render html:params
   end
   def show
-    find_message
-    @messages = @message.messages.order(created_at: :desc).reverse
+    @message.notifications.where(recipient_id: current_user.id ).update(read_at: Time.zone.now)
+    @messages = @message.messages.includes(:user, :parent, :chatroom).order(created_at: :desc).reverse
   end
 
   def create
@@ -16,10 +17,8 @@ class MessagesController < ApplicationController
     if message.save
       if message.chatroom.status == "1on1"
         message.chatroom.chatroom_users.update(display: true)
-        MessageRelayJob.perform_later(message)
-      else
-        MessageRelayJob.perform_later(message)
       end
+        MessageRelayJob.perform_later(message, current_user)
     end
   end
 
