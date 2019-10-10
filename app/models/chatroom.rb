@@ -41,9 +41,6 @@ class Chatroom < ApplicationRecord
 
   private
   def slugged_chatroom
-    [
-      :name,
-      [:name, SecureRandom.hex[0, 8]]
-    ]
+    SecureRandom.hex[0, 8]
   end
 end

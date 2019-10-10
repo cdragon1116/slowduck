@@ -12,7 +12,7 @@ class ChatroomUsersController < ApplicationController
       @chatroom.chatroom_users.where(user_id: @user).first_or_create if @user
       Notification.create(recipient: @user, actor: current_user, action: 'invite', notifiable: @chatroom)
     end
-    redirect_to edit_chatroom_path(@chatroom.id)
+    redirect_to edit_chatroom_path(@chatroom.slug)
   end
 
   def show
@@ -26,7 +26,7 @@ class ChatroomUsersController < ApplicationController
     else
       @chatroom_user.destroy
       Notification.create(recipient: @chatroom_user.user, actor: current_user, action: 'kickout', notifiable: @chatroom)
-      redirect_to edit_chatroom_path(@chatroom.id)  
+      redirect_to edit_chatroom_path(@chatroom.slug)  
     end
   end
 
