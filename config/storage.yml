@@ -2,19 +2,19 @@ test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
 
-local:
+local: 
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
 google:
   service: GCS
-  project: cchatty 
+  project: slowduck 
   credentials: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'].as_json %>
-  bucket: chatty-production 
+  bucket: slowduck19production
 
 google_dev:
   service: GCS
-  project: cchatty 
-  credentials: <%= Rails.root.join("config/secrets/flowdock.json") %>
-  bucket: chatty-production 
+  project: slowduck 
+  credentials: <%= Rails.root.join("config/secrets/slowduck.json") %>
+  bucket: slowduck19production
 
