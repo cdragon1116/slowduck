@@ -27,7 +27,7 @@ $(document).on("turbolinks:load", function() {
   let msgs = $(`[data-user="${uid}"]`)
   $.each(msgs, function(i, msg){
     $(msg).children('.edit_message_btn').removeClass('d-none')
-    a = $(msg).find('.dropdown-menu').html()
+    $(msg).find('.dropdown-menu').html()
   })
 })
 
@@ -37,34 +37,55 @@ $(document).on('submit', '#new_message',function(){
     let msgs = $(`[data-user="${uid}"]`)
     let last_msg = $(msgs[msgs.length - 1])
     last_msg.children('.edit_message_btn').removeClass('d-none')
-    a = $(last_msg).find('.dropdown-menu form').addClass('d-none')
+    $(last_msg).find('.dropdown-menu form').addClass('d-none')
   }, 600)
 })
+
 
 $(document).on('submit', 'form', function(e){
   let msg_id = $(e.currentTarget).parents('.message').data('message')
   setTimeout(function(){
     let msg = $(`[data-message=${msg_id}]`)
     $(msg).children('.edit_message_btn').removeClass('d-none')
-    a = $(msg).find('.dropdown-menu form').addClass('d-none')
+    $(msg).find('.dropdown-menu form').addClass('d-none')
   }, 800)
 })
 
+
 // edit message
-$(document).on('click', '.edit_message_btn', function(){
+$(document).on('click', '.edit_message_btn', function(e){
+  e.preventDefault()
+  let msgs = $(`.message`)
+  $.each(msgs, function(i, msg){
+    reset_edit_message(msg)
+  })
+  
   let id = $(this).parent().data('message')
-  $(`[data-message="${id}"] .flex-grow-1 .message-body`).empty()
+  $(`[data-message="${id}"] .flex-grow-1 .message-body`).hide()
   $(`#edit_message_${id}`).toggleClass('d-none')
   $(this).parent().children('.update_message_btn').removeClass('d-none')
   $(this).addClass('d-none')
+  return false
 })
 
-$(document).on('click', '.update_message_btn', function(){
+$(document).on('click', '.update_message_btn', function(e){
   let id = $(this).parent().data('message')
   let input_value = $(`#edit_message_${id} #message_body`).val()
   if ( input_value != '' ){
     $(`#edit_message_${id}`).submit()
+    return false
   }
+})
+
+$(document).on('click', '#message_body', function(){
+  return false
+})
+
+$(document).on('click', function(){
+  let msgs = $(`.message`)
+  $.each(msgs, function(i, msg){
+    reset_edit_message(msg)
+  })
 })
 
 $(document).on('keypress', '#message_body', function(e){
@@ -76,3 +97,9 @@ $(document).on('keypress', '#message_body', function(e){
   }
 })
 
+function reset_edit_message(msg){
+  $(msg).find('.flex-grow-1 .message-body').show()
+  $(msg).find('.edit-message-form').addClass('d-none')
+  $(msg).find('.update_message_btn').addClass('d-none')
+  $(msg).find('.edit_message_btn').removeClass('d-none')
+}

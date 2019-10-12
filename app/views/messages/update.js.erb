@@ -1,6 +1,3 @@
-body = "<%= escape_javascript render(:partial => "body", :locals => { :message => @message }) %>"
-$('[data-message="<%= @message.id%>"] .flex-grow-1 .message-body').html(body)
-
 $('#edit_message_<%= @message.id%>').addClass('d-none')
 $('[data-message="<%= @message.id%>"] .update_message_btn').addClass('d-none')
 $('[data-message="<%= @message.id%>"] .edit_message_btn').removeClass('d-none')
