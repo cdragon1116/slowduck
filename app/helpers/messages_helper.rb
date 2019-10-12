@@ -19,4 +19,13 @@ module MessagesHelper
       link_to "<i class='fa fa-share #{color(message.color)} mt-3' aria-hidden='true'></i>".html_safe , message_path(message.parent.slug)
     end
   end
+
+  def process(message)
+    if message.updated_at.to_s == message.created_at.to_s
+      markdown(scan(message.body))
+    else
+      update_time = message.updated_at.strftime(' %H:%M')
+      markdown(scan(message.body)) + "<span class='edited'> - 已編輯#{update_time}</span>".html_safe
+    end
+  end
 end

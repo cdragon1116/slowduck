@@ -8,11 +8,17 @@ class Message < ApplicationRecord
   has_many :message_tags, dependent: :destroy
   has_many :tags, through: :message_tags, dependent: :destroy
 
-  after_create :set_parent, :set_color
   include Taggable
+  after_create :set_parent, :set_color
+  before_update :clear_associations
 
   extend FriendlyId
   friendly_id :slugged_message, use: :slugged
+
+  def clear_associations
+    notifications.destroy_all
+    message_tags.destroy_all
+  end
 
   def initialize_messages
     messages.includes(:parent, :chatroom, :user => :image_attachment).order(created_at: :desc).reverse

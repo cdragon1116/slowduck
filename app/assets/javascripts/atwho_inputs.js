@@ -2,10 +2,12 @@ $(document).on("turbolinks:load", function() {
   // textarea mention-tag trigger
   let chatroom = $("[data-behavior='messages']").data('chatroom-id') 
   let edit_chatroom = $("[data-behavior='editChatroom']").data('chatroom-id')
-  atwho_users('#message_body', chatroom)
+  atwho_users('#message_input', chatroom)
   atwho_users('.search-input', chatroom)
-  atwho_tags('#message_body', chatroom)
+  atwho_users('.edit_input', chatroom)
+  atwho_tags('#message_input', chatroom)
   atwho_tags('.search-input', chatroom)
+  atwho_tags('.edit_input', chatroom)
   atwho_relative_users('#chatroom_user_user_email', edit_chatroom)
 });
 

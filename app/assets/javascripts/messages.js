@@ -22,4 +22,31 @@ $(document).on("turbolinks:load", function() {
     $(msg).removeClass('msg-hover')
     })
   });
+
+})
+
+// edit message
+$(document).on('click', '.edit_message_btn', function(){
+  let id = $(this).parent().data('message')
+  $(`[data-message="${id}"] .flex-grow-1 .message-body`).empty()
+  $(`#edit_message_${id}`).toggleClass('d-none')
+  $(this).parent().children('.update_message_btn').removeClass('d-none')
+  $(this).addClass('d-none')
+})
+
+$(document).on('click', '.update_message_btn', function(){
+  let id = $(this).parent().data('message')
+  let input_value = $(`#edit_message_${id} #message_body`).val()
+  if ( input_value != '' ){
+    $(`#edit_message_${id}`).submit()
+  }
+})
+
+$(document).on('keypress', '#message_body', function(e){
+  if (e.keyCode === 13){
+    if (!e.shiftKey){
+    e.preventDefault()
+      $(e.currentTarget).parent().submit()
+    }
+  }
 })

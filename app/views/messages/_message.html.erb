@@ -1,4 +1,5 @@
 <div class="message icon navbar align-items-start flex-nowrap pl-5" data-message="<%= message.id%>" data-parent="<%= message.parent.id%>">
+
   <div class="navbar flex-nowrap align-items-start p-0">
     <%= message_icon(message) %>
     <%= render 'shared/user_info', user: message.user, current_user: current_user %>
@@ -9,7 +10,16 @@
       <%= message.user.username%>
     </span>
     <div class="message-body">
-      <%= markdown(message.body) %>
+      <%= process(message) %>
     </div>
+
+    <%= form_for message, remote: true, html: { class: 'edit-message-form d-none' } do |form| %>
+      <%= form.text_area :body, :class => 'edit_input form-control col-xl-10' %>
+      <% end %>
   </div>
+
+  <% if message.user == current_user %>
+    <button class='update_message_btn btn d-none'><i class="fas fa-check"></i></button>
+    <button class='edit_message_btn btn'><i class="fas fa-edit"></i></button>
+  <% end %>
 </div>

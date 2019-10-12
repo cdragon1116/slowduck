@@ -1,10 +1,15 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_new_conversation, only: [:show]
-  before_action :find_message, only: [:show]
-  include MessagesHelper
+  before_action :find_message, only: [:show, :update]
 
   def index
+  end
+
+  def update
+    unless @message.update(message_params)
+      @message
+    end
   end
 
   def show
@@ -29,7 +34,7 @@ class MessagesController < ApplicationController
   end
 
   def find_message
-    @message = Message.friendly.find(params[:id])
+    @message = Message.find(params[:id])
   end
 
   def set_new_conversation

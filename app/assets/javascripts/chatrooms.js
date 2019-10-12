@@ -21,19 +21,6 @@ $(document).on("turbolinks:load", function() {
     return scrolled = true;
   });
   
-  // enable keying tab in textarea
-  $('textarea').on('keydown', function() {
-    let e, s, v;
-    if (event.keyCode === 9) {
-      v = $(this).val();
-      s = $(this).selectionStart;
-      e = $(this).selectionEnd;
-      $(this).val(v.substring(0, s) + '\u0009' + v.substring(e));
-      $(this).selectionStart = $(this).selectionEnd = s + 1;
-      return false;
-    }
-  });
-
   // Right Panel Toggle Button
   $('#rightPanelCollapse').on('click', function () {
     $('#right-panel').toggleClass('active');
@@ -70,7 +57,7 @@ $(document).on("turbolinks:load", function() {
 
   // emoji
   $(function () {
-    $('#message_body').emoji({place: 'before'});
+    $('#message_input').emoji({place: 'before'});
   })
 
 
