@@ -112,6 +112,9 @@ a.dropdown-item:active{
 }
 
 @media (min-width: 768px) {
+  body{
+    overflow-y: hidden;
+  }
   .sidebar .tab-menu-link{
     position: absolute;
     left: 10rem;

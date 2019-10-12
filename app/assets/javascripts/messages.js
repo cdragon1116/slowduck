@@ -12,17 +12,33 @@ $(document).on("turbolinks:load", function() {
     let parent_id = this.dataset.parent
     msgs = $(`[data-parent='${parent_id}']`)
     $.each(msgs, function(i, msg){
-    $(msg).addClass('msg-hover')
+      $(msg).addClass('msg-hover')
     })
   });
   $(document).on("mouseout", '.message',function(e){
     let parent_id = this.dataset.parent
     msgs = $(`[data-parent='${parent_id}']`)
     $.each(msgs, function(i, msg){
-    $(msg).removeClass('msg-hover')
+      $(msg).removeClass('msg-hover')
     })
   });
 
+  let uid = document.cookie.split(/(=)/)[2]
+  let msgs = $(`[data-user="${uid}"]`)
+  $.each(msgs, function(i, msg){
+    $(msg).children('.edit_message_btn').removeClass('d-none')
+    a = $(msg).find('.dropdown-menu').html()
+  })
+})
+
+$(document).on('submit', '#new_message',function(){
+  setTimeout(function(){
+    let uid = document.cookie.split(/(=)/)[2]
+    let msgs = $(`[data-user="${uid}"]`)
+    let last_msg = $(msgs[msgs.length - 1])
+    last_msg.children('.edit_message_btn').removeClass('d-none')
+    a = $(last_msg).find('.dropdown-menu form').addClass('d-none')
+  }, 500)
 })
 
 // edit message
@@ -45,8 +61,9 @@ $(document).on('click', '.update_message_btn', function(){
 $(document).on('keypress', '#message_body', function(e){
   if (e.keyCode === 13){
     if (!e.shiftKey){
-    e.preventDefault()
+      e.preventDefault()
       $(e.currentTarget).parent().submit()
     }
   }
 })
+
