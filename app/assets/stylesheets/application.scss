@@ -74,7 +74,7 @@ a.dropdown-item:active{
 }
 // sidebar
 .sidebar{
-  height: 100vh;
+  min-height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #333;
@@ -117,9 +117,6 @@ a.dropdown-item:active{
     top: 0;
   }
 
-  body {
-    overflow-y: hidden;
-  }
   .sidebar{
     min-width: 14rem;
   }
