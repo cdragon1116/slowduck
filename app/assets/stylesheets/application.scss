@@ -160,7 +160,7 @@ a.dropdown-item:active{
   position: absolute;
   display:block;
   background-color: rgba(256,256,256,.8);
-  height: 100vh;
+  height: calc(100vh - 4.375rem);
   width: 100%;
   top: 0;
   left: 0;

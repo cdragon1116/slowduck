@@ -40,10 +40,10 @@ class Message < ApplicationRecord
       update(color: 0)
     elsif Message.where(parent_id: parent_id).length == 2
       previous_color = (previous_parent.nil?) ? 0 : previous_parent.color
-      update(color: (previous_color + 1) % 3 + 1)
-      Message.find(parent_id).update(color: color)
+      update_column(:color, (previous_color + 1) % 3 + 1)
+      Message.find(parent_id).update_column(:color, color)
     else
-      update(color: Message.find(parent_id).color)
+      update_column(:color,  Message.find(parent_id).color)
     end
   end
 

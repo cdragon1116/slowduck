@@ -6,7 +6,8 @@ class MessageRelayJob < ApplicationJob
       message:  ApplicationController.renderer.render(partial: 'messages/message_broadcast', locals: {message: message, current_user: current_user}),
       username: message.user.username,
       body: message.body,
-      chatroom_id: message.chatroom_id
+      chatroom_id: message.chatroom_id,
+      message_id: message.id,
     }
   end
 end

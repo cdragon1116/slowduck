@@ -74,7 +74,7 @@ $(document).on('turbolinks:load', function(e){
     return false;
   });
 
-  Close collapse panel when document on click
+  //Close collapse panel when document on click
   if ($(window).width() > 768) {
     $(document).click(function(){
       $('.panel-collapse.in')

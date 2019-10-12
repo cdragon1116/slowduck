@@ -38,7 +38,16 @@ $(document).on('submit', '#new_message',function(){
     let last_msg = $(msgs[msgs.length - 1])
     last_msg.children('.edit_message_btn').removeClass('d-none')
     a = $(last_msg).find('.dropdown-menu form').addClass('d-none')
-  }, 500)
+  }, 600)
+})
+
+$(document).on('submit', 'form', function(e){
+  let msg_id = $(e.currentTarget).parents('.message').data('message')
+  setTimeout(function(){
+    let msg = $(`[data-message=${msg_id}]`)
+    $(msg).children('.edit_message_btn').removeClass('d-none')
+    a = $(msg).find('.dropdown-menu form').addClass('d-none')
+  }, 800)
 })
 
 // edit message

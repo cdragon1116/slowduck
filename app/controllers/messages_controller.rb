@@ -7,9 +7,8 @@ class MessagesController < ApplicationController
   end
 
   def update
-    unless @message.update(message_params)
-      @message
-    end
+    @message.update(message_params)
+    MessageRelayJob.perform_later(@message, current_user)
   end
 
   def show
