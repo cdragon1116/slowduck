@@ -36,6 +36,7 @@ function search_messages(request, chatroom){
   if (!$('#right-panel').hasClass('active')){
     $('#right-panel').addClass('active');
     $('#chatroom').addClass('active');
+    $('.form').addClass('active');
   }
   $('.result-loader').removeClass("d-none");
   $.get(`/api/v2/chatrooms/${chatroom}/get_messages.json?` + jQuery.param(request))

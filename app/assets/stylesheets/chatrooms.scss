@@ -52,6 +52,9 @@
     padding: 10px;
   }
 }
+.form.active{
+  width: calc(60vw - 14rem);
+}
 .form.sidebar-toggled{
   width: calc(100vw - 6.5rem);
 }
