@@ -3,12 +3,14 @@ class ChatroomsController < ApplicationController
   before_action :set_chatroom, only: [:show, :edit, :update, :destroy, :hide_chatroom]
   before_action :authenticate_chatroom_user! , only: [:show, :edit, :update, :destroy, :hide_chatroom]
   before_action :set_new_conversation, only: [:show, :new, :edit, :create]
+  layout 'index', only: [:index]
 
   def index 
   end
 
   def show
     current_user.is_online
+    @chatroom.notifications.where(recipient_id: current_user.id).update(read_at: Time.zone.now)
     @messages = @chatroom.initialize_messages
     @chatroom_users_online = @chatroom.online_users
     @chatroom_users_offline = @chatroom.offline_users
@@ -52,11 +54,6 @@ class ChatroomsController < ApplicationController
 
   def hide_chatroom
     @chatroom.update_display(current_user, false)
-    if current_user.group_chatrooms.length.positive?
-      redirect_to chatroom_path(current_user.group_chatrooms.first)
-    else
-      redirect_to chatrooms_path
-    end
   end
 
   def update

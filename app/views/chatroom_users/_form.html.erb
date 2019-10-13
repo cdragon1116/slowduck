@@ -12,7 +12,7 @@
 
 <div class="users-list mt-5">
   <% @chatroom_users.each do |user| %>
-    <div class="user-info navbar mx-2 my-2 p-0">
+    <div class="user-info navbar mx-2 my-2 p-0" data-user="<%= user.id%>">
       <div class="d-flex align-items-center justify-content-center">
 
         <%= render 'shared/user_info', user: user, current_user: current_user %>
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="leave">
-        <%= link_to  chatroom_chatroom_user_path(@chatroom.id, user.id), method:'delete', data:{confirm: "你要移除此成為嗎？"}, class:'nav-link'  do %>
+        <%= link_to  chatroom_chatroom_user_path(@chatroom.id, user.id), remote: true,  method:'delete', data:{confirm: "你要移除此成為嗎？"}, class:'nav-link'  do %>
           <i class="fas fa-times text-dark"></i>
         <% end %>
       </div>

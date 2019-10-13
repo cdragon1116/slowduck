@@ -35,7 +35,7 @@ function search_messages(request, chatroom){
   $('#search-result').empty()
   if (!$('#right-panel').hasClass('active')){
     $('#right-panel').addClass('active');
-    $('#chatroom').addClass('active');
+    $('.chatroom').addClass('active');
     $('.form').addClass('active');
   }
   $('.result-loader').removeClass("d-none");

@@ -61,19 +61,29 @@ $(document).on('click', '.edit_message_btn', function(e){
     reset_edit_message(msg)
   })
   
-  let id = $(this).parent().data('message')
-  $(`[data-message="${id}"] .flex-grow-1 .message-body`).hide()
-  $(`#edit_message_${id}`).removeClass('d-none')
-  $(this).parent().children('.update_message_btn').removeClass('d-none')
+  let message = $(this).parent()
+  let body = message.find('.message-body')
+  let form = message.find('.edit-message-form')
+  let update_btn = message.children('.update_message_btn')
+
+  body.hide()
+  form.removeClass('d-none')
+  update_btn.removeClass('d-none')
   $(this).addClass('d-none')
+
+  // resize input
+  let input = $(this).parent().find('.edit_input')
+  input.height(0).height(input.scrollHeight).change()
   return false
 })
 
 $(document).on('click', '.update_message_btn', function(e){
-  let id = $(this).parent().data('message')
-  let input_value = $(`#edit_message_${id} #message_body`).val()
+  let message = $(this).parent()
+  let input_value = message.find('#message_body').val()
+  let form = message.find('.edit-message-form')
+
   if ( input_value != '' ){
-    $(`#edit_message_${id}`).submit()
+    form.submit()
     return false
   }
 })
@@ -105,3 +115,9 @@ function reset_edit_message(msg){
   $(msg).find('.update_message_btn').addClass('d-none')
   $(msg).find('.edit_message_btn').removeClass('d-none')
 }
+
+
+// input resize
+$(document).on( 'change keyup keydown paste cut', '.edit_input', function (){
+    $(this).height(0).height(this.scrollHeight);
+}).find( 'textarea' ).change();

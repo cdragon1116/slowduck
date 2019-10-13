@@ -5,9 +5,9 @@ jQuery(function() {
 });
 
 $(document).on('click', '[data-behavior="notification"]', function(e){
-    let id = $(this).data('notification')
-    $.ajax({
-      url: `/notifications/${id}/mark_as_read`,
-      dataType: 'JSON',
-      method: 'POST', })
+  let id = $(this).data('notification')
+  $.ajax({
+    url: `/notifications/${id}/mark_as_read`,
+    dataType: 'JSON',
+    method: 'POST', })
 })
