@@ -4,6 +4,7 @@ class ChatroomsController < ApplicationController
   before_action :authenticate_chatroom_user! , only: [:show, :edit, :update, :destroy, :hide_chatroom]
   before_action :set_new_conversation, only: [:show, :new, :edit, :create]
   before_action :update_notification, only: [:show]
+
   layout 'index', only: [:index]
 
   def index 
@@ -11,7 +12,8 @@ class ChatroomsController < ApplicationController
 
   def show
     current_user.is_online
-    @messages = @chatroom.initialize_messages end
+    @messages = @chatroom.initialize_messages
+  end
 
   def new
     @chatroom = Chatroom.new

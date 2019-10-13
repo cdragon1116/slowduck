@@ -143,14 +143,16 @@
   vertical-align: middle;
   padding: 0 5px;
 }
+
 #emoji-list{
   display: flex;
   flex-flow: row wrap;
+  span{
+    padding: 3px;
+    display: block;
+  }
 }
-#emoji-list span{
-  padding: 3px;
-  display: block;
-}
+
 .edit-chatroom-name{
   font-size: 3rem;
 }

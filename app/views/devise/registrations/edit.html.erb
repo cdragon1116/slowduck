@@ -7,7 +7,7 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= bootstrap_devise_error_messages! %>
 
-    <div class="row my-2">
+    <div class="row my-4">
       <div class="form-group col-12 col-md-6">
         <%= f.label "使用者名稱" %>
         <%= f.text_field :username, autofocus: false , autocomplete: 'username',class: 'form-control' %>
@@ -18,13 +18,13 @@
         <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
       </div>
     </div>
-    <div class="form-group my-2>
+    <div class="form-group my-4">
       <%= f.label "大頭貼" %>
       <%= f.file_field :image,class: 'form-control' %>
     </div>
 
 
-    <div class="row my-2">
+    <div class="row my-4">
       <div class="col-12 col-md-6">
         <div class="form-group">
           <%= f.label "新密碼" %>
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="form-group my-2">
+    <div class="form-group my-4">
       <%= f.label "舊密碼" %>
       <%= f.password_field :current_password, autocomplete: 'current-password', class: 'form-control' %>
       <small class="form-text text-gray-500 small">如果不需更換密碼請保留空白</small>
