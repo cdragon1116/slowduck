@@ -1,5 +1,5 @@
 <div class="d-flex flex-nowrap w-100 align-items-stretch">
-  <div id="chatroom" >
+  <div class="chatroom" >
     <div class="row no-gutters align-items-center justify-content-between chatroom-name shadow border-left">
       <h3 class='h4 mb-0'><%= chatroom_link(@chatroom) %></h3>
 
@@ -16,7 +16,7 @@
       </nav>
     </div>
 
-    <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' id='message-box'>
+    <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' class='message-box'>
       <div class="history-loader text-center">
         <%= render 'shared/ducks' %>
       </div>

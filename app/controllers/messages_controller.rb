@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
 
   def update
     @message.update(message_params)
-    MessageRelayJob.perform_later(@message, current_user)
+    MessageRelayJob.perform_later(@message)
   end
 
   def show
@@ -19,7 +19,7 @@ class MessagesController < ApplicationController
     message = Message.new(message_params)
     if message.save
       message.chatroom.chatroom_users.update(display: true)
-      MessageRelayJob.perform_later(message, current_user)
+      MessageRelayJob.perform_later(message)
     end
   end
 

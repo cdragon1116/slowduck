@@ -8,7 +8,7 @@
         <%= user_image(message.user, 32) %>
       </a>
 
-      <%= render 'shared/user_dropdown_broadcast' , user: message.user, current_user: current_user %>
+      <%= render 'shared/user_dropdown_broadcast' , user: message.user %>
     </div>
 
   </div>
@@ -17,14 +17,15 @@
     <span>
       <%= message.user.username%>
     </span>
-    <div class="message-body">
+    <div class="message-body pt-2">
       <%= process(message) %>
     </div>
 
-    <%= form_for message, remote: true, html: { class: 'edit-message-form d-none' } do |form| %>
+    <%= form_for message, remote: true, html: { class: 'edit-message-form d-none pt-2' } do |form| %>
       <%= form.text_area :body, :class => 'edit_input form-control col-xl-10' %>
     <% end %>
   </div>
 
-  <%= edit_buttons(message, current_user) %>  
+    <button class="update_message_btn btn d-none"><i class="fas fa-check"></i></button>
+    <button class="edit_message_btn btn d-none"><i class="fas fa-edit"></i></button>
 </div>

@@ -55,14 +55,15 @@ $(document).on('submit', 'form', function(e){
 // edit message
 $(document).on('click', '.edit_message_btn', function(e){
   e.preventDefault()
-  let msgs = $(`.message`)
+  let uid = document.cookie.split(/(=)/)[2]
+  let msgs = $(`[data-user="${uid}"]`)
   $.each(msgs, function(i, msg){
     reset_edit_message(msg)
   })
   
   let id = $(this).parent().data('message')
   $(`[data-message="${id}"] .flex-grow-1 .message-body`).hide()
-  $(`#edit_message_${id}`).toggleClass('d-none')
+  $(`#edit_message_${id}`).removeClass('d-none')
   $(this).parent().children('.update_message_btn').removeClass('d-none')
   $(this).addClass('d-none')
   return false
@@ -82,7 +83,8 @@ $(document).on('click', '#message_body', function(){
 })
 
 $(document).on('click', function(){
-  let msgs = $(`.message`)
+  let uid = document.cookie.split(/(=)/)[2]
+  let msgs = $(`[data-user="${uid}"]`)
   $.each(msgs, function(i, msg){
     reset_edit_message(msg)
   })

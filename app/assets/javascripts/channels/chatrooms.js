@@ -29,10 +29,10 @@ App.chatrooms = App.cable.subscriptions.create("ChatroomsChannel", {
         
       } else{
         active_chatroom.append(data.message);
+        active_chatroom.animate({
+          scrollTop: active_chatroom.prop('scrollHeight')
+        }, 300);
       }
-      active_chatroom.animate({
-        scrollTop: active_chatroom.prop('scrollHeight')
-      }, 300);
 
     } else {
       $(`[data-behavior='chatroom-link'][data-chatroom-id='${data.chatroom_id}'] svg.fa-exclamation`).removeClass('d-none');
