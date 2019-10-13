@@ -13,7 +13,7 @@
       </nav>
     </div>
 
-    <div data-behavior='messages' data-chatroom-id='<%= @message.chatroom.id %>' class='message-box'>
+    <div data-behavior='messages' data-chatroom-id='<%= @message.chatroom.id %>' data-message='top' data-top-id='<%= @messages.first.parent_id%>' class='message-box'>
       <div class="history-loader text-center">
         <%= render 'shared/ducks' %>
       </div>

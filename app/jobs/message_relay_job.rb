@@ -8,6 +8,7 @@ class MessageRelayJob < ApplicationJob
       body: message.body,
       chatroom_id: message.chatroom_id,
       message_id: message.id,
+      parent_id: message.parent_id,
     }
   end
 end
