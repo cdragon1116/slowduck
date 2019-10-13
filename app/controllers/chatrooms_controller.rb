@@ -46,7 +46,7 @@ class ChatroomsController < ApplicationController
       @chatroom.chatroom_users.show
       redirect_to chatroom_path(@chatroom)
     else
-      redirect_to root_path
+      redirect_to chatrooms_path
     end
   end
 
@@ -55,7 +55,7 @@ class ChatroomsController < ApplicationController
     if current_user.group_chatrooms.length.positive?
       redirect_to chatroom_path(current_user.group_chatrooms.first)
     else
-      redirect_to root_path
+      redirect_to chatrooms_path
     end
   end
 
@@ -68,10 +68,10 @@ class ChatroomsController < ApplicationController
   def destroy
     if @chatroom.users.length == 1
       @chatroom.destroy
-      redirect_to root_path, notice: '成功刪除聊天室'
+      redirect_to chatrooms_path, notice: '成功刪除聊天室'
     else
       @chatroom.chatroom_users.find_by(user: current_user).destroy
-      redirect_to root_path, notice: '已退出聊天室!'
+      redirect_to chatrooms_path, notice: '已退出聊天室!'
     end
   end
 
