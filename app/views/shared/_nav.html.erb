@@ -39,7 +39,7 @@
       <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-bell fa-fw"></i>
         <!-- Counter - Alerts -->
-        <span class="badge badge-danger badge-counter" data-behavior='unread-count'><%= current_user.notifications.unread.size if current_user.notifications.unread.size > 0 %></span>
+        <span class="badge badge-danger badge-counter" data-behavior='unread-count'><%= notifications.size if notifications.size > 0 %></span>
       </a>
       <!-- Dropdown - Alerts -->
       <div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-md-left dropdown-menu-xl-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="bell-alert">
@@ -47,9 +47,9 @@
           未讀通知列表
         </h6>
         <div class="notification-list">
-        <% notifications.each do |notification| %>
-        <%= render "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}", notification: notification %>
-        <% end %>
+          <% notifications.each do |notification| %>
+            <%= render "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}", notification: notification %>
+          <% end %>
         </div>
         <%= link_to mark_as_read_notifications_path, method: :post, remote: true,  id:'mark-as-read', class:'dropdown-item text-center small text-gray-500' do %> 
           全部標示為已讀 

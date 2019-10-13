@@ -47,7 +47,7 @@ $(document).on("turbolinks:load", function() {
               $('.message-box').scrollTop(50);
             }
             else{
-              $('#inner').prepend(`<div class='text-center bg-gray text-dark py-2 small'>---- 聊天室頂端 ----</div>`)
+              $('#inner').prepend(`<div class='text-center bg-gray text-dark py-2 small'>- 聊天室頂端 -</div>`)
               $('.history-loader').css('display','none')
             }
           })

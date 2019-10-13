@@ -20,6 +20,7 @@ gem "sass_rails_patch", "~> 0.0.1"
 gem 'jquery-atwho-rails', '~> 1.5', '>= 1.5.4'
 gem 'friendly_id', '~> 5.3'
 gem 'sendgrid-ruby'
+gem 'groupdate'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'

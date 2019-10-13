@@ -34,4 +34,16 @@ module MessagesHelper
       markdown(scan(message.body)) + "<span class='edited'> - 已編輯#{update_time}</span>".html_safe
     end
   end
+
+  def render_date(message)
+    start_message_of_day = message.chatroom.messages.order(created_at: :asc).group_by{ |t| t.created_at.to_date }.map{|k, v| v[0].id}
+    if start_message_of_day.include?( message.id )
+      render 'messages/message_with_date', message: message
+    else
+      render 'messages/message_without_date', message: message
+    end
+  end
+  def get_date(message)
+    message.created_at.strftime(' %m月%d日')
+  end
 end

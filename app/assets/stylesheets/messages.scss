@@ -69,3 +69,22 @@ span.edited{
   font-size: 12px;
   color: #aaa;
 }
+.message.message-with-date{
+  margin-top: 2.277rem;
+}
+.message.message-with-date::before{
+    font-size: 12px;
+    padding-top:0.75rem;
+    padding-bottom:0.75rem;
+    display: block;
+    content: attr(data-date);
+    position: absolute;
+    left: 0;
+    top: -30px;
+    width: 100%;
+    text-align: center;
+    border-color: #e4e4e4;
+    pointer-events: none;
+    background: transparent;
+    color: #BEBEBE;
+}

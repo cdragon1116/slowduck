@@ -3,11 +3,11 @@
     <%= user_image(user, 32) %>
   <div class="ml-2 py-2">
     <%= user.username %>
-    <div class="small text-gray-500 my-1"><%= user.email %></div>
-    <% if user.online == 1 %>
-      <div class="small text-prime ">online</div>
+    <div class="small text-gray-500 my-2"><%= user.email %></div>
+    <% if user.online? %>
+      <div class="small text-prime ">在線</div>
     <% else %>
-      <div class="small text-gray">offline</div>
+      <div class="small text-gray">離線</div>
     <% end %>
   </div>
   </div>
