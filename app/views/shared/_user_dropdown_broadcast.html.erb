@@ -3,7 +3,7 @@
     <%= user_image(user, 32) %>
   <div class="ml-2 py-2">
     <%= user.username %>
-    <div class="small text-gray-500"><%= user.email %></div>
+    <div class="small text-gray-500 my-1"><%= user.email %></div>
     <% if user.online == 1 %>
       <div class="small text-prime ">online</div>
     <% else %>
@@ -17,7 +17,7 @@
         <%= f.hidden_field :user_id ,  :value => user.id %>
       <% end %>
       <%= link_to '#', :onclick => "$('.conversation-#{user.id}').submit()",:class =>'dropdown-item text-center small text-gray-500 bg-dark rounded-bottom' do  %>
-        <div>create-1-on-1 Chat</div>
+        <div>開啟一對一對話</div>
       <% end %>
     <% end %>
 </div>

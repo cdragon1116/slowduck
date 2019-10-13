@@ -1,9 +1,9 @@
 <div class="d-flex flex-nowrap w-100 align-items-stretch">
   <div class="chatroom" >
-    <div class="row no-gutters align-items-center justify-content-between chatroom-name shadow border-left">
+    <div class="row no-gutters align-items-center chatroom-name shadow border-left">
       <h3 class='h4 mb-0'><%= chatroom_link(@chatroom) %></h3>
 
-      <nav class="navbar p-0 ml-3 mr-auto align-items-center chatroom-users">
+      <nav class="navbar p-0 ml-3 mr-auto align-items-center">
         <% @chatroom_users_online.each do |user| %>
           <%= render 'shared/user_online', user: user %> 
         <% end %>

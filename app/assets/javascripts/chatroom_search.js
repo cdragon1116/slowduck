@@ -44,7 +44,7 @@ function search_messages(request, chatroom){
         return `${content}`
       })
       if (messages.length === 0 ){
-        messages = [`<div class='navbar'><h2>搜不到啦,想好再搜可以嗎!!!</h2></div>`]
+        messages = [`<div class='text-center'><h2>無搜尋結果</h2></div>`]
       }
       $('#search-result').html(messages)
       $('.result-loader').addClass("d-none");
