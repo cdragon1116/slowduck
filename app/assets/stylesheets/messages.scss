@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-a.mention-link{
+span.mention-link{
     margin: 1px;
     display:inline-block;
     border-radius: 5px;
@@ -10,11 +10,11 @@ a.mention-link{
     font-size: 0.9rem;
     font-weight: 500;
 }
-a.mention-tag{
+span.mention-tag{
     color: #eee;
     background-color: #888;
 }
-a.mention-user{
+span.mention-user{
   color: #555;
   background-color: #fec52a;
 }

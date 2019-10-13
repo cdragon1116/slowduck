@@ -11,8 +11,8 @@
   background-color: #fff;
 
   .chatroom-name{
-   padding: 5px 10px;
-   height: 3rem; 
+    padding: 5px 10px;
+    height: 3rem; 
   }
 
   .chatroom-name a{
@@ -20,17 +20,17 @@
   }
 
   #message-box{
-      width: 100%;
-      height: calc(100vh - 12.375rem );
-      overflow-y: auto; 
+    width: 100%;
+    height: calc(100vh - 12.375rem );
+    overflow-y: auto; 
   }
 
 }
 
 .form{
-    box-sizing: border-box;
-    width: calc(100vw - 14rem);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  width: calc(100vw - 14rem);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   textarea.form-control{
     box-sizing: border-box;
@@ -53,10 +53,10 @@
   }
 }
 .form.sidebar-toggled{
-    width: calc(100vw - 6.5rem);
+  width: calc(100vw - 6.5rem);
 }
 #chatroom.active{
-    min-width:60%;
+  min-width:60%;
 }
 
 .message-body{
@@ -70,47 +70,47 @@
 
 // right-panel
 #right-panel{
-    position: relative;
-    display:none;
+  position: relative;
+  display:none;
 }
 
 #right-panel.active {
-    display:block;
-    min-width: 40%;
-    max-width: 40%;
-    height: calc(100vh - 4.35rem);
-    overflow-y: auto;
-    background-color: #fff;
-    border-left: 8px solid #eee;
+  display:block;
+  min-width: 40%;
+  max-width: 40%;
+  height: calc(100vh - 4.35rem);
+  overflow-y: auto;
+  background-color: #fff;
+  border-left: 8px solid #eee;
 }
 @media (max-width: 992px) {
-    #right-panel {
-      min-width: 200px;
-      max-width: 200px;
+  #right-panel {
+    min-width: 200px;
+    max-width: 200px;
     overflow-y: auto;
-    }
+  }
 }
 
 @media (max-width: 768px) {
-    #right-panel {
-      display:none;
-    }
-    #right-panel.active {
-        display: block;
-        position: absolute;
-        height: 90vh;
-        min-width: 100%;
-        max-width: 100%;
-        background-color: #fff;
-        top:  0;
-        left: 0; 
-    }
-    #chatroom.active{
-        width:100%;
-    }
-    .form{
-      width: 100%;
-    }
+  #right-panel {
+    display:none;
+  }
+  #right-panel.active {
+    display: block;
+    position: absolute;
+    height: 90vh;
+    min-width: 100%;
+    max-width: 100%;
+    background-color: #fff;
+    top:  0;
+    left: 0; 
+  }
+  #chatroom.active{
+    width:100%;
+  }
+  .form{
+    width: 100%;
+  }
 }
 
 
@@ -124,7 +124,7 @@
 #message-box::-webkit-scrollbar,
 #right-panel::-webkit-scrollbar
 {
-	width: 6px;
+  width: 6px;
 }
 
 #message-box::-webkit-scrollbar-thumb,
@@ -135,14 +135,15 @@
 }
 
 // sidebar-conversation-hide-btn
-.close1on1{
+.hide-conversation{
   display: none;
 }
 
-li.nav-item:hover > .close1on1{
-  display:block
+@media (min-width: 768px) {
+  li.nav-item:hover > .hide-conversation{
+    display:block
+  }
 }
-
 // emoji-style
 #emoji-button-area::before{
   content:'';

@@ -1,6 +1,8 @@
 class Api::V2::ChatroomsController < ApplicationController
   before_action :set_chatroom
+  before_action :set_new_conversation, only: [:get_messages, :next_messages]
   include ActionView::Helpers::SanitizeHelper
+  
   def get_relative_users
     query = params["query"]
     @users = current_user.relative_users
@@ -50,5 +52,9 @@ class Api::V2::ChatroomsController < ApplicationController
   private
   def set_chatroom
     @chatroom = Chatroom.find_by(id: params[:id])
+  end
+  def set_new_conversation
+    @conversation = Chatroom.new
+    @conversation.chatroom_users.build
   end
 end
