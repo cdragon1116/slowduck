@@ -25,7 +25,7 @@ class User < ApplicationRecord
   end
 
   def resize_image(size = 60)
-    image.variant(resize: "#{size}x#{size}").processed
+    image.variant(resize: "#{size}x#{size}!").processed
   end
 
   def relative_users

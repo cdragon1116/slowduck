@@ -22,7 +22,9 @@
       </div>
       <div id="inner">
         <% @messages.each do |message| %>
+          <% cache message do %> 
           <%= render message %>
+          <% end %>
         <% end %>
       </div>
     </div>
