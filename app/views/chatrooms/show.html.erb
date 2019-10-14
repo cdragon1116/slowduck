@@ -1,4 +1,5 @@
 <div class="d-flex flex-nowrap w-100 align-items-stretch">
+
   <div class="chatroom" >
     <div class="row no-gutters flex-nowrap align-items-center justify-content-start chatroom-name shadow border-left">
       <h3 class='h4 mb-0 mr-2'><%= chatroom_name(@chatroom) %></h3>
@@ -9,7 +10,6 @@
         <% end %>
       </nav>
       <%= add_member_button(@chatroom) %>
-
     </div>
 
     <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' class='message-box'>
@@ -50,4 +50,5 @@
     <div id="chatroom-loader" class="loader"></div>
   </div>
   <%= render 'right_panel' %>
+
 </div>
