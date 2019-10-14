@@ -48,7 +48,7 @@
     padding: 0 5px;
   }
   div#emoji-list{
-    max-width: 302px;
+    max-width: 285px;
     border-radius: 5px;
     padding: 10px;
   }
@@ -141,4 +141,13 @@
 
 #emoji-button-area{
   vertical-align: middle;
+  padding: 0 5px;
+}
+#emoji-list{
+  display: flex;
+  flex-flow: row wrap;
+}
+#emoji-list span{
+  padding: 3px;
+  display: block;
 }
