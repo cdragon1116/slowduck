@@ -3,9 +3,9 @@
   <!-- Sidebar - Brand -->
   <%= link_to chatrooms_path, class:'sidebar-brand d-flex align-items-center justify-content-center' do %> 
     <div class="sidebar-brand-icon">
-      <%= image_tag "duck-plain.svg", :title => "title", :class => "sidebar-brand-icon svg-inline--fa" %>
+      <%= image_tag "duck-plain.svg", :title => "呱呱呱", :class => "sidebar-brand-icon svg-inline--fa" %>
     </div>
-    <div class="sidebar-brand-text mx-3">Slowduck</div>
+    <div title="首頁" class="sidebar-brand-text mx-3">Slowduck</div>
   <% end %>
 
 
@@ -15,8 +15,8 @@
   <% if user_signed_in? %>
 
     <!-- Heading -->
-    <div class="sidebar-heading my-2 my-md-3">
-      群組 
+    <div class="sidebar-heading my-2 my-md-3 text-prime">
+      群組
     </div>
 
 
@@ -43,7 +43,7 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="sidebar-heading my-2">
+    <div class="sidebar-heading my-2 text-prime">
       一對一
     </div>
 
@@ -71,7 +71,7 @@
 
   <% end %>
 
-  <div class="text-center ">
+  <div title="新增聊天室" class="text-center " >
     <button class="rounded-circle border-0 new-chatroom bg-light mt-3 mt-md-2">
       <%= link_to  new_chatroom_path, class:'nav-link' do  %>
         <i class="fas fa-plus text-dark"></i>
