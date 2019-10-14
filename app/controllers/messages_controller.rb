@@ -26,12 +26,12 @@ class MessagesController < ApplicationController
   end
   private
     def set_chatroom
-      @chatroom = Chatroom.friendly.find(params[:chatroom_id])
+      @chatroom = Chatroom.find(params[:chatroom_id])
     end
     def message_params
       params.require(:message).permit(:body, :parent_id, :user_id, :chatroom_id)
     end
     def find_message
-      @message = Message.friendly.find(params[:id])
+      @message = Message.find(params[:id])
     end
 end

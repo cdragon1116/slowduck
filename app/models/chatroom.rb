@@ -35,10 +35,6 @@ class Chatroom < ApplicationRecord
     users.where('user_id != ? ', current_user.id).first
   end
 
-  def normalize_friendly_id(input)
-    input.to_s.to_slug.normalize.to_s
-  end
-
   private
   def slugged_chatroom
     SecureRandom.hex[0, 8]
