@@ -14102,7 +14102,7 @@ body.sidebar-toggled footer.sticky-footer {
 }
 /* line 50, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .form div#emoji-list {
-  max-width: 302px;
+  max-width: 285px;
   border-radius: 5px;
   padding: 10px;
 }
@@ -14212,6 +14212,19 @@ body.sidebar-toggled footer.sticky-footer {
 /* line 142, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #emoji-button-area {
   vertical-align: middle;
+  padding: 0 5px;
+}
+
+/* line 146, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+#emoji-list {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/* line 150, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+#emoji-list span {
+  padding: 3px;
+  display: block;
 }
 /* line 2, /Users/longlong/Project/flowdock/app/assets/stylesheets/devise.scss */
 #pop-up-block {
@@ -14468,6 +14481,249 @@ span.edited {
 .message-right {
   min-width: 0;
 }
+/* line 1, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.nav-item {
+  position: relative;
+}
+
+/* line 5, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.form-group {
+  position: relative;
+}
+
+/* line 9, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.container-fluid {
+  position: relative;
+  height: calc(100vh - 4.375rem);
+  overflow-y: auto;
+}
+/* line 14, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.container-fluid input.form-control {
+  border: none;
+  border-bottom: 1px solid #666;
+  border-radius: 0;
+}
+/* line 20, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.container-fluid input.form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* line 25, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+a:hover {
+  text-decoration: none;
+}
+
+/* line 29, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+a.dropdown-item:active {
+  background-color: #333;
+}
+
+/* line 33, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.fa {
+  padding: 5px;
+}
+
+/* line 37, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.fa-bell {
+  color: #fec52a;
+}
+
+/* line 41, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.fa-markdown {
+  color: #333;
+}
+
+/* line 45, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.clearfix {
+  clear: both;
+}
+
+/* line 49, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.btn:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+/* line 54, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.close.devise {
+  position: absolute;
+  right: 20px;
+  top: 5px;
+}
+
+/* line 60, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.sidebar {
+  min-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #333;
+}
+
+/* line 66, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.sidebar .new-chatroom {
+  width: 2.5rem;
+  height: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  background: #fff;
+}
+
+/* line 74, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.sidebar .tab-menu-link {
+  color: #fff;
+  z-index: 1;
+  padding: 16px;
+  text-align: center;
+}
+
+/* line 80, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.sidebar.toggled .nav-item {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+/* line 84, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.sidebar.toggled .tab-menu-link {
+  display: none;
+}
+
+/* line 87, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.sidebar.toggled .img-profile {
+  display: none;
+}
+
+/* line 90, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.sidebar {
+  min-width: 6.5rem;
+}
+
+/* line 93, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.sidebar.toggled {
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  /* line 98, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+  body {
+    overflow-y: hidden;
+  }
+
+  /* line 101, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+  .sidebar .tab-menu-link {
+    position: absolute;
+    left: 10rem;
+    top: 0;
+  }
+
+  /* line 107, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+  .sidebar {
+    height: 100vh;
+    min-width: 14rem;
+  }
+
+  /* line 111, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+  .sidebar.toggled {
+    min-width: 6.5rem;
+  }
+}
+/* line 117, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.result-loader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 200px;
+}
+
+/* line 128, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.history-loader {
+  display: none;
+}
+
+/* line 131, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.page-loader {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 200px;
+}
+
+/* line 142, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.black {
+  content: '';
+  position: absolute;
+  display: block;
+  background-color: rgba(255, 255, 255, 0.8);
+  height: calc(100vh - 4.375rem);
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* line 154, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.notification-list {
+  overflow: auto;
+  height: 300px;
+}
+
+/* line 160, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.message-box::-webkit-scrollbar-track,
+#right-panel::-webkit-scrollbar-track,
+.sidebarbar::-webkit-scrollbar-track {
+  border-radius: 20px;
+}
+
+/* line 167, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.message-box::-webkit-scrollbar,
+#right-panel::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* line 174, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.message-box::-webkit-scrollbar-thumb,
+#right-panel::-webkit-scrollbar-thumb,
+.sidebar::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: #777;
+}
+
+/* line 184, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.text-prime {
+  color: #fec52a !important;
+}
+
+/* line 187, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.bg-prime {
+  background-color: #fec52a;
+}
+
+/* line 190, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.btn-prime {
+  background-color: #fec52a;
+  color: #fff;
+}
+
+/* line 194, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.btn-prime:hover {
+  background-color: #ffba00;
+  color: #fff;
+}
+
+/* line 199, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+.img-profile {
+  vertical-align: middle;
+}
 /* line 1, /Users/longlong/Project/flowdock/app/assets/stylesheets/reset.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -14683,20 +14939,20 @@ table {
   font-size: 14px;
   line-height: 18px;
 }
-/* line 122, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
+/* line 123, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
 .message-body .highlight {
   background-color: #333;
 }
-/* line 125, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
+/* line 126, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
 .message-body .highlight .err {
   background-color: transparent;
 }
-/* line 128, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
+/* line 129, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
 .message-body p {
   font-size: 16px;
   display: block;
 }
-/* line 132, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
+/* line 133, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
 .message-body blockquote {
   margin: 1em 1em;
   color: #999;
@@ -14704,13 +14960,20 @@ table {
   padding-left: 1em;
   background-color: #fff;
 }
-/* line 140, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
+/* line 141, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
 .message-body ul li {
   list-style: square inside;
 }
-/* line 144, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
+/* line 145, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
 .message-body ol li {
   list-style: decimal inside;
+}
+/* line 149, /Users/longlong/Project/flowdock/app/assets/stylesheets/rouges.scss.erb */
+.message-body code,
+.message-body pre {
+  -moz-osx-font-smoothing: auto;
+  -webkit-font-smoothing: auto;
+  font-family: monospace;
 }
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files * listed below.
@@ -14732,234 +14995,4 @@ html, body {
   width: 100%;
   font-family: "PingFang", "Microsoft JhengHei", "Arial";
   overflow-y: hidden;
-}
-
-/* line 25, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.nav-item {
-  position: relative;
-}
-
-/* line 29, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.form-group {
-  position: relative;
-}
-
-/* line 33, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.container-fluid {
-  position: relative;
-  height: calc(100vh - 4.375rem);
-  overflow-y: auto;
-}
-/* line 38, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.container-fluid input.form-control {
-  border: none;
-  border-bottom: 1px solid #666;
-  border-radius: 0;
-}
-/* line 44, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.container-fluid input.form-control:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-/* line 49, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-a:hover {
-  text-decoration: none;
-}
-
-/* line 53, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-a.dropdown-item:active {
-  background-color: #333;
-}
-
-/* line 57, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.fa {
-  padding: 5px;
-}
-
-/* line 61, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.fa-bell {
-  color: #fec52a;
-}
-
-/* line 65, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.clearfix {
-  clear: both;
-}
-
-/* line 69, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.btn:focus {
-  box-shadow: none;
-  outline: none;
-}
-
-/* line 74, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.close.devise {
-  position: absolute;
-  right: 20px;
-  top: 5px;
-}
-
-/* line 80, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.sidebar {
-  overflow-y: auto;
-  overflow-x: hidden;
-  background-color: #333;
-  min-width: 6.5rem;
-  min-height: 100%;
-  height: 100vh;
-}
-
-/* line 89, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.sidebar.toggled {
-  min-width: 0;
-}
-
-/* line 92, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.sidebar .new-chatroom {
-  width: 2.5rem;
-  height: 2.5rem;
-  text-align: center;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  background: #fff;
-}
-
-/* line 100, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.sidebar .tab-menu-link {
-  color: #fff;
-  z-index: 1;
-  padding: 16px;
-  text-align: center;
-}
-
-/* line 106, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.sidebar.toggled .nav-item {
-  display: flex;
-  flex-flow: column nowrap;
-}
-
-/* line 110, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.sidebar.toggled .tab-menu-link {
-  display: none;
-}
-
-/* line 113, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.sidebar.toggled .img-profile {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  /* line 118, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-  .sidebar .tab-menu-link {
-    position: absolute;
-    left: 10rem;
-    top: 0;
-  }
-
-  /* line 124, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-  .sidebar {
-    min-width: 14rem;
-  }
-
-  /* line 127, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-  .sidebar.toggled {
-    min-width: 6.5rem;
-  }
-}
-/* line 133, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.result-loader {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  margin: auto;
-  width: 100%;
-  height: 200px;
-}
-
-/* line 144, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.history-loader {
-  display: none;
-}
-
-/* line 147, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.page-loader {
-  z-index: 10;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  margin: auto;
-  width: 100%;
-  height: 200px;
-}
-
-/* line 158, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.black {
-  content: '';
-  position: absolute;
-  display: block;
-  background-color: rgba(255, 255, 255, 0.8);
-  height: calc(100vh - 4.375rem);
-  width: 100%;
-  top: 0;
-  left: 0;
-}
-
-/* line 170, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.notification-list {
-  overflow: auto;
-  height: 300px;
-}
-
-/* line 176, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.message-box::-webkit-scrollbar-track,
-#right-panel::-webkit-scrollbar-track,
-.sidebarbar::-webkit-scrollbar-track {
-  border-radius: 20px;
-}
-
-/* line 183, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.message-box::-webkit-scrollbar,
-#right-panel::-webkit-scrollbar,
-.sidebar::-webkit-scrollbar {
-  width: 4px;
-}
-
-/* line 190, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.message-box::-webkit-scrollbar-thumb,
-#right-panel::-webkit-scrollbar-thumb,
-.sidebar::-webkit-scrollbar-thumb {
-  border-radius: 20px;
-  background-color: #777;
-}
-
-/* line 200, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.text-prime {
-  color: #fec52a;
-}
-
-/* line 203, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.bg-prime {
-  background-color: #fec52a;
-}
-
-/* line 206, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.btn-prime {
-  background-color: #fec52a;
-  color: #fff;
-}
-
-/* line 210, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.btn-prime:hover {
-  background-color: #ffba00;
-  color: #fff;
-}
-
-/* line 215, /Users/longlong/Project/flowdock/app/assets/stylesheets/application.scss */
-.img-profile {
-  vertical-align: middle;
 }
