@@ -17,7 +17,6 @@
 //= require jquery.atwho
 //= require popper 
 //= require_tree .
-//= require_tree ./channels
 //
 
 // full-page loader

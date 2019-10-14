@@ -9,19 +9,25 @@ class Chatroom < ApplicationRecord
 
   accepts_nested_attributes_for :chatroom_users, :users
 
+  after_commit :clear_associations, on: :destroy
+
   extend FriendlyId
   friendly_id :slugged_chatroom, use: :slugged
+
+  def clear_associations
+    notifications.destroy_all
+  end
 
   def update_display(user, boolean)
     chatroom_users.where(user: user).update(display: boolean)
   end
 
   def online_users
-    users.includes(:image_attachment).where(online: 1)
+    users.includes(image_attachment: :blob).where(online: 1)
   end
 
   def offline_users
-    users.includes(:image_attachment).where(online: 0)
+    users.includes(image_attachment: :blob).where(online: 0)
   end
 
   def last_person?
@@ -29,7 +35,7 @@ class Chatroom < ApplicationRecord
   end
 
   def initialize_messages
-    messages.includes(:parent, :user => :image_attachment ).order(created_at: :desc).limit(15).reverse
+    messages.includes(:parent, { user:  {image_attachment: [:blob]}} ).order(created_at: :desc).limit(15).reverse
   end
 
   def tags
@@ -43,6 +49,10 @@ class Chatroom < ApplicationRecord
       chatroom_users.where(user_id: valid_user).first_or_create if valid_user
       notifications.create(recipient: valid_user, actor: current_user, action: 'invite')
     end
+  end
+
+  def notifications_with_related
+    notifications.includes(:recipient, :actor)
   end
 
   private

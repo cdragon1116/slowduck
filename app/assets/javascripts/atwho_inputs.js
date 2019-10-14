@@ -31,7 +31,7 @@ function atwho_relative_users(bind_object, chatroom){
     searchKey: 'email',
     data: null, 
     insertTpl: "${email}" ,
-    displayTpl: "<li class='d-flex align-items-center'><div class='img-profile d-inline-block px-2'>${image}</div><span>${username}-<small>${email}</small></span></li>",
+    displayTpl: "<li class='d-flex align-items-center'><div class='img-profile px-2'>${image}</div><span>${username}-<small>${email}</small></span></li>",
     callbacks: {
       remoteFilter: function(query, callback){
         $.get(`/api/v2/chatrooms/${chatroom}/get_relative_users.json?`, function(data){

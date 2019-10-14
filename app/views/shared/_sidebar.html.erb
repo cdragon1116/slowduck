@@ -24,7 +24,7 @@
       <li class="nav-item" title="<%= room.name %>">
         <%= link_to  room, class:'nav-link py-4 py-md-3 pr-md-5', data: { behavior: "chatroom-link", chatroom_id: room.id} do %>
           <span>
-            <%= truncate( room.name, :length => 15, :escape => false) %>
+            <%= truncate( room.name, :length => 10, :escape => false) %>
           </span>
           <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>
         <% end %>
@@ -57,7 +57,7 @@
             <div class="img d-none d-md-inline">
               <%= user_image(room.conversation_with(current_user) , 32) %>
             </div>
-            <span class="ml-md-3"><%= truncate( room.conversation_with(current_user).username, :length => 15, :escape => false) + "<i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
+            <span class="ml-md-3"><%= truncate( room.conversation_with(current_user).username, :length => 10, :escape => false) + "<i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
           </div>
         <% end %>
         <%= link_to  hide_chatroom_chatroom_path(room.id), remote: true, class:'tab-menu-link hide-conversation mt-md-2', method:'post' do %>

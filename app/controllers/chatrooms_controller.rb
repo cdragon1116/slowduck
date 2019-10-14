@@ -1,8 +1,9 @@
 class ChatroomsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!  
   before_action :set_chatroom, only: [:show, :edit, :update, :destroy, :hide_chatroom]
   before_action :authenticate_chatroom_user! , only: [:show, :edit, :update, :destroy, :hide_chatroom]
   before_action :set_new_conversation, only: [:show, :new, :edit, :create]
+  before_action :update_notification, only: [:show]
   layout 'index', only: [:index]
 
   def index 
@@ -10,10 +11,7 @@ class ChatroomsController < ApplicationController
 
   def show
     current_user.is_online
-    @chatroom.notifications.where(recipient_id: current_user.id).update(read_at: Time.zone.now)
     @messages = @chatroom.initialize_messages
-    @chatroom_users_online = @chatroom.online_users
-    @chatroom_users_offline = @chatroom.offline_users
   end
 
   def new
@@ -22,7 +20,7 @@ class ChatroomsController < ApplicationController
   end
 
   def edit
-    @chatroom_users = @chatroom.users.includes(:image_attachment)
+    @chatroom_users = @chatroom.users.includes(image_attachment: :blob)
     @chatroom_user = ChatroomUser.new
   end
 
@@ -82,11 +80,14 @@ class ChatroomsController < ApplicationController
     params.require(:chatroom).permit(:name, :public, :room_type, chatroom_users_attributes: [:user_id])
   end
 
-
   def authenticate_chatroom_user!
     unless @chatroom.users.exists?(id: current_user.id)
       redirect_to chatrooms_url, notice: '你沒有權限!'
     end
+  end
+
+  def update_notification
+    @chatroom.notifications_with_related.where(recipient_id: current_user.id).update(read_at: Time.zone.now)
   end
 
   def set_new_conversation
