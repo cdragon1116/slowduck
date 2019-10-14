@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :current_user_chatrooms
+  before_action :set_user
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   private
@@ -18,6 +19,12 @@ class ApplicationController < ActionController::Base
       @group_chatrooms = []
       @conversations = []
       @notifications = []
+    end
+  end
+
+  def set_user
+    if current_user
+      cookies["078asdf"] = current_user.id
     end
   end
 end

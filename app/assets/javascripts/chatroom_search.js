@@ -36,6 +36,7 @@ function search_messages(request, chatroom){
   if (!$('#right-panel').hasClass('active')){
     $('#right-panel').addClass('active');
     $('#chatroom').addClass('active');
+    $('.form').addClass('active');
   }
   $('.result-loader').removeClass("d-none");
   $.get(`/api/v2/chatrooms/${chatroom}/get_messages.json?` + jQuery.param(request))
@@ -44,7 +45,7 @@ function search_messages(request, chatroom){
         return `${content}`
       })
       if (messages.length === 0 ){
-        messages = [`<div class='navbar'><h2>搜不到啦,想好再搜可以嗎!!!</h2></div>`]
+        messages = [`<div class='text-center'><h2>無搜尋結果</h2></div>`]
       }
       $('#search-result').html(messages)
       $('.result-loader').addClass("d-none");

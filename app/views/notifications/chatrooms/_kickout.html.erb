@@ -1,4 +1,4 @@
-<%= link_to chatroom_path(notification.notifiable) do %> 
+<%= link_to chatroom_path(notification.notifiable), method: :get do %> 
   <div class="d-flex dropdown-item flex-nowrap align-items-center" data-behavior='notification' data-notification="<%= notification.id%>">
     <div class="mr-3">
       <div class="icon-circle bg-dark">

@@ -1,4 +1,4 @@
-<%= link_to message_path(notification.notifiable.id) do %> 
+<%= link_to message_path(notification.notifiable.id), method: :get do %> 
   <div class="d-flex dropdown-item align-items-center" data-behavior='notification' data-notification="<%= notification.id%>">
     <div class="mr-3">
       <div class="icon-circle bg-dark">

@@ -8,11 +8,17 @@ class Message < ApplicationRecord
   has_many :message_tags, dependent: :destroy
   has_many :tags, through: :message_tags, dependent: :destroy
 
-  after_create :set_parent, :set_color
   include Taggable
+  after_create :set_parent, :set_color
+  before_update :clear_associations
 
   extend FriendlyId
   friendly_id :slugged_message, use: :slugged
+
+  def clear_associations
+    notifications.destroy_all
+    message_tags.destroy_all
+  end
 
   def initialize_messages
     messages.includes(:parent, :chatroom, :user => :image_attachment).order(created_at: :desc).reverse
@@ -34,10 +40,10 @@ class Message < ApplicationRecord
       update(color: 0)
     elsif Message.where(parent_id: parent_id).length == 2
       previous_color = (previous_parent.nil?) ? 0 : previous_parent.color
-      update(color: (previous_color + 1) % 3 + 1)
-      Message.find(parent_id).update(color: color)
+      update_column(:color, (previous_color + 1) % 3 + 1)
+      Message.find(parent_id).update_column(:color, color)
     else
-      update(color: Message.find(parent_id).color)
+      update_column(:color,  Message.find(parent_id).color)
     end
   end
 

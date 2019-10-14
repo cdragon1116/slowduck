@@ -28,7 +28,7 @@
                       <div class="col-sm-6 mb-3 mb-sm-0">
                         <%= f.password_field :password, autocomplete: 'current-password', class:"form-control form-control-user" , id:"exampleInputPassword" , placeholder:"密碼"%>
                         <% if @minimum_password_length %>
-                          <small class="form-text text-muted"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
+                          <small class="form-text text-muted small">最少六位數</small>
                         <% end %>
                       </div>
                       <div class="col-sm-6">

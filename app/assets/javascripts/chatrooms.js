@@ -21,19 +21,6 @@ $(document).on("turbolinks:load", function() {
     return scrolled = true;
   });
   
-  // enable keying tab in textarea
-  $('textarea').on('keydown', function() {
-    let e, s, v;
-    if (event.keyCode === 9) {
-      v = $(this).val();
-      s = $(this).selectionStart;
-      e = $(this).selectionEnd;
-      $(this).val(v.substring(0, s) + '\u0009' + v.substring(e));
-      $(this).selectionStart = $(this).selectionEnd = s + 1;
-      return false;
-    }
-  });
-
   // Right Panel Toggle Button
   $('#rightPanelCollapse').on('click', function () {
     $('#right-panel').toggleClass('active');
@@ -44,8 +31,8 @@ $(document).on("turbolinks:load", function() {
   let chatroom = $("[data-behavior='messages']").data('chatroom-id') 
 
   // scroll to see history message
-  $('#message-box').scroll(function(){
-    if ($('#message-box').scrollTop() == 0){
+  $('.message-box').scroll(function(){
+    if ($('.message-box').scrollTop() == 0){
       let pre_id = $('#inner').children('.message:nth-child(1)').data("message")
       if (pre_id){
         $('.history-loader').css('display','block')
@@ -57,10 +44,10 @@ $(document).on("turbolinks:load", function() {
             if (messages.length !== 0){
               $('#inner').prepend(messages)
               $('.load-img').css('display','none')
-              $('#message-box').scrollTop(50);
+              $('.message-box').scrollTop(50);
             }
             else{
-              $('#inner').prepend(`<div class='text-center'>沒東西了啦不要再拉了！！！</div>`)
+              $('#inner').prepend(`<div class='text-center bg-gray text-dark py-2 small'>- 聊天室頂端 -</div>`)
               $('.history-loader').css('display','none')
             }
           })
@@ -70,7 +57,7 @@ $(document).on("turbolinks:load", function() {
 
   // emoji
   $(function () {
-    $('#message_body').emoji({place: 'before'});
+    $('#message_input').emoji({place: 'before'});
   })
 
 

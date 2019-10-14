@@ -13,10 +13,12 @@
  *= require_self
  */
 
+
 html, body {
   margin: 0 !important;
   padding: 0 !important;
   width: 100%;
+  font-family: "PingFang", "Microsoft JhengHei", "Arial";
 }
 
 .nav-item{
@@ -29,7 +31,8 @@ html, body {
 
 .container-fluid{
   position: relative;
-  min-height: calc(100vh - 4.375rem);
+  height: calc(100vh - 4.375rem);
+  overflow-y: auto;
 
   input.form-control{
     border: none;
@@ -74,7 +77,7 @@ a.dropdown-item:active{
 }
 // sidebar
 .sidebar{
-  height: 100vh;
+  min-height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #333;
@@ -111,16 +114,17 @@ a.dropdown-item:active{
 }
 
 @media (min-width: 768px) {
+  body{
+    overflow-y: hidden;
+  }
   .sidebar .tab-menu-link{
     position: absolute;
     left: 10rem;
     top: 0;
   }
 
-  body {
-    overflow-y: hidden;
-  }
   .sidebar{
+    height: 100vh;
     min-width: 14rem;
   }
   .sidebar.toggled{
@@ -159,7 +163,7 @@ a.dropdown-item:active{
   position: absolute;
   display:block;
   background-color: rgba(256,256,256,.8);
-  height: 100vh;
+  height: calc(100vh - 4.375rem);
   width: 100%;
   top: 0;
   left: 0;
@@ -172,21 +176,21 @@ a.dropdown-item:active{
 }
 
 // scrool-bar style
-#message-box::-webkit-scrollbar-track,
+.message-box::-webkit-scrollbar-track,
 #right-panel::-webkit-scrollbar-track,
 .sidebarbar::-webkit-scrollbar-track,
 {
   border-radius: 20px;
 }
 
-#message-box::-webkit-scrollbar,
+.message-box::-webkit-scrollbar,
 #right-panel::-webkit-scrollbar,
 .sidebar::-webkit-scrollbar
 {
   width: 4px;
 }
 
-#message-box::-webkit-scrollbar-thumb,
+.message-box::-webkit-scrollbar-thumb,
 #right-panel::-webkit-scrollbar-thumb,
 .sidebar::-webkit-scrollbar-thumb
 {
@@ -211,3 +215,6 @@ a.dropdown-item:active{
   color: #fff;
 }
 
+.img-profile{
+  vertical-align: middle;
+}

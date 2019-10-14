@@ -4,7 +4,6 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     omniauth_callbacks: "users/omniauth_callbacks"
   }
-
   root 'chatrooms#index'
 
   resources :chatrooms do

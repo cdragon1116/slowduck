@@ -46,3 +46,45 @@ span.mention-user{
     bottom: 78px;
     left: 15px;
   }
+
+button.edit_message_btn{
+  opacity: 0;
+}
+.message:hover button.edit_message_btn{
+  opacity: 100;
+}
+
+form.edit-message-form{
+  textarea#message_body{
+    min-width: 100%;
+    background-color: #fff;
+    border: none;
+  }
+  textarea#message_body:focus{
+    outline: none;
+    box-shadow: none;
+  }
+}
+span.edited{
+  font-size: 12px;
+  color: #aaa;
+}
+.message.message-with-date{
+  margin-top: 2.277rem;
+}
+.message.message-with-date::before{
+    font-size: 12px;
+    padding-top:0.75rem;
+    padding-bottom:0.75rem;
+    display: block;
+    content: attr(data-date);
+    position: absolute;
+    left: 0;
+    top: -30px;
+    width: 100%;
+    text-align: center;
+    border-color: #e4e4e4;
+    pointer-events: none;
+    background: transparent;
+    color: #BEBEBE;
+}

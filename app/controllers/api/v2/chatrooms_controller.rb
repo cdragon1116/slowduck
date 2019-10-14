@@ -4,7 +4,6 @@ class Api::V2::ChatroomsController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
   
   def get_relative_users
-    query = params["query"]
     @users = current_user.relative_users
     respond_to do |format|
       format.json
@@ -12,7 +11,6 @@ class Api::V2::ChatroomsController < ApplicationController
   end
 
   def get_users
-    query = params["query"] 
     @users = @chatroom.users
     respond_to do |format|
       format.json

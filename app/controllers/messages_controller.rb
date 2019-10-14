@@ -1,10 +1,14 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_new_conversation, only: [:show]
-  before_action :find_message, only: [:show]
-  include MessagesHelper
+  before_action :find_message, only: [:show, :update]
 
   def index
+  end
+
+  def update
+    @message.update(message_params)
+    MessageRelayJob.perform_later(@message)
   end
 
   def show
@@ -15,7 +19,7 @@ class MessagesController < ApplicationController
     message = Message.new(message_params)
     if message.save
       message.chatroom.chatroom_users.update(display: true)
-      MessageRelayJob.perform_later(message, current_user)
+      MessageRelayJob.perform_later(message)
     end
   end
 
@@ -29,7 +33,7 @@ class MessagesController < ApplicationController
   end
 
   def find_message
-    @message = Message.friendly.find(params[:id])
+    @message = Message.find(params[:id])
   end
 
   def set_new_conversation

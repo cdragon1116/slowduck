@@ -1,10 +1,10 @@
 // Place all the styles related to the Chatrooms controller here.
 // They will automatically be included in application.css.  // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#chatroom {
-  over-flow:hidden;
+.chatroom {
+  overflow:hidden;
   box-sizing: border-box;
-  min-width: 100%;
+  max-width: 100%;
   min-height: calc(100vh - 4.375rem);
   flex-flow: column nowrap;
   font-size: 20px;
@@ -19,7 +19,7 @@
     color: #5a5c69 ;
   }
 
-  #message-box{
+  .message-box{
     width: 100%;
     height: calc(100vh - 12.375rem );
     overflow-y: auto; 
@@ -52,15 +52,20 @@
     padding: 10px;
   }
 }
+.form.active{
+  width: calc(60vw - 14rem);
+}
 .form.sidebar-toggled{
   width: calc(100vw - 6.5rem);
 }
-#chatroom.active{
-  min-width:60%;
+.chatroom.active{
+  min-width: 60%;
 }
 
 .message-body{
   overflow-wrap: break-word;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 #search-input:focus{
@@ -92,6 +97,9 @@
 }
 
 @media (max-width: 768px) {
+  .chatroom{
+    width: 100%;
+  }
   #right-panel {
     display:none;
   }
@@ -105,33 +113,12 @@
     top:  0;
     left: 0; 
   }
-  #chatroom.active{
-    width:100%;
+  .chatroom.active{
+    min-width:100%;
   }
   .form{
     width: 100%;
   }
-}
-
-
-// scroll-bar
-#message-box::-webkit-scrollbar-track,
-#right-panel::-webkit-scrollbar-track
-{
-  border-radius: 20px;
-}
-
-#message-box::-webkit-scrollbar,
-#right-panel::-webkit-scrollbar
-{
-  width: 6px;
-}
-
-#message-box::-webkit-scrollbar-thumb,
-#right-panel::-webkit-scrollbar-thumb
-{
-  border-radius: 20px;
-  background-color: #777;
 }
 
 // sidebar-conversation-hide-btn

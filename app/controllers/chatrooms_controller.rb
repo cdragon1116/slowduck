@@ -1,5 +1,5 @@
 class ChatroomsController < ApplicationController
-  before_action :authenticate_user! , except: [:index]
+  before_action :authenticate_user!
   before_action :set_chatroom, only: [:show, :edit, :update, :destroy, :hide_chatroom]
   before_action :authenticate_chatroom_user! , only: [:show, :edit, :update, :destroy, :hide_chatroom]
   before_action :set_new_conversation, only: [:show, :new, :edit, :create]
@@ -9,7 +9,6 @@ class ChatroomsController < ApplicationController
 
   def show
     current_user.is_online
-    @chatroom.notifications.where(recipient_id: current_user.id ).update(read_at: Time.zone.now)
     @messages = @chatroom.initialize_messages
     @chatroom_users_online = @chatroom.online_users
     @chatroom_users_offline = @chatroom.offline_users
@@ -47,7 +46,7 @@ class ChatroomsController < ApplicationController
       @chatroom.chatroom_users.show
       redirect_to chatroom_path(@chatroom)
     else
-      redirect_to root_path
+      redirect_to chatrooms_path
     end
   end
 
@@ -56,7 +55,7 @@ class ChatroomsController < ApplicationController
     if current_user.group_chatrooms.length.positive?
       redirect_to chatroom_path(current_user.group_chatrooms.first)
     else
-      redirect_to root_path
+      redirect_to chatrooms_path
     end
   end
 
@@ -69,10 +68,10 @@ class ChatroomsController < ApplicationController
   def destroy
     if @chatroom.users.length == 1
       @chatroom.destroy
-      redirect_to root_path, notice: '成功刪除聊天室'
+      redirect_to chatrooms_path, notice: '成功刪除聊天室'
     else
       @chatroom.chatroom_users.find_by(user: current_user).destroy
-      redirect_to root_path, notice: '已退出聊天室!'
+      redirect_to chatrooms_path, notice: '已退出聊天室!'
     end
   end
 
