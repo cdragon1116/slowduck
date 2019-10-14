@@ -58,7 +58,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'hirb-unicode', '~> 0.0.5'
-  gem 'bullet', '~> 5.7', '>= 5.7.5'
+  # gem 'bullet', '~> 5.7', '>= 5.7.5'
 end
 
 group :development do

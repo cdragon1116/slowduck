@@ -1,15 +1,1 @@
-<div class="message icon navbar align-items-start flex-nowrap pl-5" data-message="<%= message.id%>" data-parent="<%= message.parent.id%>">
-  <div class="navbar flex-nowrap align-items-start p-0">
-    <%= message_icon(message) %>
-    <%= render 'shared/user_info', user: message.user, current_user: current_user %>
-  </div>
-
-  <div class="flex-grow-1" style="min-width: 0;">
-    <span>
-      <%= message.user.username%>
-    </span>
-    <div class="message-body">
-      <%= markdown(message.body) %>
-    </div>
-  </div>
-</div>
+<%= render_date(message) %>
