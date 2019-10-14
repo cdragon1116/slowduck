@@ -4,7 +4,7 @@ $(document).on("turbolinks:load", function() {
     element = $('[data-behavior=\'messages\']');
     element.animate({
       scrollTop: element.prop('scrollHeight')
-    }, 200);
+    }, 1000);
   });
 
   // parent message hover with group

@@ -20,7 +20,8 @@ gem "sass_rails_patch", "~> 0.0.1"
 gem 'jquery-atwho-rails', '~> 1.5', '>= 1.5.4'
 gem 'friendly_id', '~> 5.3'
 gem 'sendgrid-ruby'
-gem "lazyload-rails"
+gem 'remotipart', '~> 1.2', '>= 1.2.1'
+gem 'active_storage_validations'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'

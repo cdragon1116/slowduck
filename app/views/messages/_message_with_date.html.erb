@@ -10,6 +10,9 @@
       <%= message.user.username%>
     </span>
     <div class="message-body pt-2">
+      <% if message.image.attached? and ['image/jpeg'].include?(message.image.blob.content_type) %>
+        <%= image_tag url_for( message.resize_image ) %>
+      <% end %>
       <%= process(message) %>
     </div>
 

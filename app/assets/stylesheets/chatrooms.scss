@@ -180,6 +180,7 @@
   width: 0;
   vertical-align: middle;
 }
+<<<<<<< HEAD
 
 // giphy-style
 
@@ -217,3 +218,10 @@
    height: 260px;
    overflow: scroll;
  }
+
+#file-uploader{
+  display: none;
+}
+.file-uploader-label{
+  cursor: pointer;
+}

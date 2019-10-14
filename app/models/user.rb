@@ -8,7 +8,8 @@ class User < ApplicationRecord
 
   validates :username, presence: true, allow_blank: false
   validates_uniqueness_of :username
-  
+  validates :image, content_type: [:png, :jpg, :jepg]
+
   has_one_attached :image
   has_many :chatroom_users
   has_many :chatrooms, through: :chatroom_users

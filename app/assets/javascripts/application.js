@@ -14,6 +14,7 @@
 //= require turbolinks
 //= require jquery3
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require jquery.atwho
 //= require popper 
 //= require_tree .

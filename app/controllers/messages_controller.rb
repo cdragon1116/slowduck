@@ -18,9 +18,12 @@ class MessagesController < ApplicationController
 
   def create
     message = Message.new(message_params)
-    if message.save
-      message.chatroom.chatroom_users.update(display: true)
-      MessageRelayJob.perform_later(message)
+    respond_to do |format|
+      if message.save
+        message.chatroom.chatroom_users.update(display: true)
+        MessageRelayJob.perform_later(message)
+        format.js
+      end
     end
   end
 
@@ -30,7 +33,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:body, :parent_id, :user_id, :chatroom_id)
+    params.require(:message).permit(:body, :parent_id, :user_id, :chatroom_id, :image)
   end
 
   def find_message
