@@ -6,9 +6,6 @@ module DeviseHelper
 
    html = <<-HTML
    <div class="alert alert-danger alert-block"> 
-    <button class="close" type="button" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">×</span>
-    </button>
     #{messages}
    </div>
    HTML
@@ -21,10 +18,7 @@ module DeviseHelper
   messages = flash.map{|name, msg| content_tag(:li, msg)}.join
 
    html = <<-HTML
-   <div class="alert alert-danger alert-block"> 
-    <button class="close" type="button" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">×</span>
-    </button>
+   <div class="alert alert-block"> 
     #{messages}
    </div>
    HTML

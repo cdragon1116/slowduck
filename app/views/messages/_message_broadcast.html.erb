@@ -1,0 +1,31 @@
+<div class="message icon navbar align-items-start flex-nowrap pl-5" data-user="<%= message.user.id%>" data-message="<%= message.id%>" data-parent="<%= message.parent.id%>">
+
+  <div class="navbar flex-nowrap align-items-start p-0">
+    <%= message_icon(message) %>
+
+    <div class="nav-item dropdown no-arrow mx-1 dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="userInfoDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= user_image(message.user, 32) %>
+      </a>
+
+      <%= render 'shared/user_dropdown_broadcast' , user: message.user %>
+    </div>
+
+  </div>
+
+  <div class="flex-grow-1 message-right">
+    <span class='h6 font-weight-bold text-dark'>
+      <%= message.user.username%>
+    </span>
+    <div class="message-body pt-2">
+      <%= process(message) %>
+    </div>
+
+    <%= form_for message, remote: true, html: { class: 'edit-message-form d-none pt-2' } do |form| %>
+      <%= form.text_area :body, :class => 'edit_input form-control col-xl-10' %>
+    <% end %>
+  </div>
+
+    <button class="update_message_btn btn d-none"><i class="fas fa-check"></i></button>
+    <button class="edit_message_btn btn d-none"><i class="fas fa-edit"></i></button>
+</div>

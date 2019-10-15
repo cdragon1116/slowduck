@@ -1,23 +1,26 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
+  root 'chatrooms#index'
 
   resources :chatrooms do
     resources :chatroom_users 
-    resources :messages
     collection do 
-      post :create_one_on_one
+      post :create_conversation
     end
     member do 
       post :hide_chatroom
     end
   end 
 
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations',
-    omniauth_callbacks: "users/omniauth_callbacks"
-  }
-
-  root 'chatrooms#index'
+  resources :messages
+  resources :notifications, only: [:index] do
+    post :mark_as_read, on: :collection
+    post :mark_as_read, on: :member
+  end
 
   namespace :api do 
     namespace :v2 do
@@ -31,11 +34,6 @@ Rails.application.routes.draw do
         end
       end
     end
-  end
-
-  resources :notifications, only: [:index] do
-    post :mark_as_read, on: :collection
-    post :mark_as_read, on: :member
   end
 end
 

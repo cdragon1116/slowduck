@@ -19,7 +19,8 @@ gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 gem "sass_rails_patch", "~> 0.0.1"
 gem 'jquery-atwho-rails', '~> 1.5', '>= 1.5.4'
 gem 'friendly_id', '~> 5.3'
-gem 'babosa'
+gem 'sendgrid-ruby'
+gem "lazyload-rails"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'

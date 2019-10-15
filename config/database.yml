@@ -8,8 +8,7 @@
 #   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
 # On Windows:
 #   gem install pg
-#       Choose the win32 build.
-#       Install PostgreSQL and put its /bin directory on your path.
+#       Choose the win32 build.  #       Install PostgreSQL and put its /bin directory on your path.
 #
 # Configure Using Gemfile
 # gem 'pg'
@@ -80,6 +79,6 @@ test:
 #
 production:
   <<: *default
-  database: flowdock_production
-  username: flowdock
-  password: <%= ENV['FLOWDOCK_DATABASE_PASSWORD'] %>
+  database: slowduck_production
+  username: slowduck
+  password: <%= ENV['SLOWDUCK_DATABASE_PASSWORD'] %>

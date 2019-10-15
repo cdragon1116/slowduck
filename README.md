@@ -1,24 +1,24 @@
-# README
+## SlowDuck
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails Real-Time Chatroom System
 
-Things you may want to cover:
+Provide GroupChatrooms and 1-on-1-Conversations.
 
-* Ruby version
+Real-Time implement through WebSocket by Rails Action Cable.
 
-* System dependencies
 
-* Configuration
+## What we can do ?
 
-* Database creation
+- Real-time Chat
+- Real-time Notification
+- 1-on-1 Conversation with friend
+- Group Chatroom with friends
+- Emoji on Message
+- Support Edit Message
+- Support Markdown Style
+- Support Mentions and Tags with notifications
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Chat Now!
+demo-url: http://slowduck.herokuapp.com

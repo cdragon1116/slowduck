@@ -1,56 +1,55 @@
-<div class="container mt-5">
+<div class="container pt-5 px-5">
   <div class="text-center mb-5">
     <%= user_image(current_user, 150) %>
-    <h3 class="text-gray-800"><%= current_user.username %></h3>
+    <h3 class="text-gray-800 py-2"><%= current_user.username %></h3>
   </div>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= bootstrap_devise_error_messages! %>
 
-    <div class="row">
+    <div class="row my-2">
       <div class="form-group col-12 col-md-6">
-        <%= f.label :username %>
+        <%= f.label "使用者名稱" %>
         <%= f.text_field :username, autofocus: false , autocomplete: 'username',class: 'form-control' %>
       </div>
 
       <div class="form-group col-12 col-md-6">
-        <%= f.label :email %>
+        <%= f.label "電子郵件" %>
         <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
       </div>
     </div>
-    <div class="form-group">
-      <%= f.label :image %>
+    <div class="form-group my-2>
+      <%= f.label "大頭貼" %>
       <%= f.file_field :image,class: 'form-control' %>
     </div>
 
 
-    <div class="row">
+    <div class="row my-2">
       <div class="col-12 col-md-6">
         <div class="form-group">
-          <%= f.label :password %>
+          <%= f.label "新密碼" %>
           <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
-          <small class="form-text text-muted"><%= t('.leave_blank_if_you_don_t_want_to_change_it') %></small>
+          <small class="form-text text-gray-500 small">如果不需更換密碼請保留空白</small>
         </div>
       </div>
       <div class="col-12 col-md-6">
         <div class="form-group">
-          <%= f.label :password_confirmation %>
+          <%= f.label "新密碼確認" %>
           <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'  %>
         </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label :current_password %>
+    <div class="form-group my-2">
+      <%= f.label "舊密碼" %>
       <%= f.password_field :current_password, autocomplete: 'current-password', class: 'form-control' %>
-
-      <small class="form-text text-muted"><%= t('.we_need_your_current_password_to_confirm_your_changes') %></small>
+      <small class="form-text text-gray-500 small">如果不需更換密碼請保留空白</small>
     </div>
 
-      <%= f.submit t('.update'), class: 'btn btn-sm btn-dark' %>
+      <%= f.submit "更新", class: 'btn btn-sm btn-dark' %>
   <% end %>
 
-  <p><%= link_to t('.cancel_my_account'), registration_path(resource_name), class:'small text-gray-500',data: { confirm: t('.are_you_sure') }, method: :delete %>.</p>
+  <p class='pt-2'><%= link_to "刪除帳戶", registration_path(resource_name), class:'small text-gray-500',data: { confirm: t('.are_you_sure') }, method: :delete %>.</p>
 
 
 </div>

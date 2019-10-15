@@ -29,15 +29,23 @@ module MarkdownHelper
     renderer = Rouge::Renderer.new(options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
 
-    # text = text.gsub("\r\n", "<br>").gsub("\n", '')
-    markdown_text = markdown.render(text)
-    
-    # 修正非code換行問題
-    markdown_text.gsub!('<br>', '')
+    # 修正換行問題
+    sub_text = text.gsub("\n ", '')
+    markdown_text = markdown.render(sub_text)
 
+    p_pattern = /(<p[^>]*>.*?<\/p>)/
+    p_ary = markdown_text.split(p_pattern)
+    p_final_text = p_ary.map do |x|
+      if x.start_with?("<p")
+        x.gsub('<br><br>', '<br>')
+      else
+        x
+      end
+    end
+   
     # 修正code 縮排問題
-    pattern = /(<\s*code[^>]*>)/
-    ary = markdown_text.split(pattern)
+    code_pattern = /(<\s*code[^>]*>)/
+    ary = p_final_text.join('').split(code_pattern)
     final_text = ary.map do |x|
       if x.start_with?("<code")
         x = x + "\r\n"
@@ -45,6 +53,7 @@ module MarkdownHelper
         x
       end
     end
+
     return final_text.join("").html_safe
   end
 

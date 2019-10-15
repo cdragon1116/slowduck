@@ -1,2 +1,2 @@
-json.extract! message, :id, :body
-json.content render(partial: "messages/message", locals: { message: message }, formats: [:html])
+json.extract! message, :id, :body, :user_id
+json.content render(partial: "messages/message", locals: { message: message , current_user: current_user}, formats: [:html])

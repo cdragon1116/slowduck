@@ -3,11 +3,10 @@
   <!-- Sidebar - Brand -->
   <%= link_to chatrooms_path, class:'sidebar-brand d-flex align-items-center justify-content-center' do %> 
     <div class="sidebar-brand-icon">
-      <%= image_tag "duck-plain.svg", :title => "title", :class => "sidebar-brand-icon svg-inline--fa" %>
+      <%= image_tag "duck-plain.svg", :title => "呱呱呱", :class => "sidebar-brand-icon svg-inline--fa" %>
     </div>
-    <div class="sidebar-brand-text mx-3">Slowduck</div>
+    <div title="首頁" class="sidebar-brand-text mx-3">Slowduck</div>
   <% end %>
-
 
   <!-- Divider -->
   <hr class="sidebar-divider">
@@ -15,16 +14,18 @@
   <% if user_signed_in? %>
 
     <!-- Heading -->
-    <div class="sidebar-heading my-2 my-md-3">
-      群組 
+    <div class="sidebar-heading my-2 my-md-3 text-prime">
+      群組
     </div>
 
 
     <% group_chatrooms.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <%= link_to  room, class:'nav-link py-2 py-md-3 pr-md-5', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
-          <span><%= "#{room.name}" %></span>
+      <li class="nav-item" title="<%= room.name %>">
+        <%= link_to  room, class:'nav-link py-4 py-md-3 pr-md-5', data: { behavior: "chatroom-link", chatroom_id: room.id} do %>
+          <span>
+            <%= truncate( room.name, :length => 10, :escape => false) %>
+          </span>
           <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>
         <% end %>
         <%= link_to '#', class:'tab-menu-link', data: {toggle:'collapse', target:"#collapse#{room.id}"} do %>
@@ -43,23 +44,23 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="sidebar-heading my-2">
+    <div class="sidebar-heading my-2 text-prime">
       一對一
     </div>
 
 
     <% conversations.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item py-0">
-        <%= link_to  room, class:'nav-link d-flex flex-row align-items-center justify-content-center justify-content-md-start py-2 py-md-3 pr-md-5', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
-            <div class="<%= conversation_online?(room, current_user) %>">
-              <div class="img d-none d-md-inline">
-                <%= user_image(room.conversation_with(current_user) , 32) %>
-              </div>
-              <span class="ml-md-3"><%= "#{room.conversation_with(current_user).username} <i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
+      <li class="nav-item py-0" title="<%= room.conversation_with(current_user).username %>">
+        <%= link_to  room, class:'nav-link d-flex flex-row align-items-center justify-content-center justify-content-md-start py-4 py-md-3 pr-md-5', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
+          <div class="d-flex align-items-center <%= conversation_online?(room, current_user) %>">
+            <div class="img d-none d-md-inline">
+              <%= user_image(room.conversation_with(current_user) , 32) %>
             </div>
+            <span class="ml-md-3"><%= truncate( room.conversation_with(current_user).username, :length => 10, :escape => false) + "<i class='fa fa-exclamation d-none text-warning ml-2' aria-hidden='true'></i>".html_safe %></span>
+          </div>
         <% end %>
-        <%= link_to  hide_chatroom_chatroom_path(room.id), class:'tab-menu-link close1on1 mt-md-1 d-none d-md-inline', method:'post' do %>
+        <%= link_to  hide_chatroom_chatroom_path(room.id), remote: true, class:'tab-menu-link hide-conversation mt-md-2', method:'post' do %>
           <i class="fas fa-times"></i>
         <% end %>
       </li>
@@ -71,12 +72,10 @@
 
   <% end %>
 
-  <div class="text-center ">
-    <button class="rounded-circle border-0 new-chatroom bg-light mt-3 mt-md-2">
-      <%= link_to  new_chatroom_path, class:'nav-link' do  %>
-        <i class="fas fa-plus text-dark"></i>
+  <div title="新增聊天室" class="text-center" >
+      <%= link_to  new_chatroom_path, class:'nav-link my-3' do  %>
+            <i class="fas fa-comment-medical text-light"></i>
       <% end %>
-    </button>
   </div>
 
 </ul>

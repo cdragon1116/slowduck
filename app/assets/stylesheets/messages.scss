@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-a.mention-link{
+span.mention-link{
     margin: 1px;
     display:inline-block;
     border-radius: 5px;
@@ -10,11 +10,11 @@ a.mention-link{
     font-size: 0.9rem;
     font-weight: 500;
 }
-a.mention-tag{
+span.mention-tag{
     color: #eee;
     background-color: #888;
 }
-a.mention-user{
+span.mention-user{
   color: #555;
   background-color: #fec52a;
 }
@@ -40,9 +40,54 @@ a.mention-user{
     position: relative;
 }
 
-
 #emoji-list{
     position: absolute;
     bottom: 78px;
     left: 15px;
   }
+
+button.edit_message_btn{
+  opacity: 0;
+}
+.message:hover button.edit_message_btn{
+  opacity: 100;
+}
+
+form.edit-message-form{
+  textarea#message_body{
+    min-width: 100%;
+    background-color: #fff;
+    border: none;
+  }
+  textarea#message_body:focus{
+    outline: none;
+    box-shadow: none;
+  }
+}
+span.edited{
+  font-size: 12px;
+  color: #aaa;
+}
+.message.message-with-date{
+  margin-top: 2.277rem;
+}
+.message.message-with-date::before{
+    font-size: 12px;
+    padding-top:0.75rem;
+    padding-bottom:0.75rem;
+    display: block;
+    content: attr(data-date);
+    position: absolute;
+    left: 0;
+    top: -30px;
+    width: 100%;
+    text-align: center;
+    border-color: #e4e4e4;
+    pointer-events: none;
+    background: transparent;
+    color: #BEBEBE;
+}
+
+.message-right{
+  min-width: 0;
+}

@@ -1,12 +1,14 @@
 class MessageRelayJob < ApplicationJob
   queue_as :default
 
-  def perform(message, user)
+  def perform(message)
     ActionCable.server.broadcast "chatrooms:#{message.chatroom_id}", {
-      message:  ApplicationController.renderer.render(partial: 'messages/message', locals: {message: message, current_user: user}),
+      message:  ApplicationController.renderer.render(partial: 'messages/message_broadcast', locals: {message: message}),
       username: message.user.username,
       body: message.body,
-      chatroom_id: message.chatroom_id
+      chatroom_id: message.chatroom_id,
+      message_id: message.id,
+      parent_id: message.parent_id,
     }
   end
 end

@@ -1,0 +1,23 @@
+<div class="message icon navbar align-items-start flex-nowrap pl-5 message-with-date" data-user="<%= message.user.id%>" data-message="<%= message.id%>" data-parent="<%= message.parent.id%>" data-date="<%= get_date(message)%>">
+
+  <div class="navbar flex-nowrap align-items-start p-0">
+    <%= message_icon(message) %>
+    <%= render 'shared/user_info', user: message.user, current_user: current_user %>
+  </div>
+
+  <div class="flex-grow-1 message-right">
+    <span class='h6 font-weight-bold text-dark'>
+      <%= message.user.username%>
+    </span>
+    <div class="message-body pt-2">
+      <%= process(message) %>
+    </div>
+
+    <% if message.user == current_user %>
+    <%= form_for message, remote: true, html: { class: 'edit-message-form d-none pt-2' } do |form| %>
+      <%= form.text_area :body, :class => 'edit_input form-control col-xl-10' %>
+      <% end %>
+    <% end %>
+  </div>
+  <%= edit_buttons(message, current_user) %>
+</div>

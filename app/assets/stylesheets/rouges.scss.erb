@@ -1,7 +1,39 @@
 // markdown style
 .message-body{
   <%= Rouge::Themes::Base16.mode(:dark).render(scope: '.highlight') %>
-  
+  h1, h2, h3, h4, h5, h6{
+    padding-bottom: 0.2rem;
+  }
+  h1{
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+  h2{
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+  }
+  h3{
+    font-size: 2rem;
+    line-height: 2rem;
+  }
+  h4{
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+  }
+  h5{
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
+  h6{
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+  strong{
+    font-weight: 800;
+  }
+  em{
+    font-style: italic;
+  }
   pre{
     background-color: #fafafa;
     padding: 0 20px 18px;
@@ -9,6 +41,7 @@
     border: 1px solid #ccc;
     font-size: 14px;
     line-height: 18px;
+
   }
   .highlight {
     background-color: #333;
@@ -18,6 +51,7 @@
   }
   p{
     font-size:16px;
+    display:block;
   }
   blockquote {
     margin: 1em 1em;
@@ -33,6 +67,13 @@
 
   ol li {
     list-style: decimal inside;
+  }
+
+  code,
+  pre {
+    -moz-osx-font-smoothing: auto;
+    -webkit-font-smoothing: auto;
+    font-family: monospace;
   }
 }
 

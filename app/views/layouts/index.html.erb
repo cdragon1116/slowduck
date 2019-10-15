@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SlowDuck</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="turbolinks-cache-control" content="no-cache">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div class="d-flex" id="wrapper">
+      <%= render 'shared/sidebar' , group_chatrooms: @group_chatrooms, conversations: @conversations %> 
+
+      <!-- Page Content -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main-content -->
+        <div class="content">
+
+          <!-- Top-bar -->
+          <%= render 'shared/nav_without_search', notifications: @notifications %>
+          <!-- /Top-bar -->
+
+          <!-- Begin-Page-Content -->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+            <%= yield %>
+
+            <div class="loading-block d-none">
+              <div class="black"></div>
+              <div class="page-loader text-center">
+                <%= render 'shared/ducks' %>
+              </div>
+            </div>
+
+          </div>
+          <!-- End-of-Page-Content -->
+        </div>
+        <!-- End-of-Main-content -->
+      </div>
+      <!-- End-of-page-content-wrapper -->
+    </div>
+    <!-- End-of-wrapper -->
+
+    <%= render 'shared/logout' %>
+    <!-- Scroll to Top Button-->
+  </body>
+</html>

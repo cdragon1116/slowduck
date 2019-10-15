@@ -1,0 +1,23 @@
+<div class="dropdown-menu shadow animated--grow-in dropdown-menu-left py-0" id="userInfoMenu" aria-labelledby="userInfoDropdown" >
+  <div class="d-flex align-items-center justify-content-center mx-3">
+    <%= user_image(user, 32) %>
+  <div class="ml-2 py-2">
+    <%= user.username %>
+    <div class="small text-gray-500 my-2"><%= user.email %></div>
+    <% if user.online == 1 %>
+      <div class="small text-prime ">在線</div>
+    <% else %>
+      <div class="small text-gray">離線</div>
+    <% end %>
+  </div>
+  </div>
+    <%= form_tag create_conversation_chatrooms_path , :method => :post ,:html => { :class=>"conversation-form conversation-#{user.id} drop-down-item, text-center"} do |form| %>
+      <%= hidden_field_tag :room_type, :value => 1 %>
+      <%= fields_for :chatroom_users do |f| %>
+        <%= f.hidden_field :user_id ,  :value => user.id %>
+      <% end %>
+      <%= link_to '#', :onclick => "$('.conversation-#{user.id}').submit()",:class =>'dropdown-item text-center small text-gray-500 bg-dark rounded-bottom' do  %>
+        <div>開啟一對一對話</div>
+      <% end %>
+    <% end %>
+</div>

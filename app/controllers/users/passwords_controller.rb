@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Users::PasswordsController < Devise::PasswordsController
-  layout 'account'
+  layout 'devise'
+  # layout 'account'
   # GET /resource/password/new
   # def new
   #   super
@@ -9,7 +10,8 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # POST /resource/password
   # def create
-  #   super
+    # render html: params
+    # super
   # end
 
   # GET /resource/password/edit?reset_password_token=abcdef
@@ -24,9 +26,6 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # protected
 
-  # def after_resetting_password_path_for(resource)
-  #   super(resource)
-  # end
 
   # The path used after sending reset password instructions
   # def after_sending_reset_password_instructions_path_for(resource_name)
