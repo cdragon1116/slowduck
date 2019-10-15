@@ -151,3 +151,28 @@
   padding: 3px;
   display: block;
 }
+.new-chatroom-input{
+  text-align: center;
+  border-radius: 20px;
+  &:focus{
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.new-chatroom-submit{
+  position: absolute;
+  right: 10%;
+  top: 14%;
+  .fa-comment-medical{
+    font-size: 25px;
+  }
+}
+
+.new-chatroom-wrap::before{
+  content:'';
+  display: inline-block;
+  height: 100%;
+  width: 0;
+  vertical-align: middle;
+}

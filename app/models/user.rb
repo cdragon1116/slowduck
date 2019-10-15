@@ -30,7 +30,7 @@ class User < ApplicationRecord
 
   def relative_users
     chatroom_ids = chatrooms.map(&:id)
-    User.includes(image_attachment: :blob).joins(:chatroom_users).where('chatroom_id IN (?) ', chatroom_ids).distinct
+    User.includes(image_attachment: :blob).joins(:chatroom_users).where('chatroom_id IN (?) ', chatroom_ids).distinct - [self]
   end
 
   def is_online
