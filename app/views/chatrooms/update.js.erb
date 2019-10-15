@@ -1,12 +1,19 @@
 newName = $('#chatroom_name').val()
+
+if (newName.length > 10){
+  sidebarName = newName.slice(0, 8) + '...'
+}else{
+  sidebarName = newName
+}
+
 editForm = $('[data-behavior="editChatroom"]')
 editForm.html('')
 editForm.html(`
-    <h3 class='h2 text-dark'>${newName}</h3>
+    <h3 class='h2 text-dark edit-chatroom-name'>${newName}</h3>
     <a href='#' class="mx-4 text-dark small" id="editChatroomName">編輯</a>
   `)
 
-var active_chatroom = $(`[data-behavior='editChatroom']`).data('chatroom-id');
-var active_link = $(`[data-behavior='chatroom-link'][data-chatroom-id='${active_chatroom}'] span`)
-active_link.html(newName)
+var edit_active_chatroom = $(`[data-behavior='editChatroom']`).data('chatroom-id');
+var active_link = $(`[data-behavior='chatroom-link'][data-chatroom-id='${edit_active_chatroom}'] span`)
+active_link.html(sidebarName)
 

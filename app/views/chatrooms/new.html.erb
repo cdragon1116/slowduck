@@ -4,7 +4,7 @@
     <div class="m-auto">
       <%= form_for(@chatroom) do |form| %>
         <div class="form-group">
-          <%= form.text_field :name, :class => 'new-chatroom-input col-10 bg-light border-0 py-3 px-3', :placeholder => '輸入聊天室名稱' %>
+          <%= form.text_field :name, :class => 'new-chatroom-input text-center col-10 bg-light border-0 py-3 px-3', :placeholder => '輸入聊天室名稱' %>
           <%= form.button :submit , :class => 'btn new-chatroom-submit' do %>
             <i class="fas fa-comment-medical text-dark"></i>
           <% end %>

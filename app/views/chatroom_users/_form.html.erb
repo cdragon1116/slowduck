@@ -1,11 +1,11 @@
-<div class="d-flex align-items-center mb-4">
-  <h5 class="m-0 small text-gray-800">新增成員</h5>
+<div class="text-center mb-4">
+   <h1 class='h3 text-gray-900 mt-5 mb-5'>新增成員</h1>
 </div>
 
 <%= form_for [chatroom, chatroom_user] do |form| %>
   <div class="form-group row justify-content-center">
     <%= form.fields_for :user do |user_field| %>
-      <%= user_field.text_field :email, :class => 'form-control col-11 col-md-11', :placeholder =>'輸入使用者Email或名稱 / @查詢已知使用者' %><br/>
+      <%= user_field.text_field :email, :class => 'new-chatroom-input col-12 bg-light border-0 py-3 px-3', :placeholder => '輸入Email或名稱或@查詢' %>
     <% end %>
   </div>
 <% end %>
