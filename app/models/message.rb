@@ -28,7 +28,6 @@ class Message < ApplicationRecord
 
   def slugged_message
     SecureRandom.hex[0, 8]
-  
   end
 
   def set_parent

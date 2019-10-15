@@ -23,7 +23,6 @@ class ChatroomUsersController < ApplicationController
     else
       @chatroom_user.destroy
       @chatroom.notifications.create(recipient: @chatroom_user.user, actor: current_user, action: 'kickout')
-      redirect_to edit_chatroom_path(@chatroom)
     end
   end
 

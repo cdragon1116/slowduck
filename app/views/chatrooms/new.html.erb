@@ -1,31 +1,35 @@
-<div class="container pt-5 px-5">
-  <div class="d-inline-block">
-  <h1 class='small text-gray-900 mt-5 mb-4'>創建聊天室</h1>
-  <%= form_for(@chatroom) do |form| %>
-    <div class="form-group row flex-row">
-      <%= form.text_field :name, :class => 'form-control col-12 col-md-8', :placeholder => '輸入聊天室名稱' %>
-      <%= form.submit "創建", :class => 'col-12 col-md-3 btn btn-sm btn-dark mt-3 mt-md-0 mx-md-1' %>
+<div class="new-chatroom-wrap container pt-5 px-5">
+  <div class="text-center align-middle">
+    <h1 class='h3 text-gray-900 mt-5 mb-5'>創建群組與朋友聊天！</h1>
+    <div class="m-auto">
+      <%= form_for(@chatroom) do |form| %>
+        <div class="form-group">
+          <%= form.text_field :name, :class => 'new-chatroom-input text-center col-10 bg-light border-0 py-3 px-3', :placeholder => '輸入聊天室名稱' %>
+          <%= form.button :submit , :class => 'btn new-chatroom-submit' do %>
+            <i class="fas fa-comment-medical text-dark"></i>
+          <% end %>
+        </div>
+      <% end %>
     </div>
-  <% end %></div>
+  </div>
 
-
-  <hr class='my-5'>
-
-  <div class="users-list mt-5 d-inline-block m-auto">
-    <h1 class='small text-gray-900 mb-4'>與朋友對話</h1>
-    <% @friends.each do |user| %>
-      <div class="user-info navbar mx-2 my-2 p-0">
-        <div class="d-flex align-items-center justify-content-center">
-
-          <%= render 'shared/user_info', user: user, current_user: current_user %>
-
-          <div class="ml-2">
-            <%=user.username %>
-            <div class="small text-gray-500 my-2"><%= user.email %></div>
+  <% unless @friends.size == 0 %>
+    <div class="users-list m-auto align-middle">
+      <div class="text-center">
+        <h1 class='h3 text-gray-900 my-5'>與朋友私訊</h1>
+      </div>
+      <% @friends.each do |user| %>
+        <div class="user-info navbar mx-2 my-2 p-0">
+          <div class="d-flex align-items-center justify-content-center">
+            <%= render 'shared/user_info', user: user, current_user: current_user %>
+            <div class="ml-2">
+              <%=user.username %>
+              <div class="small text-gray-500 my-2"><%= user.email %></div>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
-    <div class="clearfix"></div>
-  </div>
+      <% end %>
+      <div class="clearfix"></div>
+    </div>
+  <% end %>
 </div>

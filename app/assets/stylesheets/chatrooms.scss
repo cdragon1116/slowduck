@@ -5,6 +5,7 @@
   overflow:hidden;
   box-sizing: border-box;
   max-width: 100%;
+  min-width: 100%;
   min-height: calc(100vh - 4.375rem);
   flex-flow: column nowrap;
   font-size: 20px;
@@ -29,7 +30,6 @@
 
 .form{
   box-sizing: border-box;
-  width: calc(100vw - 14rem);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   textarea.form-control{
@@ -38,6 +38,7 @@
     width: 100%;
     height: 5rem;
     border:none;
+    resize: none;
   }
   textarea.form-control:focus{
     box-shadow :none;
@@ -47,19 +48,17 @@
     padding: 0 5px;
   }
   div#emoji-list{
-    max-width: 302px;
+    max-width: 285px;
     border-radius: 5px;
     padding: 10px;
   }
-}
-.form.active{
-  width: calc(60vw - 14rem);
 }
 .form.sidebar-toggled{
   width: calc(100vw - 6.5rem);
 }
 .chatroom.active{
   min-width: 60%;
+  max-width: 60%;
 }
 
 .message-body{
@@ -142,5 +141,40 @@
 
 #emoji-button-area{
   vertical-align: middle;
+  padding: 0 5px;
+}
+#emoji-list{
+  display: flex;
+  flex-flow: row wrap;
+}
+#emoji-list span{
+  padding: 3px;
+  display: block;
+}
+.edit-chatroom-name{
+  font-size: 3rem;
+}
+.new-chatroom-input{
+  border-radius: 20px;
+  &:focus{
+    outline: none;
+    box-shadow: none;
+  }
+}
 
+.new-chatroom-submit{
+  position: absolute;
+  right: 10%;
+  top: 14%;
+  .fa-comment-medical{
+    font-size: 25px;
+  }
+}
+
+.new-chatroom-wrap::before{
+  content:'';
+  display: inline-block;
+  height: 100%;
+  width: 0;
+  vertical-align: middle;
 }

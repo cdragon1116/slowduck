@@ -11,10 +11,17 @@
   height: calc(100vh - 4.375rem);
   overflow-y: auto;
 
+  label{
+    margin: 5px 0;
+  }
   input.form-control{
     border: none;
-    border-bottom: 1px solid #666;
-    border-radius: 0;
+    background: #f8f9fc;
+    border-radius: 20px;
+    &:focus{
+      outline: none;
+      box-shadow: none;
+    }
   }
 
   input.form-control:focus{
@@ -41,7 +48,10 @@ a.dropdown-item:active{
 .fa-markdown{
   color: #333;
 }
+.fa-comment-medical{
+  font-size: 32px;
 
+}
 .clearfix{
   clear: both;
 }

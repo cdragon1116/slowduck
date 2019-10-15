@@ -20,7 +20,7 @@
         <div class="content">
 
           <!-- Top-bar -->
-          <%= render 'shared/nav', notifications: @notifications %>
+          <%= render 'shared/nav', notifications: @notifications, cached: true  %>
           <!-- /Top-bar -->
 
           <!-- Begin-Page-Content -->
@@ -44,7 +44,7 @@
     </div>
     <!-- End-of-wrapper -->
 
-    <%= render 'shared/logout' %>
+    <%= render 'shared/logout', cached: true %>
     <!-- Scroll to Top Button-->
   </body>
 </html>

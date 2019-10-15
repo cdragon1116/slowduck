@@ -12,6 +12,7 @@ class MessagesController < ApplicationController
   end
 
   def show
+    @message.notifications.where(recipient_id: current_user.id).update(read_at: Time.zone.now)
     @messages = @message.initialize_messages
   end
 

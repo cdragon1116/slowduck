@@ -20,17 +20,14 @@ $(function ($) {
     this.each(function (n, input) {
       var $input = $(input);
 
-      function showEmoji() {
+      function showEmoji(ev) {
         $list.show();
         $input.focus();
-        setTimeout(function () {
-          $(document).on('click', closeEmoji);
-        }, 1);
+        return false
       }
 
       function closeEmoji() {
         $list.hide();
-        $(document).off('click', closeEmoji);
       }
 
       function clickEmoji(ev) {
@@ -44,11 +41,15 @@ $(function ($) {
           input.value += ev.currentTarget.innerHTML;
         }
 
-        closeEmoji();
         $input.focus();
         input.selectionStart = startPos + 2;
         input.selectionEnd = endPos + 2;
+        return false
       }
+
+      $(document).on('click', function(e){
+        closeEmoji()
+      })
 
       var $button = $("<span id='emoji-button-area'>").html(settings.button).css({cursor: 'pointer', 'font-size': settings.fontSize}).on('click', showEmoji);
       var $list = $('<div id=emoji-list>').css(defaults.listCSS).css(settings.listCSS);

@@ -17,7 +17,6 @@
 //= require jquery.atwho
 //= require popper 
 //= require_tree .
-//= require_tree ./channels
 //
 
 // full-page loader
@@ -68,12 +67,6 @@ $(document).on('turbolinks:load', function(e){
     }
   });
 
-  // Close button action to go Back
-  $('.close').on('click', function(){
-    history.go(-1);
-    return false;
-  });
-
   //Close collapse panel when document on click
   if ($(window).width() > 768) {
     $(document).click(function(){
@@ -93,6 +86,7 @@ $(document).on('turbolinks:load', function(e){
   active_link.parent().css('background-color', '#fec52a')
   active_link.parent().children(1).css({'color':'#333', 'font-weight': 700})
   active_link.css({'color':'#333', 'font-weight': 700})
-
 })
+
+
 

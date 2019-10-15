@@ -58,6 +58,9 @@ GEM
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
     builder (3.2.3)
+    bullet (5.9.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.0.1)
     capybara (3.29.0)
       addressable
@@ -147,6 +150,8 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     jwt (2.2.1)
+    lazyload-rails (0.5.0)
+      nokogiri (~> 1.5)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -296,6 +301,7 @@ GEM
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (0.1.1)
+    uniform_notifier (1.13.0)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -315,6 +321,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3.1)
+  bullet (~> 5.7, >= 5.7.5)
   byebug
   capybara (>= 2.15)
   chromedriver-helper
@@ -329,6 +336,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-atwho-rails (~> 1.5, >= 1.5.4)
   jquery-rails
+  lazyload-rails
   listen (>= 3.0.5, < 3.2)
   mini_magick (~> 4.5, >= 4.5.1)
   omniauth

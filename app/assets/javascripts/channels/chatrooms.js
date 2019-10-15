@@ -8,6 +8,8 @@ App.chatrooms = App.cable.subscriptions.create("ChatroomsChannel", {
   received: function(data) {
     var active_chatroom;
     active_chatroom = $(`[data-behavior='messages'][data-chatroom-id='${data.chatroom_id}']`);
+    active_message = $(`[data-message='top']`)
+    active_message_id = $(`[data-message='top']`).data('top-id')
 
     if ( document.hidden && Notification.permission == "granted") {
       new Notification(data.username, {
@@ -28,10 +30,20 @@ App.chatrooms = App.cable.subscriptions.create("ChatroomsChannel", {
         }, 200)
         
       } else{
-        active_chatroom.append(data.message);
-        active_chatroom.animate({
-          scrollTop: active_chatroom.prop('scrollHeight')
-        }, 300);
+        if (active_message.length > 0){
+          if (active_message_id == data.parent_id){
+            active_chatroom.append(data.message);
+            active_chatroom.animate({
+              scrollTop: active_chatroom.prop('scrollHeight')
+            }, 300);
+          }
+
+        } else{
+          active_chatroom.append(data.message);
+          active_chatroom.animate({
+            scrollTop: active_chatroom.prop('scrollHeight')
+          }, 300);
+        }
       }
 
     } else {

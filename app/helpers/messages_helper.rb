@@ -12,7 +12,7 @@ module MessagesHelper
 
   def user_image(user, size)
     if user.image.attached? 
-      image_tag url_for(user.resize_image("#{size}x#{size}!")), class:"shadow-sm img-profile rounded-circle"
+      image_tag url_for(user.resize_image(size)), class:"shadow-sm img-profile rounded-circle"
     else
       "<i class='fas fa-user-circle fa-lg text-dark' style='width:#{size}px; height:#{size}px; vertical-align: middle;'></i>".html_safe
     end

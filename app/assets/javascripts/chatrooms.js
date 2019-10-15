@@ -24,7 +24,7 @@ $(document).on("turbolinks:load", function() {
   // Right Panel Toggle Button
   $('#rightPanelCollapse').on('click', function () {
     $('#right-panel').toggleClass('active');
-    $('#chatroom').toggleClass('active');
+    $('.chatroom').toggleClass('active');
     $('.form').toggleClass('active');
   });
 
@@ -71,5 +71,10 @@ $(document).on('click', '#editChatroomName', function(e){
   editForm.html(`
     <input class="form-control col-12 col-md-4 mx-2" type="text" value="${originName}" name="chatroom[name]" id="chatroom_name" />
     <input type="submit" name="commit" value="更新" class="btn btn-dark btn-sm small" id="updateChatroom" data-disable-with="更新" />`)
+
 })
+
+$(document).on( 'change keyup keydown paste cut', '.edit_input', function (){
+    $(this).height(0).height(this.scrollHeight);
+}).find( 'textarea' ).change();
 

@@ -40,7 +40,6 @@ span.mention-user{
     position: relative;
 }
 
-
 #emoji-list{
     position: absolute;
     bottom: 78px;
@@ -87,4 +86,8 @@ span.edited{
     pointer-events: none;
     background: transparent;
     color: #BEBEBE;
+}
+
+.message-right{
+  min-width: 0;
 }

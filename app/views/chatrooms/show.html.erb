@@ -1,19 +1,21 @@
 <div class="d-flex flex-nowrap w-100 align-items-stretch">
   <div class="chatroom" >
-    <div class="row no-gutters align-items-center chatroom-name shadow border-left">
-      <h3 class='h4 mb-0'><%= chatroom_link(@chatroom) %></h3>
+    <div class="row no-gutters align-items-center justify-content-start chatroom-name shadow border-left">
+      <h3 class='h4 mb-0'><%= chatroom_name(@chatroom) %></h3>
 
-      <nav class="navbar p-0 ml-3 mr-auto align-items-center">
-        <% @chatroom_users_online.each do |user| %>
+      <nav class="navbar p-0 mx-3 align-items-center">
+        <% @chatroom.online_users.each do |user| %>
           <%= render 'shared/user_online', user: user %> 
         <% end %>
-        <% if @chatroom_users_offline.size != 0 %>
+        <% if @chatroom.offline_users.size != 0 %>
           <div class="small mx-2">|</div>
         <% end %>
-        <% @chatroom_users_offline.each do |user| %>
+        <% @chatroom.offline_users.each do |user| %>
           <%= render 'shared/user_offline', user:user %> 
         <% end %>
       </nav>
+      <%= add_member_button(@chatroom) %>
+
     </div>
 
     <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>' class='message-box'>

@@ -1,4 +1,4 @@
-<div class="container pt-5">
+<div class="container pt-5 px-5">
   <div class="text-center mb-5">
     <%= user_image(current_user, 150) %>
     <h3 class="text-gray-800 py-2"><%= current_user.username %></h3>
@@ -7,7 +7,7 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= bootstrap_devise_error_messages! %>
 
-    <div class="row">
+    <div class="row my-2">
       <div class="form-group col-12 col-md-6">
         <%= f.label "使用者名稱" %>
         <%= f.text_field :username, autofocus: false , autocomplete: 'username',class: 'form-control' %>
@@ -18,18 +18,18 @@
         <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group my-2>
       <%= f.label "大頭貼" %>
       <%= f.file_field :image,class: 'form-control' %>
     </div>
 
 
-    <div class="row">
+    <div class="row my-2">
       <div class="col-12 col-md-6">
         <div class="form-group">
           <%= f.label "新密碼" %>
           <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
-          <small class="form-text text-muted small">如果不需更換密碼請保留空白</small>
+          <small class="form-text text-gray-500 small">如果不需更換密碼請保留空白</small>
         </div>
       </div>
       <div class="col-12 col-md-6">
@@ -40,10 +40,10 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group my-2">
       <%= f.label "舊密碼" %>
       <%= f.password_field :current_password, autocomplete: 'current-password', class: 'form-control' %>
-      <small class="form-text text-muted small">如果不需更換密碼請保留空白</small>
+      <small class="form-text text-gray-500 small">如果不需更換密碼請保留空白</small>
     </div>
 
       <%= f.submit "更新", class: 'btn btn-sm btn-dark' %>
