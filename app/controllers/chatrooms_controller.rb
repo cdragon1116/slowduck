@@ -11,8 +11,7 @@ class ChatroomsController < ApplicationController
 
   def show
     current_user.is_online
-    @messages = @chatroom.initialize_messages
-  end
+    @messages = @chatroom.initialize_messages end
 
   def new
     @chatroom = Chatroom.new
@@ -82,6 +81,7 @@ class ChatroomsController < ApplicationController
 
   def authenticate_chatroom_user!
     unless @chatroom.users.exists?(id: current_user.id)
+      update_notification
       redirect_to chatrooms_url, notice: '你沒有權限!'
     end
   end

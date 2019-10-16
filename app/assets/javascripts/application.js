@@ -87,6 +87,3 @@ $(document).on('turbolinks:load', function(e){
   active_link.parent().children(1).css({'color':'#333', 'font-weight': 700})
   active_link.css({'color':'#333', 'font-weight': 700})
 })
-
-
-

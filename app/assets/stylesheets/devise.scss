@@ -1,11 +1,13 @@
 // signin/signout page
 #pop-up-block{
   position: fixed;
-  top: 5vh;
+  top: 0vh;
   left: 0;
   bottom: 0;
   right: 0;
+  margin: auto;
   z-index:20;
+  height: 800px;
   overflow-y: auto;
 }
 #pop-up-block:after{
@@ -26,6 +28,6 @@
     display: none;
   }
   #pop-up-block{
-    top: -3vh;
+    height: auto;
   }
 }

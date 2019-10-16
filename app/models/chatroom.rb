@@ -22,6 +22,10 @@ class Chatroom < ApplicationRecord
     chatroom_users.where(user: user).update(display: boolean)
   end
 
+  def users_with_image
+    users.includes(image_attachment: :blob).order(online: :desc)
+  end
+
   def online_users
     users.includes(image_attachment: :blob).where(online: 1)
   end
