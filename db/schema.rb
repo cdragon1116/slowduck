@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 2019_10_14_063613) do
     t.datetime "updated_at", null: false
     t.datetime "last_read_at"
     t.boolean "display", default: true
-    t.boolean "online", default: true
     t.index ["chatroom_id"], name: "index_chatroom_users_on_chatroom_id"
     t.index ["user_id"], name: "index_chatroom_users_on_user_id"
   end
