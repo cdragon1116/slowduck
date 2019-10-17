@@ -167,6 +167,7 @@ a.dropdown-item:active{
 }
 
 // scrool-bar style
+#giphy_resault::-webkit-scrollbar-track,
 .message-box::-webkit-scrollbar-track,
 #right-panel::-webkit-scrollbar-track,
 .sidebarbar::-webkit-scrollbar-track
@@ -174,6 +175,7 @@ a.dropdown-item:active{
   border-radius: 20px;
 }
 
+#giphy_resault::-webkit-scrollbar,
 .message-box::-webkit-scrollbar,
 #right-panel::-webkit-scrollbar,
 .sidebar::-webkit-scrollbar
@@ -181,6 +183,7 @@ a.dropdown-item:active{
   width: 4px;
 }
 
+#giphy_resault::-webkit-scrollbar-thumb,
 .message-box::-webkit-scrollbar-thumb,
 #right-panel::-webkit-scrollbar-thumb,
 .sidebar::-webkit-scrollbar-thumb

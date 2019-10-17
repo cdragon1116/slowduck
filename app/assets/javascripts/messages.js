@@ -98,6 +98,7 @@ $(document).on('click', function(){
   $.each(msgs, function(i, msg){
     reset_edit_message(msg)
   })
+  $("#giphy_list").hide();
 })
 
 $(document).on('keypress', '#message_body', function(e){
