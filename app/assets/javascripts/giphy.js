@@ -17,12 +17,12 @@ document.addEventListener('turbolinks:load', function(){
         e.stopPropagation();
     });
     $("#giphy_icon").on("click", function(e){
+        $('#emoji-list').hide()
         e.stopPropagation();
     });
 
     
   $('#giphy_list').on('click', function(e){
-    console.log('click')
     return false
   })
 

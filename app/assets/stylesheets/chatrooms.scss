@@ -226,6 +226,11 @@
 
  }
 
+@media (max-width: 768px) {
+  #giphy_list{
+    width: 80%;
+  }
+}
  .result{
    position: absolute;
    top: 40px;
