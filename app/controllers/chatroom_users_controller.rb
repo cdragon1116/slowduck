@@ -19,7 +19,7 @@ class ChatroomUsersController < ApplicationController
     @chatroom_user = ChatroomUser.find_by(chatroom: @chatroom, user_id: params[:id])
     if @chatroom.last_person?
       @chatroom.destroy
-      redirect_to root_path
+      redirect_to new_chatrooms_path
     else
       @chatroom_user.destroy
       @chatroom.notifications.create(recipient: @chatroom_user.user, actor: current_user, action: 'kickout')

@@ -43,7 +43,15 @@ module MessagesHelper
       render 'messages/message_without_date', message: message
     end
   end
+
   def get_date(message)
     message.created_at.strftime(' %m月%d日')
+  end
+
+  def message_image(message)
+    image_types = ['image/jpeg', 'image/gif', 'image/png']
+    if message.image.attached? and image_types.include?(message.image.blob.content_type)
+      image_tag url_for( message.resize_image ), :class => 'message_image'
+    end
   end
 end

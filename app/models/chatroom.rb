@@ -8,7 +8,6 @@ class Chatroom < ApplicationRecord
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   accepts_nested_attributes_for :chatroom_users, :users
-
   after_commit :clear_associations, on: :destroy
 
   extend FriendlyId

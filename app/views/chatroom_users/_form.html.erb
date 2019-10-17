@@ -1,5 +1,5 @@
 <div class="text-center mb-4">
-   <h1 class='h3 text-gray-900 mt-5 mb-5'>新增成員</h1>
+  <h1 class='h3 text-gray-900 mt-5 mb-5'>新增成員</h1>
 </div>
 
 <%= form_for [chatroom, chatroom_user] do |form| %>
@@ -22,13 +22,15 @@
           <div class="small text-gray-500 my-2"><%= user.email %></div>
         </div>
       </div>
-      <div class="leave">
-        <%= link_to  chatroom_chatroom_user_path(@chatroom.id, user.id), remote: true,  method:'delete', data:{confirm: "你要移除此成為嗎？"}, class:'nav-link'  do %>
-          <i class="fas fa-times text-dark"></i>
-        <% end %>
-      </div>
+      <% if user.id != current_user.id %>
+        <div class="leave">
+          <%= link_to  chatroom_chatroom_user_path(@chatroom.id, user.id), remote: true,  method:'delete', data:{confirm: "你要踢出此成員嗎？"}, class:'nav-link'  do %>
+            <i class="fas fa-times text-dark"></i>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   <% end %>
-    <div class="clearfix"></div>
+  <div class="clearfix"></div>
 </div>
 

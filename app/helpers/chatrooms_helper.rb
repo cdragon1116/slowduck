@@ -6,6 +6,7 @@ module ChatroomsHelper
       "#{chatroom.name}".html_safe
     end
   end
+
   def add_member_button(chatroom)
     if !chatroom.conversation?
       link_to edit_chatroom_path(chatroom), :title => '加人進聊天室', :class => 'add-user ml-2' do 
@@ -13,6 +14,7 @@ module ChatroomsHelper
       end
     end
   end
+
   def user_state(user)
     if user.online?
       render 'shared/user_online', user: user

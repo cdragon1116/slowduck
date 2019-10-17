@@ -11,7 +11,7 @@ class ChatroomsController < ApplicationController
   end
 
   def show
-    current_user.is_online
+    current_user.online!
     @messages = @chatroom.initialize_messages
   end
 
