@@ -29,7 +29,19 @@
       </div>
     </div>
 
+    <span id="giphy_icon"><img src="https://img.icons8.com/metro/26/000000/gif.png"></span>
+              <div id='giphy_list' style=" display:none">
+                  <form action="search" id="giphy_search">
+                      <input type="text" placeholder="輸入想尋找的giphy" id="giphy_form">
+                  </form>
+                    
+                  <div class="result" id="giphy_resault">
+                  </div> 
+              </div>       
+
     <div class="form">
+
+      
       <%= form_for Message.new, remote: true,  authenticity_token: true do |form| %>
         <div class="form-group d-flex align-items-center mb-0">
           <%= form.text_area :body, :class => 'input form-control', :placeholder => "有話快說！！！", autofocus: true, id: 'message_input' %>

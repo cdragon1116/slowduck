@@ -4,9 +4,11 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable,
     :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
+  before_create :remove_space
+
   validates :username, presence: true, allow_blank: false
   validates_uniqueness_of :username
-
+  
   has_one_attached :image
   has_many :chatroom_users
   has_many :chatrooms, through: :chatroom_users
@@ -44,4 +46,9 @@ class User < ApplicationRecord
   def online?
     online == 1
   end
+
+  def remove_space
+    self.username.gsub!(/\s+/, "")
+  end
+
 end
