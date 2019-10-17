@@ -1,6 +1,6 @@
 module MessagesHelper
   def edit_buttons(message, current_user)
-    if message.user.id == current_user.id
+    if message.user.id == current_user.id and !message.image.attached?
       '<button class="update_message_btn btn d-none"><i class="fas fa-check"></i></button><button class="edit_message_btn btn"><i class="fas fa-edit"></i></button>'.html_safe
     end
   end

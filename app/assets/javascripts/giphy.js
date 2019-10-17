@@ -28,6 +28,7 @@ document.addEventListener('turbolinks:load', function(){
     var form = document.querySelector("#giphy_list form");
     var input = document.querySelector('#giphy_list input[type="text"]');
     var result = document.querySelector("#giphy_list .result");
+    console.log(form)
 
 
     function search(e) {
