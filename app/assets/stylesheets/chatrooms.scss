@@ -31,21 +31,22 @@
 .form{
   box-sizing: border-box;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 5rem;
 
   textarea.form-control{
+    line-height: 1.2rem;
     box-sizing: border-box;
     padding: 10px;
     width: 100%;
-    height: 5rem;
     border:none;
     resize: none;
   }
   textarea.form-control:focus{
     box-shadow :none;
   }
-  div#emoji-button-area{
+  span#emoji-button-area{
     box-sizing: border-box;
-    padding: 0 5px;
+    padding: 0 10px;
   }
   div#emoji-list{
     max-width: 285px;
@@ -143,14 +144,16 @@
   vertical-align: middle;
   padding: 0 5px;
 }
+
 #emoji-list{
   display: flex;
   flex-flow: row wrap;
+  span{
+    padding: 3px;
+    display: block;
+  }
 }
-#emoji-list span{
-  padding: 3px;
-  display: block;
-}
+
 .edit-chatroom-name{
   font-size: 3rem;
 }
@@ -180,7 +183,6 @@
 }
 
 // giphy-style
-
 #giphy_icon{
   box-sizing: border-box;
   position: relative;
@@ -197,14 +199,31 @@
   box-shadow:1px 1px 2px 3px #cccccc;
   border-radius: 10px; 
   height: 300px;
-  width: 300px;
+  width: 400px;
+  padding: 10px;
  }
+
  #giphy_form{
+   font-size: 20px;
+   padding: 10px;
    position: absolute;
    top: 5px;
    left: 2px;
-   width: 290px;
+   width: 100%;
    border-radius: 10px;
+   border: none;
+   background-color: #fff;
+   z-index: 3;
+ }
+ #giphy_form:focus{
+   box-shadow: none;
+   outline: none;
+ }
+ #giphy_resault{
+   padding-top: 20px;
+   width: 95%;
+   overflow: auto;
+
  }
 
  .result{
@@ -215,3 +234,15 @@
    height: 260px;
    overflow: scroll;
  }
+
+#file-uploader{
+  display: none;
+}
+.file-uploader-label{
+  color: #555;
+  cursor: pointer;
+}
+.gif-image{
+  width: 25px;
+  vertical-align: top;
+}

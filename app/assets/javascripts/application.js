@@ -14,6 +14,7 @@
 //= require turbolinks
 //= require jquery3
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require jquery.atwho
 //= require popper 
 //= require_tree .
@@ -87,6 +88,3 @@ $(document).on('turbolinks:load', function(e){
   active_link.parent().children(1).css({'color':'#333', 'font-weight': 700})
   active_link.css({'color':'#333', 'font-weight': 700})
 })
-
-
-

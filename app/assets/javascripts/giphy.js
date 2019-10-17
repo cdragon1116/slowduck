@@ -19,7 +19,12 @@ document.addEventListener('turbolinks:load', function(){
     $("#giphy_icon").on("click", function(e){
         e.stopPropagation();
     });
+
     
+  $('#giphy_list').on('click', function(e){
+    console.log('click')
+    return false
+  })
 
     var apiKey ='Mrjdc0YDiu0GDGzkciE04Av5N2SJ1zSN';
     var query = 'cat';
@@ -33,6 +38,7 @@ document.addEventListener('turbolinks:load', function(){
     function search(e) {
         e.preventDefault();
         query = input.value;
+        $("#giphy_resault").empty();
         makeRequest(query);
     }
 

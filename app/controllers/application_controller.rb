@@ -5,9 +5,10 @@ class ApplicationController < ActionController::Base
 
   private
   def record_not_found
-    render :file => "#{Rails.root}/public/404.html",
-          :status => 404,
-          :layout => false
+    redirect_to root_path, notice: "沒有此聊天室"
+    #render :file => "#{Rails.root}/public/404.html",
+          #:status => 404,
+          #:layout => false
   end
 
   def current_user_chatrooms

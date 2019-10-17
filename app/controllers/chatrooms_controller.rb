@@ -4,13 +4,14 @@ class ChatroomsController < ApplicationController
   before_action :authenticate_chatroom_user! , only: [:show, :edit, :update, :destroy, :hide_chatroom]
   before_action :set_new_conversation, only: [:show, :new, :edit, :create]
   before_action :update_notification, only: [:show]
+
   layout 'index', only: [:index]
 
   def index 
   end
 
   def show
-    current_user.is_online
+    current_user.online!
     @messages = @chatroom.initialize_messages
   end
 
@@ -82,6 +83,7 @@ class ChatroomsController < ApplicationController
 
   def authenticate_chatroom_user!
     unless @chatroom.users.exists?(id: current_user.id)
+      update_notification
       redirect_to chatrooms_url, notice: '你沒有權限!'
     end
   end

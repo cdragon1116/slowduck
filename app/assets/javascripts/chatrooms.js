@@ -3,10 +3,29 @@ $(document).on("turbolinks:load", function() {
   // submit textarea when enter
   $('#new_message').on("keypress", function(e) {
     if (e && e.keyCode === 13 && !e.shiftKey)  {
-        e.preventDefault();
-        return $(this).submit();
+      e.preventDefault(); return $(this).submit();
     }
   });
+
+  $('#new_message').on('ajax:error', function(e, data, status, xhr){
+    console.log('hi')
+  })
+
+  // file upload submit
+  $('#file-uploader').on('change',function(e){
+    let fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
+    let filename = $(this).val()
+    let extension = filename.replace(/^.*\./, '').toLowerCase()
+    let form = $(this).parents('form')
+
+    if (fileExtension.includes(extension)) {
+      e.preventDefault();
+      form.submit();
+    } else{
+      alert("只允許以下類型檔案 : "+fileExtension.join(', '));
+      $(this).val('')
+    }
+  })
 
   // when new-message-send scroll bottom
   let element, scrolled;
@@ -20,7 +39,7 @@ $(document).on("turbolinks:load", function() {
   $('[data-behavior=\'messages\']').on('scroll', function() {
     return scrolled = true;
   });
-  
+
   // Right Panel Toggle Button
   $('#rightPanelCollapse').on('click', function () {
     $('#right-panel').toggleClass('active');
@@ -69,12 +88,12 @@ $(document).on('click', '#editChatroomName', function(e){
   let editForm = $('[data-behavior="editChatroom"]')
   let originName = $('[data-behavior="editChatroom"] h3').html()
   editForm.html(`
-    <input class="form-control col-12 col-md-4 mx-2" type="text" value="${originName}" name="chatroom[name]" id="chatroom_name" />
-    <input type="submit" name="commit" value="更新" class="btn btn-dark btn-sm small" id="updateChatroom" data-disable-with="更新" />`)
+                <input class="form-control col-12 col-md-4 mx-2" type="text" value="${originName}" name="chatroom[name]" id="chatroom_name" />
+                <input type="submit" name="commit" value="更新" class="btn btn-dark btn-sm small" id="updateChatroom" data-disable-with="更新" />`)
 
 })
 
 $(document).on( 'change keyup keydown paste cut', '.edit_input', function (){
-    $(this).height(0).height(this.scrollHeight);
+  $(this).height(0).height(this.scrollHeight);
 }).find( 'textarea' ).change();
 
