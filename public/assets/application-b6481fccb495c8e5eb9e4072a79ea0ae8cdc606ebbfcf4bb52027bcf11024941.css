@@ -14050,40 +14050,47 @@ body.sidebar-toggled footer.sticky-footer {
 .offline {
   opacity: .2;
 }
-/* line 4, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 5, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+:root {
+  --vh: 1vh;
+}
+
+/* line 9, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .chatroom {
   overflow: hidden;
   box-sizing: border-box;
   max-width: 100%;
   min-width: 100%;
-  min-height: calc(100vh - 4.375rem);
+  min-height: calc(var(--vh, 1vh) * 100 - 4.375rem);
   flex-flow: column nowrap;
   font-size: 20px;
   background-color: #fff;
 }
-/* line 14, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 19, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .chatroom .chatroom-name {
   padding: 5px 10px;
   height: 3rem;
 }
-/* line 19, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 24, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .chatroom .chatroom-name a {
   color: #5a5c69;
 }
-/* line 23, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 28, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .chatroom .message-box {
   width: 100%;
-  height: calc(100vh - 12.375rem );
+  height: calc(var(--vh, 1vh) * 100 - 12.375rem);
   overflow-y: auto;
 }
 
-/* line 31, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 36, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .form {
   box-sizing: border-box;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: 5rem;
+  background: #fff;
+  width: 100%;
 }
-/* line 36, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 43, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .form textarea.form-control {
   line-height: 1.2rem;
   box-sizing: border-box;
@@ -14092,53 +14099,48 @@ body.sidebar-toggled footer.sticky-footer {
   border: none;
   resize: none;
 }
-/* line 44, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 51, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .form textarea.form-control:focus {
   box-shadow: none;
 }
-/* line 47, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 54, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .form span#emoji-button-area {
   box-sizing: border-box;
   padding: 0 10px;
 }
-/* line 51, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 58, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .form div#emoji-list {
   max-width: 285px;
   border-radius: 5px;
   padding: 10px;
 }
 
-/* line 57, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
-.form.sidebar-toggled {
-  width: calc(100vw - 6.5rem);
-}
-
-/* line 60, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 64, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .chatroom.active {
   min-width: 60%;
   max-width: 60%;
 }
 
-/* line 65, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 69, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .message-body {
   overflow-wrap: break-word;
   font-size: 1rem;
   line-height: 1.5rem;
 }
 
-/* line 71, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 75, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #search-input:focus {
   outline: none;
   box-shadow: none;
 }
 
-/* line 77, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 81, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #right-panel {
   position: relative;
   display: none;
 }
 
-/* line 82, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 86, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #right-panel.active {
   display: block;
   min-width: 40%;
@@ -14150,7 +14152,7 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 @media (max-width: 992px) {
-  /* line 92, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+  /* line 96, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
   #right-panel {
     min-width: 200px;
     max-width: 200px;
@@ -14158,17 +14160,17 @@ body.sidebar-toggled footer.sticky-footer {
   }
 }
 @media (max-width: 768px) {
-  /* line 100, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+  /* line 104, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
   .chatroom {
     width: 100%;
   }
 
-  /* line 103, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+  /* line 107, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
   #right-panel {
     display: none;
   }
 
-  /* line 106, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+  /* line 110, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
   #right-panel.active {
     display: block;
     position: absolute;
@@ -14180,28 +14182,28 @@ body.sidebar-toggled footer.sticky-footer {
     left: 0;
   }
 
-  /* line 116, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+  /* line 120, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
   .chatroom.active {
     min-width: 100%;
   }
 
-  /* line 119, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+  /* line 123, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
   .form {
     width: 100%;
   }
 }
-/* line 125, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 129, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .hide-conversation {
   display: none;
 }
 
 @media (min-width: 768px) {
-  /* line 130, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+  /* line 134, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
   li.nav-item:hover > .hide-conversation {
     display: block;
   }
 }
-/* line 135, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 139, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #emoji-button-area::before {
   content: '';
   display: inline-block;
@@ -14210,50 +14212,50 @@ body.sidebar-toggled footer.sticky-footer {
   vertical-align: middle;
 }
 
-/* line 143, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 147, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #emoji-button-area {
   vertical-align: middle;
   padding: 0 5px;
 }
 
-/* line 148, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 152, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #emoji-list {
   display: flex;
   flex-flow: row wrap;
 }
-/* line 151, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 155, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #emoji-list span {
   padding: 3px;
   display: block;
 }
 
-/* line 157, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 161, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .edit-chatroom-name {
   font-size: 3rem;
 }
 
-/* line 160, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 164, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .new-chatroom-input {
   border-radius: 20px;
 }
-/* line 162, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 166, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .new-chatroom-input:focus {
   outline: none;
   box-shadow: none;
 }
 
-/* line 168, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 172, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .new-chatroom-submit {
   position: absolute;
   right: 10%;
   top: 14%;
 }
-/* line 172, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 176, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .new-chatroom-submit .fa-comment-medical {
   font-size: 25px;
 }
 
-/* line 177, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 181, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .new-chatroom-wrap::before {
   content: '';
   display: inline-block;
@@ -14262,15 +14264,16 @@ body.sidebar-toggled footer.sticky-footer {
   vertical-align: middle;
 }
 
-/* line 186, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 190, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #giphy_icon {
   box-sizing: border-box;
   position: relative;
   padding: 0 2px;
 }
 
-/* line 194, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 198, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #giphy_list {
+  z-index: 500;
   display: inline-block;
   position: absolute;
   bottom: 90px;
@@ -14282,27 +14285,27 @@ body.sidebar-toggled footer.sticky-footer {
   padding: 10px;
 }
 
-/* line 206, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 211, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #giphy_form {
   font-size: 20px;
   padding: 10px;
   position: absolute;
   top: 5px;
   left: 2px;
-  width: 100%;
+  width: 90%;
   border-radius: 10px;
   border: none;
   background-color: #fff;
   z-index: 3;
 }
 
-/* line 218, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 223, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #giphy_form:focus {
   box-shadow: none;
   outline: none;
 }
 
-/* line 222, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 227, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #giphy_resault {
   padding-top: 20px;
   width: 95%;
@@ -14310,12 +14313,12 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 @media (max-width: 768px) {
-  /* line 230, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+  /* line 235, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
   #giphy_list {
     width: 80%;
   }
 }
-/* line 234, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 239, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .result {
   position: absolute;
   top: 40px;
@@ -14325,18 +14328,18 @@ body.sidebar-toggled footer.sticky-footer {
   overflow: scroll;
 }
 
-/* line 243, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 248, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 #file-uploader {
   display: none;
 }
 
-/* line 246, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 251, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .file-uploader-label {
   color: #555;
   cursor: pointer;
 }
 
-/* line 250, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
+/* line 255, /Users/longlong/Project/flowdock/app/assets/stylesheets/chatrooms.scss */
 .gif-image {
   width: 25px;
   vertical-align: top;
@@ -14691,7 +14694,7 @@ a.dropdown-item:active {
 
 /* line 70, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
 .sidebar {
-  min-height: 100%;
+  height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #333;
@@ -14756,16 +14759,15 @@ a.dropdown-item:active {
 
   /* line 117, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
   .sidebar {
-    height: 100vh;
     min-width: 14rem;
   }
 
-  /* line 121, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+  /* line 120, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
   .sidebar.toggled {
     min-width: 6.5rem;
   }
 }
-/* line 127, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+/* line 126, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
 .result-loader {
   position: absolute;
   top: 0;
@@ -14777,12 +14779,12 @@ a.dropdown-item:active {
   height: 200px;
 }
 
-/* line 138, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+/* line 137, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
 .history-loader {
   display: none;
 }
 
-/* line 141, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+/* line 140, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
 .page-loader {
   z-index: 10;
   position: absolute;
@@ -14795,7 +14797,7 @@ a.dropdown-item:active {
   height: 200px;
 }
 
-/* line 152, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+/* line 151, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
 .black {
   content: '';
   position: absolute;
@@ -14807,13 +14809,13 @@ a.dropdown-item:active {
   left: 0;
 }
 
-/* line 164, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+/* line 163, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
 .notification-list {
   overflow: auto;
   height: 300px;
 }
 
-/* line 170, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+/* line 169, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
 #giphy_resault::-webkit-scrollbar-track,
 .message-box::-webkit-scrollbar-track,
 #right-panel::-webkit-scrollbar-track,
@@ -14821,12 +14823,13 @@ a.dropdown-item:active {
   border-radius: 20px;
 }
 
-/* line 178, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
+/* line 177, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
 #giphy_resault::-webkit-scrollbar,
 .message-box::-webkit-scrollbar,
 #right-panel::-webkit-scrollbar,
 .sidebar::-webkit-scrollbar {
   width: 4px;
+  height: 4px;
 }
 
 /* line 186, /Users/longlong/Project/flowdock/app/assets/stylesheets/nav-sidebar.scss */
