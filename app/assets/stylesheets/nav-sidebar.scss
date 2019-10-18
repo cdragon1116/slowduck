@@ -8,7 +8,7 @@
 
 .container-fluid{
   position: relative;
-  height: calc(100vh - 4.375rem);
+  height: calc(var(--vh, 1vh) * 100 - 4.375rem);
   overflow-y: auto;
 
   label{
@@ -68,7 +68,7 @@ a.dropdown-item:active{
 }
 // sidebar
 .sidebar{
-  min-height: 100%;
+  height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #333;
@@ -115,7 +115,6 @@ a.dropdown-item:active{
   }
 
   .sidebar{
-    height: 100vh;
     min-width: 14rem;
   }
   .sidebar.toggled{
@@ -167,20 +166,24 @@ a.dropdown-item:active{
 }
 
 // scrool-bar style
+#giphy_resault::-webkit-scrollbar-track,
 .message-box::-webkit-scrollbar-track,
 #right-panel::-webkit-scrollbar-track,
-.sidebarbar::-webkit-scrollbar-track,
+.sidebarbar::-webkit-scrollbar-track
 {
   border-radius: 20px;
 }
 
+#giphy_resault::-webkit-scrollbar,
 .message-box::-webkit-scrollbar,
 #right-panel::-webkit-scrollbar,
 .sidebar::-webkit-scrollbar
 {
   width: 4px;
+  height: 4px;
 }
 
+#giphy_resault::-webkit-scrollbar-thumb,
 .message-box::-webkit-scrollbar-thumb,
 #right-panel::-webkit-scrollbar-thumb,
 .sidebar::-webkit-scrollbar-thumb

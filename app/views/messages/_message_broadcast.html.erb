@@ -18,6 +18,9 @@
       <%= message.user.username%>
     </span>
     <div class="message-body pt-2">
+      <% if message.image.attached? %>
+        <%= image_tag url_for( message.resize_image) %>
+      <% end %>
       <%= process(message) %>
     </div>
 

@@ -6,40 +6,40 @@
   </button>
 
   <div class="nav-item mr-1 text-center small d-none d-md-block" id="notice">
-   <%= notice %>
+    <%= notice %>
   </div>
- <!-- Topbar Navbar -->
+  <!-- Topbar Navbar -->
   <ul class="navbar-nav ml-auto">
 
     <% if user_signed_in?%>
-    <!-- Nav Item - Alerts -->
-    <li class="nav-item dropdown no-arrow mx-1">
-      <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-bell fa-fw"></i>
-        <!-- Counter - Alerts -->
-        <span class="badge badge-danger badge-counter" data-behavior='unread-count'><%= notifications.size if notifications.size > 0 %></span>
-      </a>
-      <!-- Dropdown - Alerts -->
-      <div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-md-left dropdown-menu-xl-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="bell-alert">
-        <h6 class="bg-dark p-2 text-light text-center small mb-0">
-          未讀通知列表
-        </h6>
-        <div class="notification-list">
-          <% notifications.each do |notification| %>
-            <%= render "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}", notification: notification %>
+      <!-- Nav Item - Alerts -->
+      <li class="nav-item dropdown no-arrow mx-1">
+        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-bell fa-fw"></i>
+          <!-- Counter - Alerts -->
+          <span class="badge badge-danger badge-counter" data-behavior='unread-count'><%= notifications.size if notifications.size > 0 %></span>
+        </a>
+        <!-- Dropdown - Alerts -->
+        <div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-md-left dropdown-menu-xl-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="bell-alert">
+          <h6 class="bg-dark p-2 text-light text-center small mb-0">
+            未讀通知列表
+          </h6>
+          <div class="notification-list">
+            <% notifications.each do |notification| %>
+              <%= render "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}", notification: notification %>
+            <% end %>
+          </div>
+          <%= link_to mark_as_read_notifications_path, method: :post, remote: true,  id:'mark-as-read', class:'dropdown-item text-center small text-gray-500' do %> 
+            全部標示為已讀 
           <% end %>
         </div>
-        <%= link_to mark_as_read_notifications_path, method: :post, remote: true,  id:'mark-as-read', class:'dropdown-item text-center small text-gray-500' do %> 
-          全部標示為已讀 
-        <% end %>
-      </div>
-    </li>
+      </li>
 
-    <li class="nav-item dropdown no-arrow mx-1" title="MarkDown語法說明" >
-      <a class="nav-link dropdown-toggle" href="https://markdown.tw/"  target="_blank" data-display="static" >
-        <i class="fab fa-markdown"></i>
-      </a>
-    </li>
+      <li class="nav-item dropdown no-arrow mx-1" title="MarkDown語法說明" >
+        <a class="nav-link dropdown-toggle" href="https://markdown.tw/"  target="_blank" data-display="static" >
+          <i class="fab fa-markdown"></i>
+        </a>
+      </li>
       <div class="topbar-divider d-none d-sm-block"></div>
       <!-- Nav Item - User Information -->
       <li class="nav-item dropdown no-arrow">
@@ -51,10 +51,10 @@
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-        <%= link_to edit_user_registration_path, class:'dropdown-item' do %>
+          <%= link_to edit_user_registration_path, class:'dropdown-item' do %>
             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
             個人資料
-            <% end %>
+          <% end %>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

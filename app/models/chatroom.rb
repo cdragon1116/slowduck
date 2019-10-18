@@ -8,7 +8,6 @@ class Chatroom < ApplicationRecord
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   accepts_nested_attributes_for :chatroom_users, :users
-
   after_commit :clear_associations, on: :destroy
 
   extend FriendlyId
@@ -20,6 +19,10 @@ class Chatroom < ApplicationRecord
 
   def update_display(user, boolean)
     chatroom_users.where(user: user).update(display: boolean)
+  end
+
+  def users_with_image
+    users.includes(image_attachment: :blob).order(online: :desc)
   end
 
   def online_users
@@ -35,7 +38,7 @@ class Chatroom < ApplicationRecord
   end
 
   def initialize_messages
-    messages.includes(:parent, { user:  {image_attachment: [:blob]}} ).order(created_at: :desc).limit(15).reverse
+    messages.includes(:parent, { user: {image_attachment: [:blob]}}, image_attachment: :blob ).order(created_at: :desc).limit(15).reverse
   end
 
   def tags

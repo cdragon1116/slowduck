@@ -1,12 +1,17 @@
 class Message < ApplicationRecord
-  validates :body, presence: true, allow_blank: false
+  validates :body, presence: true, allow_blank: false, unless: :image_attached?
+  validates :image, content_type: [:png, :jpg, :jepg, :gif]
+
   belongs_to :user
   belongs_to :chatroom
   belongs_to :parent, class_name: :Message, optional: true
+
   has_many :messages, class_name: :Message, foreign_key: :parent_id
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :message_tags, dependent: :destroy
   has_many :tags, through: :message_tags, dependent: :destroy
+  has_one_attached :image
+
 
   include Taggable
   after_create :set_parent, :set_color
@@ -15,13 +20,21 @@ class Message < ApplicationRecord
   extend FriendlyId
   friendly_id :slugged_message, use: :slugged
 
+  def image_attached?
+    image.attached?
+  end
+
   def clear_associations
     notifications.destroy_all
     message_tags.destroy_all
   end
 
+  def resize_image(size = 200)
+    image.variant(resize: "#{size}x#{size}").processed
+  end
+
   def initialize_messages
-    messages.includes(:parent, :chatroom, :user => :image_attachment).order(created_at: :desc).reverse
+    messages.includes(:parent, :chatroom, { user: {image_attachment: [:blob]}} , image_attachment: :blob).order(created_at: :desc).reverse
   end
 
   private

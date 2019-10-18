@@ -37,4 +37,5 @@ yarn-debug.log*
 /config/application.yml
 
 /config/secrets/*
-*.swp
+/*.swp
+/tags

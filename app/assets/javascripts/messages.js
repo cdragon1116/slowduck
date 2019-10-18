@@ -4,7 +4,7 @@ $(document).on("turbolinks:load", function() {
     element = $('[data-behavior=\'messages\']');
     element.animate({
       scrollTop: element.prop('scrollHeight')
-    }, 200);
+    }, 1000);
   });
 
   // parent message hover with group
@@ -98,6 +98,7 @@ $(document).on('click', function(){
   $.each(msgs, function(i, msg){
     reset_edit_message(msg)
   })
+  $("#giphy_list").hide();
 })
 
 $(document).on('keypress', '#message_body', function(e){
