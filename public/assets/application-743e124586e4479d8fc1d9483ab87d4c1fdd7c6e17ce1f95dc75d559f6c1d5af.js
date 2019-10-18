@@ -12819,6 +12819,345 @@ return jQuery;
   }
 
 })( jQuery );
+// This [jQuery](https://jquery.com/) plugin implements an `<iframe>`
+// [transport](https://api.jquery.com/jQuery.ajax/#extending-ajax) so that
+// `$.ajax()` calls support the uploading of files using standard HTML file
+// input fields. This is done by switching the exchange from `XMLHttpRequest`
+// to a hidden `iframe` element containing a form that is submitted.
+
+// The [source for the plugin](https://github.com/cmlenz/jquery-iframe-transport)
+// is available on [Github](https://github.com/) and licensed under the [MIT
+// license](https://github.com/cmlenz/jquery-iframe-transport/blob/master/LICENSE).
+
+// ## Usage
+
+// To use this plugin, you simply add an `iframe` option with the value `true`
+// to the Ajax settings an `$.ajax()` call, and specify the file fields to
+// include in the submssion using the `files` option, which can be a selector,
+// jQuery object, or a list of DOM elements containing one or more
+// `<input type="file">` elements:
+
+//     $("#myform").submit(function() {
+//         $.ajax(this.action, {
+//             files: $(":file", this),
+//             iframe: true
+//         }).complete(function(data) {
+//             console.log(data);
+//         });
+//     });
+
+// The plugin will construct hidden `<iframe>` and `<form>` elements, add the
+// file field(s) to that form, submit the form, and process the response.
+
+// If you want to include other form fields in the form submission, include
+// them in the `data` option, and set the `processData` option to `false`:
+
+//     $("#myform").submit(function() {
+//         $.ajax(this.action, {
+//             data: $(":text", this).serializeArray(),
+//             files: $(":file", this),
+//             iframe: true,
+//             processData: false
+//         }).complete(function(data) {
+//             console.log(data);
+//         });
+//     });
+
+// ### Response Data Types
+
+// As the transport does not have access to the HTTP headers of the server
+// response, it is not as simple to make use of the automatic content type
+// detection provided by jQuery as with regular XHR. If you can't set the
+// expected response data type (for example because it may vary depending on
+// the outcome of processing by the server), you will need to employ a
+// workaround on the server side: Send back an HTML document containing just a
+// `<textarea>` element with a `data-type` attribute that specifies the MIME
+// type, and put the actual payload in the textarea:
+
+//     <textarea data-type="application/json">
+//       {"ok": true, "message": "Thanks so much"}
+//     </textarea>
+
+// The iframe transport plugin will detect this and pass the value of the
+// `data-type` attribute on to jQuery as if it was the "Content-Type" response
+// header, thereby enabling the same kind of conversions that jQuery applies
+// to regular responses. For the example above you should get a Javascript
+// object as the `data` parameter of the `complete` callback, with the
+// properties `ok: true` and `message: "Thanks so much"`.
+
+// ### Handling Server Errors
+
+// Another problem with using an `iframe` for file uploads is that it is
+// impossible for the javascript code to determine the HTTP status code of the
+// servers response. Effectively, all of the calls you make will look like they
+// are getting successful responses, and thus invoke the `done()` or
+// `complete()` callbacks. You can only communicate problems using the content
+// of the response payload. For example, consider using a JSON response such as
+// the following to indicate a problem with an uploaded file:
+
+//     <textarea data-type="application/json">
+//       {"ok": false, "message": "Please only upload reasonably sized files."}
+//     </textarea>
+
+// ### Compatibility
+
+// This plugin has primarily been tested on Safari 5 (or later), Firefox 4 (or
+// later), and Internet Explorer (all the way back to version 6). While I
+// haven't found any issues with it so far, I'm fairly sure it still doesn't
+// work around all the quirks in all different browsers. But the code is still
+// pretty simple overall, so you should be able to fix it and contribute a
+// patch :)
+
+// ## Annotated Source
+
+(function($, undefined) {
+  "use strict";
+
+  // Register a prefilter that checks whether the `iframe` option is set, and
+  // switches to the "iframe" data type if it is `true`.
+  $.ajaxPrefilter(function(options, origOptions, jqXHR) {
+    if (options.iframe) {
+      options.originalURL = options.url;
+      return "iframe";
+    }
+  });
+
+  // Register a transport for the "iframe" data type. It will only activate
+  // when the "files" option has been set to a non-empty list of enabled file
+  // inputs.
+  $.ajaxTransport("iframe", function(options, origOptions, jqXHR) {
+    var form = null,
+        iframe = null,
+        name = "iframe-" + $.now(),
+        files = $(options.files).filter(":file:enabled"),
+        markers = null,
+        accepts = null;
+
+    // This function gets called after a successful submission or an abortion
+    // and should revert all changes made to the page to enable the
+    // submission via this transport.
+    function cleanUp() {
+      files.each(function(i, file) {
+        var $file = $(file);
+        $file.data("clone").replaceWith($file);
+      });
+      form.remove();
+      iframe.one("load", function() { iframe.remove(); });
+      iframe.attr("src", "about:blank");
+    }
+
+    // Remove "iframe" from the data types list so that further processing is
+    // based on the content type returned by the server, without attempting an
+    // (unsupported) conversion from "iframe" to the actual type.
+    options.dataTypes.shift();
+
+    // Use the data from the original AJAX options, as it doesn't seem to be 
+    // copied over since jQuery 1.7.
+    // See https://github.com/cmlenz/jquery-iframe-transport/issues/6
+    options.data = origOptions.data;
+
+    if (files.length) {
+      form = $("<form enctype='multipart/form-data' method='post'></form>").
+        hide().attr({action: options.originalURL, target: name});
+
+      // If there is any additional data specified via the `data` option,
+      // we add it as hidden fields to the form. This (currently) requires
+      // the `processData` option to be set to false so that the data doesn't
+      // get serialized to a string.
+      if (typeof(options.data) === "string" && options.data.length > 0) {
+        $.error("data must not be serialized");
+      }
+      $.each(options.data || {}, function(name, value) {
+        if ($.isPlainObject(value)) {
+          name = value.name;
+          value = value.value;
+        }
+        $("<input type='hidden' />").attr({name:  name, value: value}).
+          appendTo(form);
+      });
+
+      // Add a hidden `X-Requested-With` field with the value `IFrame` to the
+      // field, to help server-side code to determine that the upload happened
+      // through this transport.
+      $("<input type='hidden' value='IFrame' name='X-Requested-With' />").
+        appendTo(form);
+
+      // Borrowed straight from the JQuery source.
+      // Provides a way of specifying the accepted data type similar to the
+      // HTTP "Accept" header
+      if (options.dataTypes[0] && options.accepts[options.dataTypes[0]]) {
+        accepts = options.accepts[options.dataTypes[0]] +
+                  (options.dataTypes[0] !== "*" ? ", */*; q=0.01" : "");
+      } else {
+        accepts = options.accepts["*"];
+      }
+      $("<input type='hidden' name='X-HTTP-Accept'>").
+        attr("value", accepts).appendTo(form);
+
+      // Move the file fields into the hidden form, but first remember their
+      // original locations in the document by replacing them with disabled
+      // clones. This should also avoid introducing unwanted changes to the
+      // page layout during submission.
+      markers = files.after(function(idx) {
+        var $this = $(this),
+            $clone = $this.clone().prop("disabled", true);
+        $this.data("clone", $clone);
+        return $clone;
+      }).next();
+      files.appendTo(form);
+
+      return {
+
+        // The `send` function is called by jQuery when the request should be
+        // sent.
+        send: function(headers, completeCallback) {
+          iframe = $("<iframe src='about:blank' name='" + name +
+            "' id='" + name + "' style='display:none'></iframe>");
+
+          // The first load event gets fired after the iframe has been injected
+          // into the DOM, and is used to prepare the actual submission.
+          iframe.one("load", function() {
+
+            // The second load event gets fired when the response to the form
+            // submission is received. The implementation detects whether the
+            // actual payload is embedded in a `<textarea>` element, and
+            // prepares the required conversions to be made in that case.
+            iframe.one("load", function() {
+              var doc = this.contentWindow ? this.contentWindow.document :
+                (this.contentDocument ? this.contentDocument : this.document),
+                root = doc.documentElement ? doc.documentElement : doc.body,
+                textarea = root.getElementsByTagName("textarea")[0],
+                type = textarea && textarea.getAttribute("data-type") || null,
+                status = textarea && textarea.getAttribute("data-status") || 200,
+                statusText = textarea && textarea.getAttribute("data-statusText") || "OK",
+                content = {
+                  text: type ?
+                    textarea.value :
+                    root ? (root.textContent || root.innerText) : null
+                };
+              cleanUp();
+              if (!jqXHR.responseText) {
+                jqXHR.responseText = content.text;
+              }
+              completeCallback(status, statusText, content, type ?
+                ("Content-Type: " + type) :
+                null);
+            });
+
+            // Now that the load handler has been set up, submit the form.
+            form[0].submit();
+          });
+
+          // After everything has been set up correctly, the form and iframe
+          // get injected into the DOM so that the submission can be
+          // initiated.
+          $("body").append(form, iframe);
+        },
+
+        // The `abort` function is called by jQuery when the request should be
+        // aborted.
+        abort: function() {
+          if (iframe !== null) {
+            iframe.unbind("load").attr("src", "about:blank");
+            cleanUp();
+          }
+        }
+
+      };
+    }
+  });
+
+})(jQuery);
+
+
+
+(function($) {
+
+  var remotipart;
+
+  $.remotipart = remotipart = {
+
+    setup: function(form) {
+      // Preserve form.data('ujs:submit-button') before it gets nulled by $.ajax.handleRemote
+      var button = form.data('ujs:submit-button'),
+          csrfParam = $('meta[name="csrf-param"]').attr('content'),
+          csrfToken = $('meta[name="csrf-token"]').attr('content'),
+          csrfInput = form.find('input[name="' + csrfParam + '"]').length;
+
+      form
+        // Allow setup part of $.rails.handleRemote to setup remote settings before canceling default remote handler
+        // This is required in order to change the remote settings using the form details
+        .one('ajax:beforeSend.remotipart', function(e, xhr, settings){
+          // Delete the beforeSend bindings, since we're about to re-submit via ajaxSubmit with the beforeSubmit
+          // hook that was just setup and triggered via the default `$.rails.handleRemote`
+          // delete settings.beforeSend;
+          delete settings.beforeSend;
+
+          settings.iframe      = true;
+          settings.files       = $($.rails.fileInputSelector, form);
+          settings.data        = form.serializeArray();
+
+          // Insert the name/value of the clicked submit button, if any
+          if (button)
+            settings.data.push(button);
+
+          // jQuery 1.9 serializeArray() contains input:file entries
+          // so exclude them from settings.data, otherwise files will not be sent
+          settings.files.each(function(i, file){
+            for (var j = settings.data.length - 1; j >= 0; j--)
+              if (settings.data[j].name == file.name)
+                settings.data.splice(j, 1);
+          })
+
+          settings.processData = false;
+
+          // Modify some settings to integrate JS request with rails helpers and middleware
+          if (settings.dataType === undefined) { settings.dataType = 'script *'; }
+          settings.data.push({name: 'remotipart_submitted', value: true});
+          if (csrfToken && csrfParam && !csrfInput) {
+            settings.data.push({name: csrfParam, value: csrfToken});
+          }
+
+          // Allow remotipartSubmit to be cancelled if needed
+          if ($.rails.fire(form, 'ajax:remotipartSubmit', [xhr, settings])) {
+            // Second verse, same as the first
+            $.rails.ajax(settings).always(function(data){
+              $.rails.fire(form, 'ajax:remotipartComplete', [data]);
+            });
+            setTimeout(function(){ $.rails.disableFormElements(form); }, 20);
+          }
+
+          //Run cleanup
+          remotipart.teardown(form);
+
+          // Cancel the jQuery UJS request
+          return false;
+        })
+
+        // Keep track that we just set this particular form with Remotipart bindings
+        // Note: The `true` value will get over-written with the `settings.dataType` from the `ajax:beforeSend` handler
+        .data('remotipartSubmitted', true);
+    },
+
+    teardown: function(form) {
+      form
+        .unbind('ajax:beforeSend.remotipart')
+        .removeData('remotipartSubmitted')
+    }
+  };
+
+  $(document).on('ajax:aborted:file', 'form', function(){
+    var form = $(this);
+
+    remotipart.setup(form);
+
+    // Manually call jquery-ujs remote call so that it can setup form and settings as usual,
+    // and trigger the `ajax:beforeSend` callback to which remotipart binds functionality.
+    $.rails.handleRemote(form);
+    return false;
+  });
+
+})(jQuery);
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -17019,10 +17358,10 @@ function atwho_users(bind_object, chatroom){
 }
 function atwho_relative_users(bind_object, chatroom){
   $(bind_object).atwho({ at:"@", 
-    searchKey: 'email',
+    searchKey: 'username',
     data: null, 
     insertTpl: "${email}" ,
-    displayTpl: "<li class='d-flex align-items-center'><div class='img-profile d-inline-block px-2'>${image}</div><span>${username}-<small>${email}</small></span></li>",
+    displayTpl: "<li class='d-flex align-items-center'><div class='img-profile px-2'>${image}</div><span>${username}-<small>${email}</small></span></li>",
     callbacks: {
       remoteFilter: function(query, callback){
         $.get(`/api/v2/chatrooms/${chatroom}/get_relative_users.json?`, function(data){
@@ -17797,10 +18136,25 @@ $(document).on("turbolinks:load", function() {
   // submit textarea when enter
   $('#new_message').on("keypress", function(e) {
     if (e && e.keyCode === 13 && !e.shiftKey)  {
-        e.preventDefault();
-        return $(this).submit();
+      e.preventDefault(); return $(this).submit();
     }
   });
+
+  // file upload submit
+  $('#file-uploader').on('change',function(e){
+    let fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
+    let filename = $(this).val()
+    let extension = filename.replace(/^.*\./, '').toLowerCase()
+    let form = $(this).parents('form')
+
+    if (fileExtension.includes(extension)) {
+      e.preventDefault();
+      form.submit();
+    } else{
+      alert("只允許以下類型檔案 : "+fileExtension.join(', '));
+      $(this).val('')
+    }
+  })
 
   // when new-message-send scroll bottom
   let element, scrolled;
@@ -17814,7 +18168,15 @@ $(document).on("turbolinks:load", function() {
   $('[data-behavior=\'messages\']').on('scroll', function() {
     return scrolled = true;
   });
-  
+
+  $('#message_input').on('focus', function(){
+    console.log('hi')
+    element = $('[data-behavior=\'messages\']');
+    element.animate({
+      scrollTop: element.prop('scrollHeight')
+    }, 200);
+    
+  })
   // Right Panel Toggle Button
   $('#rightPanelCollapse').on('click', function () {
     $('#right-panel').toggleClass('active');
@@ -17863,13 +18225,13 @@ $(document).on('click', '#editChatroomName', function(e){
   let editForm = $('[data-behavior="editChatroom"]')
   let originName = $('[data-behavior="editChatroom"] h3').html()
   editForm.html(`
-    <input class="form-control col-12 col-md-4 mx-2" type="text" value="${originName}" name="chatroom[name]" id="chatroom_name" />
-    <input type="submit" name="commit" value="更新" class="btn btn-dark btn-sm small" id="updateChatroom" data-disable-with="更新" />`)
+                <input class="form-control col-12 col-md-4 mx-2" type="text" value="${originName}" name="chatroom[name]" id="chatroom_name" />
+                <input type="submit" name="commit" value="更新" class="btn btn-dark btn-sm small" id="updateChatroom" data-disable-with="更新" />`)
 
 })
 
 $(document).on( 'change keyup keydown paste cut', '.edit_input', function (){
-    $(this).height(0).height(this.scrollHeight);
+  $(this).height(0).height(this.scrollHeight);
 }).find( 'textarea' ).change();
 
 $(function ($) {
@@ -17894,17 +18256,15 @@ $(function ($) {
     this.each(function (n, input) {
       var $input = $(input);
 
-      function showEmoji() {
+      function showEmoji(ev) {
         $list.show();
         $input.focus();
-        setTimeout(function () {
-          $(document).on('click', closeEmoji);
-        }, 1);
+        $('#giphy_list').hide()
+        return false
       }
 
       function closeEmoji() {
         $list.hide();
-        $(document).off('click', closeEmoji);
       }
 
       function clickEmoji(ev) {
@@ -17918,11 +18278,15 @@ $(function ($) {
           input.value += ev.currentTarget.innerHTML;
         }
 
-        closeEmoji();
         $input.focus();
         input.selectionStart = startPos + 2;
         input.selectionEnd = endPos + 2;
+        return false
       }
+
+      $(document).on('click', function(e){
+        closeEmoji()
+      })
 
       var $button = $("<span id='emoji-button-area'>").html(settings.button).css({cursor: 'pointer', 'font-size': settings.fontSize}).on('click', showEmoji);
       var $list = $('<div id=emoji-list>').css(defaults.listCSS).css(settings.listCSS);
@@ -17943,13 +18307,99 @@ $(function ($) {
   };
 }
 );
+document.addEventListener('turbolinks:load', function(){
+//     $("#giphy_icon").click(function(){
+//         $("#giphy_list").slideToggle("fast");
+//     });
+
+    $("#giphy_icon").on("click", function(e){
+        if($("#giphy_list").is(":hidden")){
+            $("#giphy_list").show();
+        }else{
+            $("#giphy_list").hide();
+        }
+     
+        $(document).one("click", function(){
+            $("giphy_list").hide();
+        });
+     
+        e.stopPropagation();
+    });
+    $("#giphy_icon").on("click", function(e){
+        $('#emoji-list').hide()
+        e.stopPropagation();
+    });
+
+    
+  $('#giphy_list').on('click', function(e){
+    return false
+  })
+
+    var apiKey ='Mrjdc0YDiu0GDGzkciE04Av5N2SJ1zSN';
+    var query = 'cat';
+    var url = "https://api.giphy.com/v1/gifs/search?api_key="+apiKey+"&q=";
+
+    var form = document.querySelector("#giphy_list form");
+    var input = document.querySelector('#giphy_list input[type="text"]');
+    var result = document.querySelector("#giphy_list .result");
+
+
+    function search(e) {
+        e.preventDefault();
+        query = input.value;
+        $("#giphy_resault").empty();
+        makeRequest(query);
+    }
+
+    function createGif(gif,url){
+        var item = document.createElement('div');
+        var img = document.createElement('img');
+        
+        img.src = gif;
+        
+        result.appendChild(item);
+        item.appendChild(img);
+        img.addEventListener('click', sendImgMarkDown);
+    }
+    function makeRequest(query) {
+        xhr = new XMLHttpRequest();
+
+        xhr.onload = function() {
+            var response = JSON.parse(this.responseText);
+            console.log(response)
+            response.data.map(function(gif){
+            createGif(gif.images.fixed_height_downsampled.url,gif.url)
+            })
+        };
+        xhr.open(
+            "GET",
+        url+query,
+            true
+        );
+        xhr.send();
+        $("#giphy_form").val('')
+    }
+
+    form.addEventListener("submit", search);
+
+    function sendImgMarkDown() {
+        var markdown = '![此圖無法顯示]('+ this.src +')';
+        var inputgiphy = document.querySelector("#message_input"); 
+        inputgiphy.value = markdown;
+        $("#new_message").submit();
+        $("#giphy_resault").empty();
+        $("#giphy_list").hide();
+    
+    }
+
+});
 $(document).on("turbolinks:load", function() {
   // textrea on focus scroll bottom
   $('#message_body').on('focus', function(){
     element = $('[data-behavior=\'messages\']');
     element.animate({
       scrollTop: element.prop('scrollHeight')
-    }, 200);
+    }, 1000);
   });
 
   // parent message hover with group
@@ -18043,6 +18493,7 @@ $(document).on('click', function(){
   $.each(msgs, function(i, msg){
     reset_edit_message(msg)
   })
+  $("#giphy_list").hide();
 })
 
 $(document).on('keypress', '#message_body', function(e){
@@ -18080,12 +18531,6 @@ $(document).on('click', '[data-behavior="notification"]', function(e){
     method: 'POST', })
 })
 ;
-/*!
-  * Bootstrap v4.3.1 (https://getbootstrap.com/)
-  * Copyright 2011-2019 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-  */
-
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery'), require('popper.js')) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
@@ -30432,28 +30877,33 @@ function __guardMethod__(obj, methodName, transform) {
 
 
 
-//
+  //
 
-// full-page loader
-$(function() {
-  document.addEventListener('turbolinks:request-start', function() {
-    $('.loading-block').removeClass('d-none');
-  });
+  // full-page loader
+  $(function() {
+    document.addEventListener('turbolinks:request-start', function() {
+      $('.loading-block').removeClass('d-none');
+    });
 
-  document.addEventListener("turbolinks:request-end", function(){
-    $('.loading-block').addClass('d-none');
+    document.addEventListener("turbolinks:request-end", function(){
+      $('.loading-block').addClass('d-none');
+    });
   });
-});
 
 $(document).on('turbolinks:load', function(e){
 
   // Toggle the side navigation
   $("#sidebarToggleTop").on('click', function(e) {
-    $("body").toggleClass("sidebar-toggled");
-    $(".sidebar").toggleClass("toggled");
-    $(".form").toggleClass("sidebar-toggled");
     if ($(".sidebar").hasClass("toggled")) {
       $('.sidebar .collapse').collapse('hide');
+      $("body").removeClass("sidebar-toggled");
+      $(".sidebar").removeClass("toggled");
+      $(".form").removeClass("sidebar-toggled");
+    }else {
+      $("body").toggleClass("sidebar-toggled");
+      $(".sidebar").toggleClass("toggled");
+      $(".form").toggleClass("sidebar-toggled");
+
     }
   });
 
@@ -30482,12 +30932,6 @@ $(document).on('turbolinks:load', function(e){
     }
   });
 
-  // Close button action to go Back
-  $('.close').on('click', function(){
-    history.go(-1);
-    return false;
-  });
-
   //Close collapse panel when document on click
   if ($(window).width() > 768) {
     $(document).click(function(){
@@ -30507,8 +30951,15 @@ $(document).on('turbolinks:load', function(e){
   active_link.parent().css('background-color', '#fec52a')
   active_link.parent().children(1).css({'color':'#333', 'font-weight': 700})
   active_link.css({'color':'#333', 'font-weight': 700})
+
+
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+  window.addEventListener('resize', () => {
+    // We execute the same script as before
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  });
 })
-
-
-
 ;

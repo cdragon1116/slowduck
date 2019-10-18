@@ -18,28 +18,33 @@
 //= require jquery.atwho
 //= require popper 
 //= require_tree .
-//
+  //
 
-// full-page loader
-$(function() {
-  document.addEventListener('turbolinks:request-start', function() {
-    $('.loading-block').removeClass('d-none');
-  });
+  // full-page loader
+  $(function() {
+    document.addEventListener('turbolinks:request-start', function() {
+      $('.loading-block').removeClass('d-none');
+    });
 
-  document.addEventListener("turbolinks:request-end", function(){
-    $('.loading-block').addClass('d-none');
+    document.addEventListener("turbolinks:request-end", function(){
+      $('.loading-block').addClass('d-none');
+    });
   });
-});
 
 $(document).on('turbolinks:load', function(e){
 
   // Toggle the side navigation
   $("#sidebarToggleTop").on('click', function(e) {
-    $("body").toggleClass("sidebar-toggled");
-    $(".sidebar").toggleClass("toggled");
-    $(".form").toggleClass("sidebar-toggled");
     if ($(".sidebar").hasClass("toggled")) {
       $('.sidebar .collapse').collapse('hide');
+      $("body").removeClass("sidebar-toggled");
+      $(".sidebar").removeClass("toggled");
+      $(".form").removeClass("sidebar-toggled");
+    }else {
+      $("body").toggleClass("sidebar-toggled");
+      $(".sidebar").toggleClass("toggled");
+      $(".form").toggleClass("sidebar-toggled");
+
     }
   });
 
@@ -87,4 +92,14 @@ $(document).on('turbolinks:load', function(e){
   active_link.parent().css('background-color', '#fec52a')
   active_link.parent().children(1).css({'color':'#333', 'font-weight': 700})
   active_link.css({'color':'#333', 'font-weight': 700})
+
+
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+  window.addEventListener('resize', () => {
+    // We execute the same script as before
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  });
 })

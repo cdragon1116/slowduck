@@ -23,6 +23,7 @@ $(function ($) {
       function showEmoji(ev) {
         $list.show();
         $input.focus();
+        $('#giphy_list').hide()
         return false
       }
 

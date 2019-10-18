@@ -7,10 +7,6 @@ $(document).on("turbolinks:load", function() {
     }
   });
 
-  $('#new_message').on('ajax:error', function(e, data, status, xhr){
-    console.log('hi')
-  })
-
   // file upload submit
   $('#file-uploader').on('change',function(e){
     let fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
@@ -40,6 +36,14 @@ $(document).on("turbolinks:load", function() {
     return scrolled = true;
   });
 
+  $('#message_input').on('focus', function(){
+    console.log('hi')
+    element = $('[data-behavior=\'messages\']');
+    element.animate({
+      scrollTop: element.prop('scrollHeight')
+    }, 200);
+    
+  })
   // Right Panel Toggle Button
   $('#rightPanelCollapse').on('click', function () {
     $('#right-panel').toggleClass('active');
