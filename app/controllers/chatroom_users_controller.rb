@@ -1,5 +1,6 @@
 class ChatroomUsersController < ApplicationController
   before_action :set_chatroom
+  before_action :authenticate_chatroom_user! , only: [:show, :edit, :update, :destroy, :hide_chatroom]
 
   def new
     @chatroom_user = ChatroomUser.new
@@ -34,6 +35,13 @@ class ChatroomUsersController < ApplicationController
 
   def chatroom_user_params
     params.require(:chatroom_user).permit(user: [:email])
+  end
+
+  def authenticate_chatroom_user!
+    unless @chatroom.users.exists?(id: current_user.id)
+      update_notification
+      redirect_to chatrooms_url, notice: '你沒有權限!'
+    end
   end
 
   def scan_users(string)

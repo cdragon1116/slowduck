@@ -18169,6 +18169,14 @@ $(document).on("turbolinks:load", function() {
     return scrolled = true;
   });
 
+  $('#message_input').on('focus', function(){
+    console.log('hi')
+    element = $('[data-behavior=\'messages\']');
+    element.animate({
+      scrollTop: element.prop('scrollHeight')
+    }, 200);
+    
+  })
   // Right Panel Toggle Button
   $('#rightPanelCollapse').on('click', function () {
     $('#right-panel').toggleClass('active');

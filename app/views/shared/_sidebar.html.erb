@@ -14,7 +14,7 @@
   <% if user_signed_in? %>
 
     <!-- Heading -->
-    <div class="sidebar-heading my-2 my-md-3 text-prime">
+    <div class="sidebar-heading my-3 my-md-3 text-prime">
       群組
     </div>
 
@@ -22,7 +22,7 @@
     <% group_chatrooms.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item" title="<%= room.name %>">
-        <%= link_to  room, class:'nav-link py-4 py-md-3 pr-md-5', data: { behavior: "chatroom-link", chatroom_id: room.id} do %>
+        <%= link_to  room, class:'nav-link py-3 py-md-3 pr-md-5', data: { behavior: "chatroom-link", chatroom_id: room.id} do %>
           <span>
             <%= truncate( room.name, :length => 10, :escape => false) %>
           </span>
@@ -44,7 +44,7 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="sidebar-heading my-2 text-prime">
+    <div class="sidebar-heading my-3 text-prime">
       一對一
     </div>
 
@@ -52,7 +52,7 @@
     <% conversations.each do |room|%>
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item py-0" title="<%= room.conversation_with(current_user).username %>">
-        <%= link_to  room, class:'nav-link d-flex flex-row align-items-center justify-content-center justify-content-md-start py-4 py-md-3 pr-md-5', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
+        <%= link_to  room, class:'nav-link d-flex flex-row align-items-center justify-content-center justify-content-md-start py-3 py-md-3 pr-md-5', data: {behavior: "chatroom-link", chatroom_id: room.id} do %>
           <div class="d-flex align-items-center <%= conversation_online?(room, current_user) %>">
             <div class="img d-none d-md-inline">
               <%= user_image(room.conversation_with(current_user) , 32) %>

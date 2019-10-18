@@ -1,12 +1,15 @@
-// Place all the styles related to the Chatrooms controller here.
-// They will automatically be included in application.css.  // You can use Sass (SCSS) here: http://sass-lang.com/
+
+:root {
+  --vh: 1vh;
+}
 
 .chatroom {
   overflow:hidden;
   box-sizing: border-box;
   max-width: 100%;
   min-width: 100%;
-  min-height: calc(100vh - 4.375rem);
+  min-height: calc(var(--vh, 1vh) * 100 - 4.375rem);
+  max-height: calc(var(--vh, 1vh) * 100 - 4.375rem);
   flex-flow: column nowrap;
   font-size: 20px;
   background-color: #fff;
@@ -22,7 +25,7 @@
 
   .message-box{
     width: 100%;
-    height: calc(100vh - 12.375rem );
+    height: calc(var(--vh, 1vh) * 100 - 12.375rem);
     overflow-y: auto; 
   }
 
@@ -32,6 +35,8 @@
   box-sizing: border-box;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: 5rem;
+  background: #fff;
+  width: 100%;
 
   textarea.form-control{
     line-height: 1.2rem;
@@ -53,9 +58,6 @@
     border-radius: 5px;
     padding: 10px;
   }
-}
-.form.sidebar-toggled{
-  width: calc(100vw - 6.5rem);
 }
 .chatroom.active{
   min-width: 60%;
@@ -83,7 +85,7 @@
   display:block;
   min-width: 40%;
   max-width: 40%;
-  height: calc(100vh - 4.35rem);
+  min-height: calc(var(--vh, 1vh) * 100 - 4.375rem);
   overflow-y: auto;
   background-color: #fff;
   border-left: 8px solid #eee;
@@ -192,6 +194,7 @@
  }
 
  #giphy_list{
+  z-index: 500;
   display: inline-block;
   position: absolute;
   bottom: 90px;
@@ -209,7 +212,7 @@
    position: absolute;
    top: 5px;
    left: 2px;
-   width: 100%;
+   width: 90%;
    border-radius: 10px;
    border: none;
    background-color: #fff;

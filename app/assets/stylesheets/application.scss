@@ -16,5 +16,6 @@ html, body {
   padding: 0 !important;
   width: 100%;
   font-family: "PingFang", "Microsoft JhengHei", "Arial";
+  max-height: calc(var(--vh, 1vh) * 100);
   overflow-y: hidden;
 }
