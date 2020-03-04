@@ -200,7 +200,7 @@ GEM
     pg (1.1.4)
     popper_js (1.14.5)
     public_suffix (4.0.1)
-    puma (3.12.1)
+    puma (3.12.4)
     rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -344,7 +344,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   pg (>= 0.18, < 2.0)
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 5.2.3)
   redcarpet (~> 3.3, >= 3.3.4)
   redis (~> 4.0)
