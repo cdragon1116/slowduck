@@ -5,7 +5,7 @@ ruby '2.6.3'
 gem 'bootstrap', '~> 4.3.1'
 gem 'devise-bootstrap-views', '~> 1.0'
 
-gem 'redcarpet', '~> 3.3', '>= 3.3.4'
+gem 'redcarpet', '~> 3.5'
 gem 'rouge', '~> 1.10', '>= 1.10.1'
 gem 'omniauth'
 gem 'omniauth-facebook'
